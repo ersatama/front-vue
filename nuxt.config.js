@@ -7,21 +7,30 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/images/favicons/favicon.ico' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/images/favicons/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/images/favicons/favicon-16x16.png' },
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/images/favicons/apple-touch-icon.png' }
     ]
+  },
+
+  router: {
+    middleware: ['auth']
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/scss/custom.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/repository.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -33,7 +42,40 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+     'nuxt-vuex-localstorage',
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxtjs/axios'
   ],
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader','css-loader','sass-loader']
+      }
+    ]
+  },
+  bootstrapVue: {
+    bootstrapCSS: false,
+    bootstrapVueCSS: false
+  },
+  i18n: {
+    strategy: 'no_prefix',
+    defaultLocale: 'en',
+    langDir: 'locales/',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        file: 'en.js'
+      },
+      {
+        code: 'ru',
+        name: 'Русский',
+        file: 'ru.js'
+      }
+    ]
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
