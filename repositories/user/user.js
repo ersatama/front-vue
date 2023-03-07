@@ -5,5 +5,12 @@ export default ($axios) => ({
         }).catch(error => {
             return error.response.data;
         });
+    },
+    auth(data) {
+        return $axios.post('/api/v1/user/auth', data).then(response => {
+            return response.data;
+        }).catch(error => {
+            return error.response.data;
+        });
     }
 });

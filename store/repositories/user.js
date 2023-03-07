@@ -17,5 +17,14 @@ export const actions = {
         } else {
             commit('setUser', null)
         }
-    }
+    },
+    async auth({commit}, info) {
+        const res = await this.$repository.user.auth(info);
+        const { status, data } = res
+        if (status === 200) {
+            commit('setUser', data)
+        } else {
+            commit('setUser', null)
+        }
+    },
 }

@@ -1,4 +1,5 @@
 export default {
+    "Alias": "Логин",
     "Login": "Вход",
     "Sign In to your account": "Войдите в личный кабинет",
     "Email": "Эл.почта",

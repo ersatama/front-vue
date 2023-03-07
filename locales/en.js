@@ -1,4 +1,5 @@
 export default {
+  'Alias': "Alias",
   "Login": "Login",
   "Sign In to your account": "Sign In to your account",
   "Email": "Email",
