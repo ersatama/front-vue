@@ -25,5 +25,5 @@ server {
         add_header X-Content-Type-Options "nosniff";
 
         #routing block
-        root /var/www/beta/immuniweb-front-nuxt
+        root /var/www/prod/immuniweb-front-nuxt;
 }
