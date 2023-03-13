@@ -87,9 +87,9 @@ then
     exit 1
   fi
 
-  if ! sudo systemctl restrt nginx
+  if ! sudo systemctl restart nginx
   then
-    echo "ERROR: nginx test config failed"
+    echo "ERROR: nginx restart failed"
     exit 1
   fi
 fi
