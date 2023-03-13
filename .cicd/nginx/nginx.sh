@@ -11,7 +11,7 @@ then
     then
         echo "file changed $line, need to start copy it\n";
         ok="1"
-        if ! sudo copy .cicd/nginx/admin3-prod /etc/nginx/sites-available/admin3-prod
+        if ! sudo cp .cicd/nginx/admin3-prod /etc/nginx/sites-available/admin3-prod
         then
             echo "ERROR while sudo copy .cicd/nginx/admin3-prod /etc/nginx/sites-available/admin3-prod in pwd:"
             pwd
@@ -49,7 +49,7 @@ then
     then
         echo "file changed $line, need to start copy it\n";
         ok="1"
-        if ! sudo copy .cicd/nginx/admin3-beta /etc/nginx/sites-available/admin3-beta
+        if ! sudo cp .cicd/nginx/admin3-beta /etc/nginx/sites-available/admin3-beta
         then
             echo "ERROR while sudo copy .cicd/nginx/admin3-beta /etc/nginx/sites-available/admin3-beta in pwd:"
             pwd
