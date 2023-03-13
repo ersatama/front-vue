@@ -1,7 +1,9 @@
+#version 1.1
 server {
         #listen block
         listen *:1450 ssl;
         server_name betaadmin3.local betaadmin3.iw;
+
 
         #log block
         access_log /var/log/nginx/admin3-beta-access.log;
@@ -23,5 +25,13 @@ server {
         add_header X-Content-Type-Options "nosniff";
 
         #routing block
-        root /var/www/beta/immuniweb-front-nuxt
+        locaion /
+        {
+                root /var/www/beta/immuniweb-front-nuxt;
+        }
+
+        locaion /api
+        {
+                root /var/www/beta/immuniweb-back-laravel;
+        }
 }
