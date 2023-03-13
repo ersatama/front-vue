@@ -1,0 +1,27 @@
+server {
+        #listen block
+        listen *:1450 ssl;
+        server_name betaadmin3.local betaadmin3.iw;
+
+        #log block
+        access_log /var/log/nginx/admin3-beta-access.log;
+        error_log /var/log/nginx/admin3-beta-error.log;
+
+        #security block
+        ssl_certificate /etc/ssl/local/current/admin3.local.crt;
+        ssl_certificate_key /etc/ssl/local/current/admin3.local.key;
+        ssl_dhparam /etc/ssl/local/current/dh4096.pem;
+        ssl_session_timeout 5m;
+        ssl_protocols  TLSv1.2 TLSv1.3;
+        ssl_ciphers "ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA256:@SECLEVEL=0";
+        ssl_ecdh_curve secp384r1;
+        ssl_prefer_server_ciphers on;
+        ssl_session_cache shared:SSL:10m;
+        add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-XSS-Protection "1; mode=block";
+        add_header X-Content-Type-Options "nosniff";
+
+        #routing block
+        root /var/www/beta/immuniweb-front-nuxt
+}
