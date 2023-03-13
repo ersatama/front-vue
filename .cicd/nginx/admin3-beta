@@ -25,12 +25,12 @@ server {
         add_header X-Content-Type-Options "nosniff";
 
         #routing block
-        locaion /
+        location /
         {
                 root /var/www/beta/immuniweb-front-nuxt;
         }
 
-        locaion /api
+        location /api
         {
                 root /var/www/beta/immuniweb-back-laravel;
         }
