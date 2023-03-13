@@ -107,7 +107,7 @@ deploy-prod2:
     - ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH}/.cicd/integration && chmod a+x *.sh && ./run.sh ${DEPLOYPATH}"
     - rsync -atv --delete --progress ./ cicd@${HOSTNAME}:${DEPLOYPATH} --exclude '/main'
     - ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH}/.cicd/deploy && chmod a+x *.sh &&  ./run.sh ${DEPLOYPATH}"
-    - git diff-tree --no-commit-id --name-only -r $CI_COMMIT_SHA | ssh cicd@${HOSTNAME} "${DEPLOYPATH}/.cicd/nginx/nginx.sh prod"
+    - git diff-tree --no-commit-id --name-only -r $CI_COMMIT_SHA | ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH} && chmod a+x ${DEPLOYPATH}/.cicd/nginx/nginx.sh && ${DEPLOYPATH}/.cicd/nginx/nginx.sh prod"
     - ssh cicd@${HOSTNAME} "echo -n \"<?php define('GITADMVERSION3', '${CI_COMMIT_SHA}'); ?>\" > /var/www/prod/conf/admversion3.inc.php";
   tags:
     - web
@@ -136,7 +136,7 @@ deploy-beta2:
     - ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH}/.cicd/integration && chmod a+x *.sh && ./run.sh ${DEPLOYPATH}"
     - rsync -atv --delete --progress ./ cicd@${HOSTNAME}:${DEPLOYPATH} --exclude '/main'
     - ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH}/.cicd/deploy && chmod a+x *.sh &&  ./run.sh ${DEPLOYPATH}"
-    - git diff-tree --no-commit-id --name-only -r $CI_COMMIT_SHA | ssh cicd@${HOSTNAME} "${DEPLOYPATH}/.cicd/nginx/nginx.sh beta"
+    - git diff-tree --no-commit-id --name-only -r $CI_COMMIT_SHA | ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH} && chmod a+x ${DEPLOYPATH}/.cicd/nginx/nginx.sh && ${DEPLOYPATH}/.cicd/nginx/nginx.sh beta"
     - ssh cicd@${HOSTNAME} "echo -n \"<?php define('GITADMVERSION3', '${CI_COMMIT_SHA}'); ?>\" > /var/www/beta/conf/admversion3.inc.php";
   tags:
     - web
