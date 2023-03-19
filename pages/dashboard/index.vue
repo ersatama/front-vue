@@ -179,64 +179,6 @@ export default {
           <div class="page-left-header-title">Найдено 1594 проекта</div>
           <div class="page-left-header-pagination"></div>
      */
-      &-filter {
-        width: 350px;
-        padding: 25px;
-        border-radius: 10px;
-        height: fit-content;
-        &-reset {
-          background: url(/images/icons/undo.png) no-repeat center;
-          width: 24px;
-          height: 24px;
-          margin-left: auto;
-        }
-        &-title {
-          font-size: 16px;
-          font-weight: bold;
-        }
-        &-options {
-          display: flex;
-          flex-direction: column;
-          margin-top: 10px;
-          gap: 10px;
-        }
-        &-item {
-          width: 100%;
-          &-btn {
-            font-size: 14px;
-            font-weight: bold;
-            height: 40px;
-            margin: 10px 0 0 0;
-            border-radius: 5px;
-          }
-          &-double {
-            display: flex;
-            gap: 15px;
-          }
-          position: relative;
-          &-title {
-            font-size: 12px;
-            font-weight: bold;
-            pointer-events: none;
-            margin-bottom: 5px;
-          }
-          &-input {
-            border-radius: 5px;
-            height: 36px;
-            width: 100%;
-            overflow: hidden;
-            background: #F1F4F8;
-            & > input, & > select {
-              width: 100%;
-              height: 100%;
-              border: none;
-              background: transparent;
-              padding: 0 10px 0 10px;
-              font-size: 12px;
-              outline: none;
-            }
-          }
-        }
-      }
+
   }
 </style>

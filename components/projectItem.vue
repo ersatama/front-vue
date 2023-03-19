@@ -4,7 +4,7 @@
       <div class="item-header-title">
         <div class="item-header-title-text">#{{portalProject.id}}</div>
         <div class="item-header-title-desc text-muted" v-if="portalProject.portalProjectType">
-          <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template><template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template>
+          <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template><template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template><template v-if="portalProject.rescan > 0"> Patch Verification</template>
         </div>
       </div>
       <div class="item-header-detail">
@@ -182,102 +182,10 @@
               </div>
             </template>
             <template v-else-if="detail === 3">
-              <div class="item-body-left-table-body-items">
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-user"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Client</div>
-                    <div class="item-body-left-table-body-detail-desc">Ms. Kary Chan</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-company"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Company</div>
-                    <div class="item-body-left-table-body-detail-desc">digiEasy</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-position"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Position</div>
-                    <div class="item-body-left-table-body-detail-desc">Project Executive</div>
-                  </div>
-                </div>
-              </div>
-              <div class="item-body-left-table-body-items">
-
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-email"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Email</div>
-                    <div class="item-body-left-table-body-detail-desc">kary.chan@digiec.com</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-mobile"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Mobile</div>
-                    <div class="item-body-left-table-body-detail-desc">-</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-edit"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Edit link</div>
-                    <div class="item-body-left-table-body-detail-desc">-</div>
-                  </div>
-                </div>
-              </div>
+              no messages
             </template>
             <template v-else-if="detail === 4">
-              <div class="item-body-left-table-body-items">
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-user"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Client</div>
-                    <div class="item-body-left-table-body-detail-desc">Ms. Kary Chan</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-company"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Company</div>
-                    <div class="item-body-left-table-body-detail-desc">digiEasy</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-position"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Position</div>
-                    <div class="item-body-left-table-body-detail-desc">Project Executive</div>
-                  </div>
-                </div>
-              </div>
-              <div class="item-body-left-table-body-items">
-
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-email"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Email</div>
-                    <div class="item-body-left-table-body-detail-desc">kary.chan@digiec.com</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-mobile"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Mobile</div>
-                    <div class="item-body-left-table-body-detail-desc">-</div>
-                  </div>
-                </div>
-                <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-edit"></div>
-                  <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Edit link</div>
-                    <div class="item-body-left-table-body-detail-desc">-</div>
-                  </div>
-                </div>
-              </div>
+              no jobs
             </template>
           </div>
         </div>
@@ -424,6 +332,7 @@ export default {
             gap: 15px;
             &-icon {
               width: 16px;
+              min-width: 16px;
               height: 16px;
               background: no-repeat center;
               background-size: contain;
@@ -475,12 +384,14 @@ export default {
               }
               &-desc {
                 font-weight: bold;
+                word-break: break-all;
               }
             }
             &-items {
               display: flex;
               & > div {
-                width: 50%;
+                flex-grow: 1;
+                flex-basis: 0
               }
             }
             &-item {
