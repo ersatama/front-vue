@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card-group shadow-sm rounded overflow-hidden">
-          <div class="card p-4 border-0">
+        <div class="card-group card-rounded overflow-hidden">
+          <div class="card p-4 border-0 m-0">
             <div class="card-body">
               <h1>{{ $t('Login') }}</h1>
               <p class="text-muted">{{ $t('Sign In to your account') }}</p>
@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-          <div class="card text-white bg-primary py-5 d-md-down-none border-0">
+          <div class="card text-white bg-primary py-5 d-md-down-none border-0 m-0">
             <div class="card-body text-center">
               <div>
                 <h2>Immuniweb</h2>
@@ -61,17 +61,25 @@ export default {
       }
     }
   },
+  computed: {
+    user() {
+      return this.$store.state.localStorage.user;
+    }
+  },
   methods: {
-    login() {
+    async login() {
       if (this.alias.trim() === '') {
         return this.$refs.alias.focus();
       } else if (this.password.trim() === '') {
         return this.$refs.password.focus();
       }
-      this.$store.dispatch('repositories/user/auth', {
+      let auth = await this.$store.dispatch('localStorage/user_auth', {
         alias: this.alias.trim(),
         password: this.password.trim()
       });
+      if (auth) {
+        window.location.href = '/dashboard';
+      }
     },
     setLanguage(code) {
       //this.$i18n.setLocaleCookie(code);
@@ -82,6 +90,9 @@ export default {
 </script>
 
 <style >
+.card-rounded {
+  border-radius: 10px;
+}
 .login-input {
   font-size: 15px;
   color: #000;

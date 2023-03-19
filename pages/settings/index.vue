@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "app",
+  name: "index"
 }
 </script>
 
-<style lang="scss">
+<style scoped>
 
 </style>

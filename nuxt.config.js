@@ -19,9 +19,7 @@ export default {
     ]
   },
 
-  router: {
-    middleware: ['auth']
-  },
+
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -30,7 +28,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/repository.js', ssr: false }
+    { src: '~/plugins/repository.js', mode: 'client' },
+    { src: '~/plugins/auth.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +44,7 @@ export default {
      'nuxt-vuex-localstorage',
     'bootstrap-vue/nuxt',
     '@nuxtjs/i18n',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
   module: {
     rules: [
@@ -77,6 +76,7 @@ export default {
     ]
   },
   axios: {
+    proxy: false,
     baseURL: 'http://127.0.0.1:8000'
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
