@@ -1,7 +1,7 @@
 <template>
   <div>
     <project-status></project-status>
-    <div class="d-flex page">
+    <div class="d-flex page" v-if="portalProjects">
       <div class="page-left">
         <div class="page-left-header">
           <div class="page-left-header-title text-muted">
@@ -33,7 +33,7 @@ export default {
       page: 1
     }
   },
-  created() {
+  mounted() {
     this.getPortalProjects();
   },
   methods: {
@@ -47,6 +47,8 @@ export default {
 <style lang="scss">
   .page {
       gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto 0 auto;
       &-info {
         display: flex;
         background: #fff;

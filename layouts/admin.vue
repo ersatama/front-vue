@@ -25,7 +25,6 @@
     <div id="page-content-wrapper">
       <!-- Top navigation-->
       <the-navbar></the-navbar>
-
       <!-- Page content-->
       <div class="admin">
         <Nuxt />

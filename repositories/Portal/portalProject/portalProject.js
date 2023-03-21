@@ -1,0 +1,23 @@
+export default ($axios) => ({
+    get(payload) {
+        return $axios.get('/api/v1/portal/portalProject/get?page='+payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
+    firstById(id) {
+        return $axios.get('/api/v1/portal/portalProject/firstById/'+id).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
+    filter() {
+        return $axios.get('/api/v1/portal/portalProject/filter').then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    }
+});

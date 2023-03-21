@@ -1,14 +1,38 @@
 export const state = () => ({
     user: null,
+    portalProjectTypes: [],
+    portalProjectFilter: null
 })
 
 export const mutations = {
     setUser(state, value) {
         state.user = value
+    },
+    setPortalProjectTypes(state, value) {
+        state.portalProjectTypes    =   value;
+    },
+    setPortalProjectFilter(state, value) {
+        state.portalProjectFilter   =   value
     }
 }
 
 export const actions = {
+    async portalProjectType_get({commit}) {
+        const res = await this.$repository.portalProjectType.get();
+        const { status, data } = res
+        if (status === 200) {
+            commit('setPortalProjectTypes', data.data);
+            return true;
+        }
+        return false;
+    },
+    async portalProject_filter({commit}) {
+        const res = await this.$repository.portalProject.filter();
+        const { status, data } = res
+        if (status === 200) {
+            commit('setPortalProjectFilter', data.data);
+        }
+    },
     async portalProject_firstById({commit}, id) {
         const res = await this.$repository.portalProject.firstById(id);
         const { status, data } = res

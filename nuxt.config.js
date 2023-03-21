@@ -1,5 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  ssr: false,
   head: {
     title: 'immuniweb',
     htmlAttrs: {
@@ -28,8 +29,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/repository.js', mode: 'client' },
-    { src: '~/plugins/auth.js', mode: 'client' }
+    { src: '~/plugins/vue-datepicker', ssr: false },
+    { src: '~/plugins/repository.js', mode: 'client', ssr: false },
+    { src: '~/plugins/auth.js', mode: 'client', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" v-if="portalProject">
     <div class="item-header">
       <div class="item-header-title">
         <div class="item-header-title-text">#{{portalProject.id}}</div>
@@ -9,20 +9,16 @@
       </div>
       <div class="item-header-detail">
         <div class="item-header-buttons">
-          <button class="item-header-button bg bg-primary text-white">Add vulnerability</button>
-          <button class="item-header-button bg bg-primary text-white">Create ticket</button>
           <button class="item-header-button bg bg-danger text-white">Report</button>
         </div>
         <div class="item-header-switcher">
-          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 1)}" @click="table = 1">RAW - vuln</div>
-          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 2)}" @click="table = 2">Raw - info</div>
-          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 3)}" @click="table = 3">Drafts</div>
-          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 4)}" @click="table = 4">Vuln</div>
+          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 1)}" @click="table = 1">Drafts</div>
+          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 2)}" @click="table = 2">Vuln</div>
         </div>
       </div>
     </div>
-    <div class="item-alerts">
-      <div class="item-alert text-white">No auth tested</div>
+    <div class="item-alerts" v-if="portalProject.alerts">
+      <div class="item-alert text-white" v-for="(alert,key) in portalProject.alerts" :key="key">{{ alert }}</div>
     </div>
     <div class="item-body">
       <div class="item-body-right">
@@ -41,10 +37,8 @@
       <div class="item-body-left">
         <div class="item-body-left-table">
           <div class="item-body-left-table-switcher">
-            <div class="item-body-left-table-switcher-item" :class="{'item-body-left-table-switcher-item-sel':(detail === 1)}" @click="detail = 1">Assessment Details</div>
-            <div class="item-body-left-table-switcher-item" :class="{'item-body-left-table-switcher-item-sel':(detail === 2)}" @click="detail = 2">User Profile</div>
-            <div class="item-body-left-table-switcher-item" :class="{'item-body-left-table-switcher-item-sel':(detail === 3)}" @click="detail = 3">Messages</div>
-            <div class="item-body-left-table-switcher-item" :class="{'item-body-left-table-switcher-item-sel':(detail === 4)}" @click="detail = 4">Jobs</div>
+            <div class="item-body-left-table-switcher-item" :class="{'item-body-left-table-switcher-item-sel':(detail === 1)}" @click="detail = 1">Details</div>
+            <div class="item-body-left-table-switcher-item" :class="{'item-body-left-table-switcher-item-sel':(detail === 2)}" @click="detail = 2">Jobs</div>
           </div>
           <div class="item-body-left-table-body">
             <template v-if="detail === 1">
@@ -112,8 +106,6 @@
                   </div>
                 </div>
               </div>
-            </template>
-            <template v-else-if="detail === 2">
               <div class="item-body-left-table-body-items">
                 <div class="item-body-left-table-body-item">
                   <div class="item-body-left-table-body-icon item-body-left-table-body-icon-user"></div>
@@ -160,11 +152,13 @@
                   </div>
                 </div>
                 <div class="item-body-left-table-body-item">
-                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-mobile"></div>
+                  <div class="item-body-left-table-body-icon item-body-left-table-body-icon-link"></div>
                   <div class="item-body-left-table-body-detail">
-                    <div class="item-body-left-table-body-detail-title text-muted">Mobile</div>
+                    <div class="item-body-left-table-body-detail-title text-muted">Url</div>
                     <div class="item-body-left-table-body-detail-desc">
-                      <template v-if="portalProject.portalUser && portalProject.portalUser.phone">{{portalProject.portalUser.phone}}</template>
+                      <template v-if="portalProject && portalProject.url">
+                        <a :href="portalProject.url" target="_blank">{{portalProject.url}}</a>
+                      </template>
                       <template v-else>-</template>
                     </div>
                   </div>
@@ -181,11 +175,8 @@
                 </div>
               </div>
             </template>
-            <template v-else-if="detail === 3">
-              no messages
-            </template>
-            <template v-else-if="detail === 4">
-              no jobs
+            <template v-else-if="detail === 2">
+              No jobs
             </template>
           </div>
         </div>
@@ -193,7 +184,7 @@
 
     </div>
     <div class="item-footer" style="word-break: break-word; width: 980px;">
-<!--      {{portalProject}}-->
+      {{portalProject}}
     </div>
   </div>
 </template>
@@ -375,6 +366,9 @@ export default {
               &-globe {
                 background-image: url('/images/icons/world.png');
               }
+              &-link {
+                background-image: url('/images/icons/link.png');
+              }
             }
             &-detail {
               font-size: 12px;
@@ -389,6 +383,7 @@ export default {
             }
             &-items {
               display: flex;
+              gap: 15px;
               & > div {
                 flex-grow: 1;
                 flex-basis: 0
