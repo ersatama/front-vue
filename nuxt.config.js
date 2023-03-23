@@ -39,6 +39,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+      '@nuxtjs/dotenv'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -79,7 +80,7 @@ export default {
   },
   axios: {
     proxy: false,
-    baseURL: 'http://127.0.0.1:8000'
+    baseURL: process.env.BASE_URL
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

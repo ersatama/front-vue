@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex" id="wrapper">
     <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper" style="z-index: 2">
+    <div class="border-end bg-white" id="sidebar-wrapper" style="z-index: 2" v-if="sidebar">
       <div class="sidebar-heading d-flex justify-content-center">
         <img src="/images/logo/logo-immuniweb.svg" width="150">
       </div>
@@ -51,6 +51,11 @@ export default {
       this.$store.commit('localStorage/setUser', null);
       window.location.href = '/login';
     }
+  },
+  computed:{
+    sidebar() {
+      return this.$store.state.localStorage.sidebar;
+    },
   }
 }
 </script>
@@ -67,6 +72,7 @@ export default {
   margin: 25px 0 25px 25px !important;
   border-radius: 10px;
   transition: margin 0.25s ease-out;
+  height: calc(100vh - 50px);
 }
 
 #sidebar-wrapper .sidebar-heading {

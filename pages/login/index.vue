@@ -17,9 +17,6 @@
                 <div class="col-6">
                   <button class="btn btn-primary px-4 login-btn" type="button" @click="login">{{ $t('Login') }}</button>
                 </div>
-                <div class="col-6 text-right">
-                  <button class="btn btn-link text-decoration-none px-0 forgot" type="button">{{ $t('Forgot password?') }}</button>
-                </div>
               </div>
             </div>
           </div>

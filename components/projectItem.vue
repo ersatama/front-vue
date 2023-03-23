@@ -184,7 +184,7 @@
 
     </div>
     <div class="item-footer" style="word-break: break-word; width: 980px;">
-      {{portalProject}}
+
     </div>
   </div>
 </template>

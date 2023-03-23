@@ -1,10 +1,14 @@
 export const state = () => ({
     user: null,
     portalProjectTypes: [],
-    portalProjectFilter: null
+    portalProjectFilter: null,
+    sidebar: true,
 })
 
 export const mutations = {
+    sidebar(state) {
+        state.sidebar = !state.sidebar;
+    },
     setUser(state, value) {
         state.user = value
     },
@@ -41,8 +45,8 @@ export const actions = {
         }
         return null;
     },
-    async portalProject_get({commit}, page) {
-        const res = await this.$repository.portalProject.get(page);
+    async portalProject_get({commit}, payload) {
+        const res = await this.$repository.portalProject.getWhere(payload);
         const { status, data } = res
         if (status === 200) {
             return data;

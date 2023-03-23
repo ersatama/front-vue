@@ -1,4 +1,11 @@
 export default ($axios) => ({
+    getWhere(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getWhere?page='+payload.page+'&take='+payload.take, payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     get(payload) {
         return $axios.get('/api/v1/portal/portalProject/get?page='+payload).then(response => {
             return response;

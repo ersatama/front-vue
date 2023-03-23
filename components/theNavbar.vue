@@ -1,12 +1,12 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light nav-main">
     <div class="nav bg-white d-flex align-items-center">
-      <div class="nav-close rounded-lg"></div>
+      <div class="nav-close rounded-lg" :class="{'nav-close-rotate':!sidebar}" @click="$store.commit('localStorage/sidebar')"></div>
       <div class="nav-title">Dashboard</div>
       <div class="nav-options d-flex align-items-center">
         <div></div>
-        <div class="nav-profile bg-primary text-white d-flex align-items-center justify-content-center">
-          <div>MN</div>
+        <div class="nav-profile bg-primary text-white d-flex align-items-center justify-content-center" v-if="user">
+          <div>{{ getNameLetter(user) }}</div>
         </div>
       </div>
     </div>
@@ -15,7 +15,27 @@
 
 <script>
 export default {
-  name: "theNavbar"
+  name: "theNavbar",
+  computed: {
+    user() {
+      return this.$store.state.localStorage.user;
+    },
+    sidebar() {
+      return this.$store.state.localStorage.sidebar;
+    },
+  },
+  methods: {
+    getNameLetter(user) {
+      let letters = '';
+      if (user.name) {
+        letters += user.name[0];
+      }
+      if (user.surname) {
+        letters += user.surname[0];
+      }
+      return letters;
+    }
+  },
 }
 </script>
 
@@ -48,6 +68,9 @@ export default {
       background: #F1F4F8;
       position: relative;
       cursor: pointer;
+      &-rotate {
+        transform: rotate(180deg);
+      }
       &:hover {
         background: #e7eaee;
       }

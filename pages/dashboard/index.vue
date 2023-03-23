@@ -5,15 +5,28 @@
       <div class="page-left">
         <div class="page-left-header">
           <div class="page-left-header-title text-muted">
-            Найдено проекта: <span class="page-left-header-title-success"><template v-if="portalProjects.count">{{portalProjects.count}}</template><template v-esle>0</template></span>
+            Найдено проекта: <span class="page-left-header-title-success"><template v-if="portalProjects.count">{{portalProjects.count}}</template><template v-else>0</template></span>
           </div>
-          <div class="page-left-header-pagination"></div>
+          <div class="page-left-header-detail">
+            <div class="page-left-header-pagination">
+              <div class="page-left-header-pages page-left-header-prev" v-if="prev" @click="pageBreak--"></div>
+              <div class="page-left-header-pages" v-for="(n,key) in ranges" :key="key" :class="{'page-left-header-pages-selected':(n === page)}" @click="page = n">{{ n }}</div>
+              <div class="page-left-header-pages page-left-header-next" v-if="next" @click="pageBreak++"></div>
+            </div>
+            <div class="page-left-header-take">
+              <select v-model="take">
+                <option>20</option>
+                <option>50</option>
+                <option>100</option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="page-left-list">
           <project-item v-for="(portalProject, key) in portalProjects.data" :key="key" :portalProject="portalProject"></project-item>
         </div>
       </div>
-      <dashboard-filter></dashboard-filter>
+      <dashboard-filter :filter="filter" @changeFilter="changeFilter"></dashboard-filter>
     </div>
   </div>
 </template>
@@ -29,16 +42,176 @@ export default {
   name: "index",
   data() {
     return {
-      portalProjects: [],
-      page: 1
+      portalProjects: null,
+      page: 1,
+      pageBreak: 1,
+      view: 5,
+      take: 20,
+      filter: {
+        scanby: 'All',
+        type: 'All',
+        projectId: '',
+        projectStatus: '',
+        testProject: 'All',
+        host: '',
+        targetUrl: '',
+        projectApproved: 'All',
+        report_date: '',
+        scheduled_date: '',
+        scheduled_before_date: '',
+        scheduled_after_date: '',
+        continuous_paid_before_date: '',
+        continuous_paid_after_date: '',
+        continuous_from_before_date: '',
+        continuous_from_after_date: '',
+        client: '',
+        company: '',
+      }
     }
+  },
+  watch: {
+    page() {
+      this.getPortalProjects();
+    },
+    take(value) {
+      this.pageBreak = 1;
+      this.page = 1;
+      this.getPortalProjects();
+    },
   },
   mounted() {
     this.getPortalProjects();
   },
+  computed: {
+    portalProjectTypes() {
+      return this.$store.state.localStorage.portalProjectTypes;
+    },
+    pages() {
+      let pages = 0;
+      if (this.portalProjects && this.portalProjects.count && this.portalProjects.count > this.take) {
+        let count = Math.floor(this.portalProjects.count / this.take);
+        let last  = this.portalProjects.count % this.take;
+        if (last > 0) {
+          count++;
+        }
+        pages = count;
+      }
+      return pages;
+    },
+    ranges() {
+      let ranges = [];
+      if (this.pages > this.view) {
+        let max = this.pageBreak * this.view;
+        if (max > this.pages) {
+          max = this.pages;
+        }
+        for (let i = ((this.pageBreak - 1) * this.view); i < max; i++) {
+          ranges.push(i + 1);
+        }
+      } else {
+        for (let i = 0; i < this.pages; i++) {
+          ranges.push(i + 1);
+        }
+      }
+      return ranges;
+    },
+    prev() {
+      let prev = false;
+      if (this.pageBreak > 1) {
+        prev = true;
+      }
+      return prev;
+    },
+    next() {
+      let next = false;
+      if ((this.pages - (this.pageBreak * this.view)) > 0) {
+        next = true;
+      }
+      return next;
+    },
+  },
+
   methods: {
     async getPortalProjects() {
-      this.portalProjects = await this.$store.dispatch('localStorage/portalProject_get', this.page);
+      let data  = {
+        page: this.page,
+        take: this.take
+      };
+      if (this.filter.scanby !== 'All') {
+        data.scanby = this.filter.scanby;
+      }
+      if (this.filter.testProject !== 'All') {
+        data.test = ['Yes'].includes(this.filter.testProject)?1:0;
+      }
+      if (this.filter.projectApproved !== 'All') {
+        data.approved = ['Yes'].includes(this.filter.projectApproved);
+      }
+      if (this.portalProjectTypes && this.filter.type !== 'All') {
+        let codes = [];
+        this.portalProjectTypes.forEach(portalProjectType => {
+          if (portalProjectType.title === this.filter.type) {
+            codes.push(portalProjectType.code);
+          }
+        });
+        data.type = codes;
+      }
+      if (this.filter.projectId.trim() !== '') {
+        data.id = this.filter.projectId.trim();
+      }
+      if (this.filter.report_date && this.filter.report_date !== '') {
+        data.dtreport = this.convertDate(this.filter.report_date);
+      }
+      if (this.filter.scheduled_date && this.filter.scheduled_date !== '') {
+        data.dtshedule = this.convertDate(this.filter.scheduled_date);
+      }
+      if (this.filter.scheduled_after_date && this.filter.scheduled_after_date !== '') {
+        data.dtshedule_after = this.convertDate(this.filter.scheduled_after_date);
+      }
+      if (this.filter.scheduled_before_date && this.filter.scheduled_before_date !== '') {
+        data.dtshedule_before = this.convertDate(this.filter.scheduled_before_date);
+      }
+      if (this.filter.continuous_paid_after_date && this.filter.continuous_paid_after_date !== '') {
+        data.dtjitpaid_after = this.convertDate(this.filter.continuous_paid_after_date);
+      }
+      if (this.filter.continuous_paid_before_date && this.filter.continuous_paid_before_date !== '') {
+        data.dtjitpaid_before = this.convertDate(this.filter.continuous_paid_before_date);
+      }
+      if (this.filter.continuous_from_after_date && this.filter.continuous_from_after_date !== '') {
+        data.dtjitfrom_after = this.convertDate(this.filter.continuous_from_after_date);
+      }
+      if (this.filter.continuous_from_before_date && this.filter.continuous_from_before_date !== '') {
+        data.dtjitfrom_before = this.convertDate(this.filter.continuous_from_before_date);
+      }
+      if (this.filter.client.trim() !== '') {
+        data.client = this.filter.client.trim();
+      }
+      if (this.filter.company.trim() !== '') {
+        data.company = this.filter.company.trim();
+      }
+      if (this.filter.projectStatus.trim() !== '') {
+        data.status = this.filter.projectStatus.trim();
+      }
+      if (this.filter.host.trim() !== '') {
+        data.host = this.filter.host.trim();
+      }
+      if (this.filter.targetUrl.trim() !== '') {
+        data.url = this.filter.targetUrl.trim();
+      }
+      this.portalProjects = await this.$store.dispatch('localStorage/portalProject_get', data);
+    },
+    convertDate(date) {
+      if (date) {
+        return date.getFullYear() + '-' +
+            ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+            ('0' + date.getDate()).slice(-2)
+      }
+      return null;
+    },
+    changeFilter(filter) {
+      this.page = 1;
+      this.pageBreak = 1;
+      this.filter = filter;
+      this.getPortalProjects();
     }
   }
 }
@@ -159,6 +332,12 @@ export default {
           padding: 25px;
           display: flex;
           align-items: center;
+          &-next, &-prev {
+            background: #f9d3d7 url('/images/icons/next.png') no-repeat center !important;
+          }
+          &-prev {
+            transform: rotate(180deg);
+          }
           &-title {
             display: flex;
             align-items: center;
@@ -172,6 +351,44 @@ export default {
               color: #28a745;
               background: #c8f1d2;
               margin-left: 15px;
+            }
+          }
+          &-detail {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
+          &-pagination {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: bold;
+          }
+          &-pages {
+            background: #F1F4F8;
+            color: #6c757d;
+            border-radius: 20px;
+            height: 36px;
+            width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            &:hover, &-selected {
+              color: #28a745;
+              background: #c8f1d2;
+            }
+          }
+          &-take {
+            & > select {
+              border: none;
+              padding: 0 10px 0 10px;
+              outline: none;
+              background: #F1F4F8;
+              height: 36px;
+              border-radius: 5px;
+              font-size: 12px;
             }
           }
         }
