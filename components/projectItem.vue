@@ -485,6 +485,7 @@ export default {
               font-size: 12px;
               padding: 15px 0 15px 0;
               border-top: 2px solid #F1F4F8;
+              justify-content: center;
             }
           }
           &-item {
