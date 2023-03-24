@@ -11,9 +11,13 @@
         <div class="item-header-buttons">
           <button class="item-header-button bg bg-danger text-white">Report</button>
         </div>
-        <div class="item-header-switcher">
-          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 1)}" @click="table = 1">Drafts</div>
-          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 2)}" @click="table = 2">Vuln</div>
+        <div class="item-header-switcher" v-if="portalProject.portalJitReport">
+          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 1)}" @click="table = 1">
+            Drafts <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.vulns.length > 0">{{ portalProject.portalJitReport.vulns.length }}</div>
+          </div>
+          <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 2)}" @click="table = 2">
+            Vuln <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.vulns.length > 0">{{ portalProject.portalJitReport.drafts.length }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -22,17 +26,51 @@
     </div>
     <div class="item-body">
       <div class="item-body-right">
-        <div class="item-body-right-table">
-          <div class="item-body-right-table-header">
-            <div class="item-body-right-table-item">Title</div>
-            <div class="item-body-right-table-item">CWE-ID</div>
-            <div class="item-body-right-table-item">Risk Level</div>
-            <div class="item-body-right-table-item">Action</div>
+        <template v-if="table === 1">
+          <div class="item-body-right-table">
+            <div class="item-body-right-table-header">
+              <div class="item-body-right-table-item">Title</div>
+              <div class="item-body-right-table-item">CWE-ID</div>
+              <div class="item-body-right-table-item">Risk Level</div>
+              <div class="item-body-right-table-item">Action</div>
+            </div>
+            <div class="item-body-right-table-body" v-if="portalProject.portalJitReport.vulns.length > 0">
+              <div v-for="(vuln, key) in portalProject.portalJitReport.vulns" :key="key">
+                <div class="item-body-right-table-item text-muted">{{ vuln.title }}</div>
+                <div class="item-body-right-table-item text-muted">{{ vuln.cwe }}</div>
+                <div class="item-body-right-table-item" :class="{'item-body-right-table-item-medium':(vuln.category === 'MEDIUM'),'item-body-right-table-item-critical':(vuln.category === 'CRITICAL'),'item-body-right-table-item-warning':(vuln.category === 'WARNING')}">
+                  <template v-if="vuln.cwe && vuln.cwe !== 'MAIN_WARNING'">
+                    {{ warn(vuln.cvss) }}
+                  </template>
+                  {{ vuln.category }}
+                </div>
+                <div class="item-body-right-table-item">
+                  <div class="item-body-right-table-item-btn">
+                    <button class="btn-success">Edit</button>
+                    <button class="btn-warning text-white">Delete</button>
+                    <button class="btn-success">Log</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item-body-right-table-body" v-else>
+              <div class="item-body-right-table-body-empty text-muted">No elements found</div>
+            </div>
           </div>
-          <div class="item-body-right-table-body">
-            <div class="item-body-right-table-body-empty text-muted">No elements found</div>
+        </template>
+        <template v-else-if="table === 2">
+          <div class="item-body-right-table">
+            <div class="item-body-right-table-header">
+              <div class="item-body-right-table-item">Title</div>
+              <div class="item-body-right-table-item">CWE-ID</div>
+              <div class="item-body-right-table-item">Risk Level</div>
+              <div class="item-body-right-table-item">Action</div>
+            </div>
+            <div class="item-body-right-table-body">
+              <div class="item-body-right-table-body-empty text-muted">No elements found</div>
+            </div>
           </div>
-        </div>
+        </template>
       </div>
       <div class="item-body-left">
         <div class="item-body-left-table">
@@ -200,6 +238,15 @@ export default {
     }
   },
   methods: {
+    warn(cvss) {
+      if (cvss) {
+        let num = parseFloat(cvss.substring(0,4));
+        if (!isNaN(num)) {
+          return num;
+        }
+      }
+      return 0;
+    },
     convertDate(date) {
       let dateArr = date.split('-');
       if (dateArr.length === 3) {
@@ -274,9 +321,14 @@ export default {
           color: #6c757d;
           border-radius: 2px;
           cursor: pointer;
+          display: flex;
+          gap: 10px;
           &:hover, &-sel {
             background: #fff;
             color: #0b76a6;
+          }
+          &-count {
+            color: #bd2130;
           }
         }
       }
@@ -407,11 +459,27 @@ export default {
             display: flex;
             & > div {
               flex-grow: 1;
+              max-width: 25%;
+              width: 25%;
             }
             font-weight: bold;
             color: #0b76a6;
           }
           &-body {
+            display: flex;
+            flex-direction: column;
+            & > div {
+              display: flex;
+              & > div {
+                border-top: 2px solid #F1F4F8;
+                flex-grow: 1;
+                max-width: 25%;
+                width: 25%;
+                &:last-child {
+                  border-top: 2px solid #F1F4F8 !important;
+                }
+              }
+            }
             &-empty {
               text-align: center;
               font-size: 12px;
@@ -422,8 +490,40 @@ export default {
           &-item {
             padding: 15px;
             border-right: 2px solid #F1F4F8;
+            word-wrap: break-word;
+            display: flex;
+            align-items: center;
+            word-break: break-all;
+            &-medium {
+              background: #ffefd2;
+              font-weight: bold;
+              color: #d18700;
+            }
+            &-critical {
+              background: #f9d3d7;
+              font-weight: bold;
+              color: #dc3545;
+            }
+            &-warning {
+              background: #d5f2ff;
+              font-weight: bold;
+              color: #0b76a6;
+            }
             &:last-child {
               border: none;
+            }
+            &-btn {
+              display: flex;
+              flex-basis: auto;
+              gap: 10px;
+              & > button {
+                flex-grow: 1;
+                border: none;
+                padding: 5px 10px 5px 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                cursor: pointer;
+              }
             }
           }
         }
