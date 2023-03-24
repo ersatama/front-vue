@@ -13,10 +13,10 @@
         </div>
         <div class="item-header-switcher" v-if="portalProject.portalJitReport">
           <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 1)}" @click="table = 1">
-            Drafts <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.vulns.length > 0">{{ portalProject.portalJitReport.vulns.length }}</div>
+            Vuln <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.vulns.length > 0">{{ portalProject.portalJitReport.vulns.length }}</div>
           </div>
           <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 2)}" @click="table = 2">
-            Vuln <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.drafts.length > 0">{{ portalProject.portalJitReport.drafts.length }}</div>
+            Drafts <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.drafts.length > 0">{{ portalProject.portalJitReport.drafts.length }}</div>
           </div>
         </div>
       </div>
