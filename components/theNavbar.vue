@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light nav-main">
     <div class="nav bg-white d-flex align-items-center">
       <div class="nav-close rounded-lg" :class="{'nav-close-rotate':!sidebar}" @click="$store.commit('localStorage/sidebar')"></div>
-      <div class="nav-title">Dashboard</div>
+      <div class="nav-title">{{ navTitle }}</div>
       <div class="nav-options d-flex align-items-center">
         <div></div>
         <div class="nav-profile bg-primary text-white d-flex align-items-center justify-content-center" v-if="user">
@@ -23,6 +23,15 @@ export default {
     sidebar() {
       return this.$store.state.localStorage.sidebar;
     },
+    navTitle() {
+      let title = 'Immuniweb';
+      if (this.$route.name === 'profile') {
+        title = 'Profile';
+      } else if (this.$route.name === 'dashboard') {
+        title = 'Dashboard';
+      }
+      return title;
+    }
   },
   methods: {
     getNameLetter(user) {

@@ -2,7 +2,9 @@
   <div class="item" v-if="portalProject">
     <div class="item-header">
       <div class="item-header-title">
-        <div class="item-header-title-text">#{{portalProject.id}}</div>
+        <NuxtLink :to="'/dashboard/'+portalProject.id">
+          <div class="item-header-title-text">#{{portalProject.id}}</div>
+        </NuxtLink>
         <div class="item-header-title-desc text-muted" v-if="portalProject.portalProjectType">
           <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template><template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template><template v-if="portalProject.rescan > 0"> Patch Verification</template>
         </div>

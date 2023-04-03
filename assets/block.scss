@@ -1,0 +1,314 @@
+a {
+  text-decoration: none !important;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  &-title {
+    padding: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    background: #fff;
+  }
+  &-body {
+    border-top: 1px solid #F1F4F8;
+    display: flex;
+    min-height: 250px;
+    gap: 25px;
+    &-content {
+      display: flex;
+      border-top: 1px solid #F1F4F8;
+      padding-bottom: 25px;
+      &-item {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        padding-bottom: 15px;
+        &-icon {
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          background: no-repeat center;
+          &-layer {
+            background-image: url('/images/icons/layers-24.png');
+          }
+          &-profile {
+            background-image: url('/images/icons/profile-24.png');
+          }
+          &-web {
+            background-image: url('/images/icons/web.png');
+          }
+          &-link {
+            background-image: url('/images/icons/link-24.png');
+          }
+          &-calendar {
+            background-image: url('/images/icons/calendar.png');
+          }
+          &-key {
+            background-image: url('/images/icons/key.png');
+          }
+          &-copy {
+            background-image: url('/images/icons/copy.png');
+          }
+          &-email {
+            background-image: url('/images/icons/email-24.png');
+          }
+          &-writing {
+            background-image: url('/images/icons/writing.png');
+          }
+          &-auth {
+            background-image: url('/images/icons/user-authentication.png');
+          }
+          &-auth-method {
+            background-image: url('/images/icons/authentication.png');
+          }
+          &-ips {
+            background-image: url('/images/icons/ip-address.png');
+          }
+          &-file {
+            background-image: url('/images/icons/attach-file.png');
+          }
+          &-login {
+            background-image: url('/images/icons/login.png');
+          }
+          &-password {
+            background-image: url('/images/icons/lock-24.png');
+          }
+          &-comment {
+            background-image: url('/images/icons/conversation.png');
+          }
+        }
+        &-detail {
+          display: flex;
+          flex-direction: column;
+          &-title {
+            font-size: 10px;
+            color: #6c757d;
+            text-transform: uppercase;
+          }
+          &-desc {
+            font-size: 14px;
+            word-break: break-all;
+            & > span {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+      &-data {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 25px;
+        &-list {
+          display: flex;
+          width: 100%;
+          border-bottom: 1px solid #F1F4F8;
+          &:last-child {
+            border-bottom: none;
+          }
+          & > div {
+            flex-grow: 1;
+            min-width: 25%;
+            max-width: 25%;
+          }
+        }
+      }
+      &-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 25px;
+        border-right: 1px solid #F1F4F8;
+        width: 450px;
+        &-switcher {
+          border: 1px solid #eaedf1;
+          border-radius: 5px;
+          background: #f9f9f9;
+          padding: 10px;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          color: #0b76a6;
+          font-weight: bold;
+          cursor: pointer;
+          &-status {
+            margin-left: auto;
+            width: 30px;
+            height: 14px;
+            background: #c1c1c1;
+            border-radius: 15px;
+            position: relative;
+            &-in {
+              height: 20px;
+              width: 20px;
+              position: absolute;
+              left: -3px;
+              top: -3px;
+              background: #7d7f81;
+              border-radius: 20px;
+              box-shadow: 0 0 1px 1px #4a4949;
+            }
+            &-active {
+              background: #93c2d7;
+              & > .block-body-content-form-switcher-status-in {
+                background: #0b76a6;
+                box-shadow: 0 0 1px 1px #17475c;
+                left: auto;
+                right: -3px;
+              }
+            }
+          }
+        }
+        &-item {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+          &-button {
+            height: 36px;
+            background-color: #0b76a6;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            width: max-content;
+            padding: 0 25px 0 25px;
+          }
+          &-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #6c757d;
+            text-transform: uppercase;
+          }
+          &-content {
+            height: 36px;
+            & > input, & > select {
+              background: #F1F4F8;
+              border-radius: 5px;
+              outline: none;
+              height: 100%;
+              border: none;
+              width: 100%;
+              padding: 0 10px 0 10px;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+    &-left {
+      width: 300px;
+      max-width: 300px;
+      min-width: 300px;
+      border-radius: 10px;
+      background: #fff;
+      height: max-content;
+      overflow: hidden;
+      &-item {
+        text-decoration: none !important;
+        padding: 15px 15px 15px 25px;
+        border-bottom: 1px solid #F1F4F8;
+        font-size: 14px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+        font-weight: bold;
+        color: #6c757d;
+        & > span {
+          text-decoration: none;
+        }
+        &:hover, &-active {
+          background: #fdfdfd;
+          color: #0b76a6;
+          & > .block-body-left-item-icon-arr {
+            &:before, &:after {
+              background: #0b76a6;
+            }
+          }
+        }
+        &-icon {
+          width: 24px;
+          height: 24px;
+          background: no-repeat center;
+          &-bag {
+            background-image: url("/images/icons/bag.png");
+          }
+          &-analysis {
+            background-image: url("/images/icons/analysis.png");
+          }
+          &-warning {
+            background-image: url("/images/icons/warning-24.png");
+          }
+          &-profile {
+            background-image: url("/images/icons/profile.png");
+          }
+          &-detail {
+            background-image: url("/images/icons/detail.png");
+          }
+          &-settings {
+            background-image: url("/images/icons/settings.png");
+          }
+          &-notification {
+            background-image: url("/images/icons/bell.png");
+          }
+          &-locked {
+            background-image: url("/images/icons/locked-24.png");
+          }
+          &-website {
+            background-image: url("/images/icons/website.png");
+          }
+          &-arr {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            transform: rotate(180deg);
+            margin-left: auto;
+            &:before, &:after {
+              content: '';
+              position: absolute;
+              background: #d0d5dd;
+              width: 4px;
+              height: 13px;
+              border-radius: 3px;
+            }
+            &:before {
+              transform: rotate(45deg);
+              margin: 5px 0 0 12px;
+            }
+            &:after {
+              transform: rotate(-45deg);
+              margin: 12px 0 0 12px;
+            }
+          }
+        }
+      }
+    }
+    &-right {
+      border-left: 1px solid #F1F4F8;
+      min-height: 250px;
+      overflow: hidden;
+      flex-grow: 1;
+      border-radius: 10px;
+      background: #fff;
+      &-header {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+      }
+      &-title {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      &-desc {
+        color: #7d7f81;
+        font-size: 12px;
+      }
+    }
+  }
+}
