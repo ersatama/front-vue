@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/block.scss";
+@import "assets/page.scss";
+@import "assets/modal.scss";
 .admin {
   margin: 0 25px 25px 25px;
 }

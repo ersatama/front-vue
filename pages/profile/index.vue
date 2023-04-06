@@ -229,5 +229,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "assets/block.scss";
+
 </style>

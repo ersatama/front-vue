@@ -37,6 +37,14 @@ export const actions = {
             commit('setPortalProjectFilter', data.data);
         }
     },
+    async portalProject_linksById({commit}, id) {
+        const res = await this.$repository.portalProject.linksById(id);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProject_firstById({commit}, id) {
         const res = await this.$repository.portalProject.firstById(id);
         const { status, data } = res

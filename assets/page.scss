@@ -1,0 +1,182 @@
+.page {
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto 0 auto;
+  &-info {
+    display: flex;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    &-items {
+      flex-grow: 1;
+      & > div:first-child {
+        padding-top: 25px;
+      }
+      & > div:last-child {
+        padding-bottom: 25px;
+      }
+      &:first-child {
+        & > div {
+          padding-left: 25px;
+        }
+      }
+      &:last-child {
+        & > div {
+          padding-right: 25px;
+        }
+      }
+    }
+    &-item {
+      border-right: 1px solid #F1F4F8;
+      border-bottom: 1px solid #F1F4F8;
+      padding: 10px;
+      gap: 10px;
+      &-icon {
+        width: 32px;
+        height: 32px;
+        background: no-repeat center;
+        background-size: contain;
+        &-warning {
+          background-image: url("/images/icons/warning.png");
+        }
+        &-database {
+          background-image: url("/images/icons/database.png");
+        }
+        &-locked {
+          background-image: url("/images/icons/lock.png");
+        }
+        &-info {
+          background-image: url("/images/icons/info.png");
+        }
+        &-refresh {
+          background-image: url("/images/icons/refresh.png");
+        }
+        &-mobile {
+          background-image: url("/images/icons/mobile.png");
+        }
+        &-file {
+          background-image: url("/images/icons/file.png");
+        }
+        &-pause {
+          background-image: url("/images/icons/pause.png");
+        }
+        &-network {
+          background-image: url("/images/icons/network.png");
+        }
+      }
+      &-header {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+      }
+      &-title {
+        font-size: 14px;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      &-count {
+        margin-left: auto;
+        gap: 10px;
+        display: flex;
+        & > div {
+          padding: 3px 10px 3px 10px;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          font-size: 15px;
+          font-weight: bold;
+        }
+        &-danger {
+          color: #dc3545;
+          background: rgb(249, 211, 215);
+        }
+        &-success {
+          color: #28a745;
+          background: #c8f1d2;
+        }
+      }
+    }
+  }
+  &-left {
+    flex-grow: 3;
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin: 25px 0 0 0;
+    }
+    &-header {
+      background: #fff;
+      border-radius: 10px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      &-next, &-prev {
+        background: #f9d3d7 url('/images/icons/next.png') no-repeat center !important;
+      }
+      &-prev {
+        transform: rotate(180deg);
+      }
+      &-title {
+        display: flex;
+        align-items: center;
+        &-success {
+          padding: 3px 10px 3px 10px;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          font-size: 15px;
+          font-weight: bold;
+          color: #28a745;
+          background: #c8f1d2;
+          margin-left: 15px;
+        }
+      }
+      &-detail {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      &-pagination {
+        display: flex;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      &-pages {
+        background: #F1F4F8;
+        color: #6c757d;
+        border-radius: 20px;
+        height: 36px;
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover, &-selected {
+          color: #28a745;
+          background: #c8f1d2;
+        }
+      }
+      &-take {
+        & > select {
+          border: none;
+          padding: 0 10px 0 10px;
+          outline: none;
+          background: #F1F4F8;
+          height: 36px;
+          border-radius: 5px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  /*
+  <div class="page-left-header">
+        <div class="page-left-header-title">Найдено 1594 проекта</div>
+        <div class="page-left-header-pagination"></div>
+   */
+
+}
