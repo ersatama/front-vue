@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <raw-report-detail :links="links"></raw-report-detail>
+    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake"></raw-report-detail>
   </div>
 </template>
 
