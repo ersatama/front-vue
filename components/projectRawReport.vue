@@ -74,11 +74,11 @@ export default {
     }
   },
   mounted() {
-    this.page = 1;
     this.getRawReports();
   },
   watch: {
     filter() {
+      this.page = 1;
       this.getRawReports();
     },
   },
