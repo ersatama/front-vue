@@ -277,78 +277,29 @@
         </template>
         <template v-else-if="tab === 2">
           <div class="block-body-right-header">
-            <div class="block-body-right-title">Notifications</div>
-            <div class="block-body-right-desc">History of alerts, notifications, logs</div>
+            <div class="block-body-right-title">Alerts</div>
+            <div class="block-body-right-desc">Project alerts</div>
           </div>
           <div class="block-body-content">
-            <div class="block-body-content-form">
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Alias</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="alias">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Name</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="name">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Surname</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="surname">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Last name</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="last_name">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Email</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" readonly v-model="email">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <button class="block-body-content-form-item-button">Save</button>
-              </div>
-            </div>
-            <extra-profile-content></extra-profile-content>
+
           </div>
         </template>
         <template v-else-if="tab === 3">
           <div class="block-body-right-header">
-            <div class="block-body-right-title">Security</div>
-            <div class="block-body-right-desc">Manage access to your account</div>
+            <div class="block-body-right-title">Scan jobs</div>
+            <div class="block-body-right-desc">Project scan jobs</div>
           </div>
           <div class="block-body-content">
-            <div class="block-body-content-form">
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Current password</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="alias">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">New password</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="name">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Repeat new password</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="surname">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <button class="block-body-content-form-item-button">Save</button>
-              </div>
-            </div>
-            <extra-profile-content></extra-profile-content>
+
+          </div>
+        </template>
+        <template v-else-if="tab === 4">
+          <div class="block-body-right-header">
+            <div class="block-body-right-title">Sitemaps</div>
+            <div class="block-body-right-desc">Project sitemaps</div>
+          </div>
+          <div class="block-body-content">
+            <project-sitemap :links="links"></project-sitemap>
           </div>
         </template>
       </div>
@@ -361,9 +312,10 @@ import ExtraProfileContent from "../../components/extraProfileContent.vue";
 import ProjectRawReport from "../../components/projectRawReport.vue";
 import ModalBox from "../../components/modalBox.vue";
 import RawReportFilter from "../../components/rawReportFilter.vue";
+import ProjectSitemap from "../../components/projectSitemap.vue";
 
 export default {
-  components: {RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
+  components: {ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
   layout: 'admin',
   name: "project",
   data() {
