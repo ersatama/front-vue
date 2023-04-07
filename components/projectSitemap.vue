@@ -35,7 +35,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="block-body-content-table-body-empty">No datra</div>
+        <div class="block-body-content-table-body-empty">No data</div>
       </template>
     </div>
   </div>
