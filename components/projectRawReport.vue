@@ -3,7 +3,7 @@
     <modal-box :modal="tableSettingsModal" @closeModal="tableSettingsModal = false">
       <raw-report-table-settings></raw-report-table-settings>
     </modal-box>
-    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake"></raw-report-detail>
+    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
     <div class="block-body-content-table-header">
       <div class="block-body-content-table-tr">
         <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake"></raw-report-detail>
+    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
   </div>
 </template>
 
@@ -74,6 +74,7 @@ export default {
     }
   },
   mounted() {
+    this.page = 1;
     this.getRawReports();
   },
   watch: {

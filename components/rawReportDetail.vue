@@ -23,11 +23,10 @@
 <script>
 export default {
   name: "rawReportDetail",
-  props: ['links', 'size'],
+  props: ['links', 'size', 'page'],
   data() {
     return {
       take: 20,
-      page: 1,
       view: 5,
       pageBreak: 1,
     }
@@ -79,16 +78,14 @@ export default {
   },
   methods: {
     setPage(page) {
-      this.page = page;
       this.$emit('setTake', {
-        page: this.page,
+        page: page,
         take: this.take
       });
     },
     setTake() {
-      this.page = 1;
       this.$emit('setTake', {
-        page: this.page,
+        page: 1,
         take: this.take
       });
     }
