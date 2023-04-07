@@ -3,7 +3,7 @@
     <modal-box :modal="tableSettingsModal" @closeModal="tableSettingsModal = false">
       <raw-report-table-settings></raw-report-table-settings>
     </modal-box>
-    <raw-report-detail></raw-report-detail>
+    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake"></raw-report-detail>
     <div class="block-body-content-table-header">
       <div class="block-body-content-table-tr">
         <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -26,13 +26,16 @@
         <div class="block-body-content-table-item block-body-content-table-item-checkbox">
           <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(rawReport.id)}"></div>
         </div>
-        <div class="block-body-content-table-item block-body-content-table-item-id">3918558</div>
-        <div class="block-body-content-table-item block-body-content-table-item-process">36974</div>
-        <div class="block-body-content-table-item block-body-content-table-item-scan">33114</div>
-        <div class="block-body-content-table-item block-body-content-table-item-service">badbots</div>
-        <div class="block-body-content-table-item block-body-content-table-item-name">WEBSEC_X_XSS_PROTECTION_DEPRECATED</div>
-        <div class="block-body-content-table-item block-body-content-table-item-status">OLD</div>
-        <div class="block-body-content-table-item block-body-content-table-item-rawbase">NO DRAFT</div>
+        <div class="block-body-content-table-item block-body-content-table-item-id">{{ rawReport.id }}</div>
+        <div class="block-body-content-table-item block-body-content-table-item-process">{{ rawReport.process }}</div>
+        <div class="block-body-content-table-item block-body-content-table-item-scan">{{ rawReport.scan }}</div>
+        <div class="block-body-content-table-item block-body-content-table-item-service">{{ rawReport.service }}</div>
+        <div class="block-body-content-table-item block-body-content-table-item-name">{{ rawReport.name }}</div>
+        <div class="block-body-content-table-item block-body-content-table-item-status">{{ rawReport.status }}</div>
+        <div class="block-body-content-table-item block-body-content-table-item-rawbase">
+          <template v-if="rawReport.rawbase === 0">NO DRAFT</template>
+          <template v-else>DRAFT</template>
+        </div>
         <div class="block-body-content-table-item block-body-content-table-item-field-option">
           <div class="block-body-content-table-item-option">
             <div class="block-body-content-table-item-option-select">
@@ -47,7 +50,7 @@
         </div>
       </div>
     </div>
-    <raw-report-detail></raw-report-detail>
+    <raw-report-detail :links="links"></raw-report-detail>
   </div>
 </template>
 
@@ -59,13 +62,24 @@ import RawReportDetail from "./rawReportDetail.vue";
 export default {
   name: "projectRawReport",
   components: {RawReportDetail, RawReportTableSettings, ModalBox},
-  props: ['portalProject'],
+  props: ['portalProject','links','filter'],
   data() {
     return {
-      rawReports: [{id: 1},{id: 2},{id: 3},{id: 4},{id: 5},{id: 6},{id: 7}],
+      rawReports: [],
       selected: [],
       tableSettingsModal: false,
+      rawReportSize: 0,
+      take: 20,
+      page: 1
     }
+  },
+  mounted() {
+    this.getRawReports();
+  },
+  watch: {
+    filter() {
+      this.getRawReports();
+    },
   },
   computed: {
     isAllSelected() {
@@ -79,6 +93,35 @@ export default {
     }
   },
   methods: {
+    async getRawReports() {
+      if (this.filter) {
+        let data  = {
+          id: this.portalProject.id,
+          take: this.take,
+          page: this.page
+        };
+        if (this.filter.target !== 'all') {
+          data.target = this.filter.target;
+        }
+        if (this.filter.service !== 'All') {
+          data.service = this.filter.service;
+        }
+        if (this.filter.status !== 'ALL') {
+          data.status = this.filter.status;
+        }
+        if (this.filter.draft !== 'ALL') {
+          data.draft = this.filter.draft;
+        }
+        if (this.filter.search !== '') {
+          data.search = this.filter.search;
+        }
+        let rawReports = await this.$store.dispatch('localStorage/scanReportRawMaster_getByProjectId', data);
+        if (rawReports.data) {
+          this.rawReports = rawReports.data;
+          this.rawReportSize  = rawReports.count;
+        }
+      }
+    },
     checkRawReportAll() {
       if (this.isAllSelected) {
         this.selected = [];
@@ -97,7 +140,12 @@ export default {
       } else {
         this.selected.push(id);
       }
-    }
+    },
+    setTake(data) {
+      this.take = data.take;
+      this.page = data.page;
+      this.getRawReports();
+    },
   }
 }
 </script>

@@ -1,23 +1,19 @@
 <template>
   <div class="block-body-content-table-info">
     <div class="block-body-content-table-info-detail">
-      <div class="block-body-content-table-info-detail-title">Raw reports 30 / 57</div>
+      <div class="block-body-content-table-info-detail-title">Raw reports <template v-if="links"><span v-if="links.newReports">{{ links.newReports }}</span> / <span v-if="links.allReports">{{ links.allReports }}</span></template></div>
     </div>
     <div class="page-left-header-detail">
       <div class="page-left-header-pagination">
-        <div class="page-left-header-pages page-left-header-prev"></div>
-        <div class="page-left-header-pages page-left-header-pages-selected">1</div>
-        <div class="page-left-header-pages">2</div>
-        <div class="page-left-header-pages">3</div>
-        <div class="page-left-header-pages">4</div>
-        <div class="page-left-header-pages">5</div>
-        <div class="page-left-header-pages page-left-header-next"></div>
+        <div class="page-left-header-pages page-left-header-prev" v-if="prev" @click="pageBreak--"></div>
+        <div class="page-left-header-pages" :class="{'page-left-header-pages-selected':(page === n)}" v-for="(n,key) in ranges" :key="key" @click="setPage(n)">{{ n }}</div>
+        <div class="page-left-header-pages page-left-header-next" v-if="next" @click="pageBreak++"></div>
       </div>
       <div class="page-left-header-take">
-        <select>
-          <option>20</option>
-          <option>50</option>
-          <option>100</option>
+        <select v-model="take" @change="setTake">
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
         </select>
       </div>
     </div>
@@ -26,7 +22,77 @@
 
 <script>
 export default {
-  name: "rawReportDetail"
+  name: "rawReportDetail",
+  props: ['links', 'size'],
+  data() {
+    return {
+      take: 20,
+      page: 1,
+      view: 5,
+      pageBreak: 1,
+    }
+  },
+  computed: {
+    pages() {
+      let pages = 0;
+      if (this.size > this.take) {
+        let count = Math.floor(this.size / this.take);
+        let last  = this.size % this.take;
+        if (last > 0) {
+          count++;
+        }
+        pages = count;
+      }
+      return pages;
+    },
+    ranges() {
+      let ranges = [];
+      if (this.pages > this.view) {
+        let max = this.pageBreak * this.view;
+        if (max > this.pages) {
+          max = this.pages;
+        }
+        for (let i = ((this.pageBreak - 1) * this.view); i < max; i++) {
+          ranges.push(i + 1);
+        }
+      } else {
+        for (let i = 0; i < this.pages; i++) {
+          ranges.push(i + 1);
+        }
+      }
+      return ranges;
+    },
+    prev() {
+      let prev = false;
+      if (this.pageBreak > 1) {
+        prev = true;
+      }
+      return prev;
+    },
+    next() {
+      let next = false;
+      if ((this.pages - (this.pageBreak * this.view)) > 0) {
+        next = true;
+      }
+      return next;
+    },
+  },
+  methods: {
+    setPage(page) {
+      this.page = page;
+      this.$emit('setTake', {
+        page: this.page,
+        take: this.take
+      });
+    },
+    setTake() {
+      this.page = 1;
+      this.$emit('setTake', {
+        page: this.page,
+        take: this.take
+      });
+    }
+  }
 }
 </script>
 

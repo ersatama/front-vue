@@ -7,7 +7,7 @@
       <NuxtLink to="/profile" class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" :class="{'bg-light':($route.name === 'profile'),'text-primary':($route.name === 'profile')}">
         <img src="/images/icons/profile.png" width="24" class="mr-1"> Profile
       </NuxtLink>
-      <NuxtLink to="dashboard" class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" :class="{'bg-light':($route.name === 'dashboard'),'text-primary':($route.name === 'dashboard')}">
+      <NuxtLink to="/dashboard" class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" :class="{'bg-light':($route.name === 'dashboard'),'text-primary':($route.name === 'dashboard')}">
         <img src="/images/icons/dashboard.png" width="24" class="mr-1"> Dashboard
       </NuxtLink>
       <a class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" @click="logout">

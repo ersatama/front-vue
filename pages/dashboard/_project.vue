@@ -1,7 +1,7 @@
 <template>
   <div class="block">
-    <modal-box :modal="filterModal" @closeModal="filterModal = false">
-      <raw-report-filter></raw-report-filter>
+    <modal-box v-if="portalProject" :modal="filterModal" @closeModal="filterModal = false">
+      <raw-report-filter :project="portalProject" @setFilter="setFilter" @closeModal="filterModal = false"></raw-report-filter>
     </modal-box>
     <div class="block-title"><span>Project</span> #{{ projectId }}</div>
     <div class="block-body" v-if="portalProject">
@@ -13,7 +13,13 @@
         </NuxtLink>
         <NuxtLink :to="'/dashboard/' + projectId + '?tab=reports'">
           <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 1)}">
-            <div class="block-body-left-item-icon block-body-left-item-icon-analysis"></div> Raw reports <div class="block-body-left-item-icon-arr"></div>
+            <div class="block-body-left-item-icon block-body-left-item-icon-analysis"></div>
+            Raw reports
+            <div class="block-body-left-item-count-double" v-if="links && links.neuron_raw_reports">
+              <div class="block-body-left-item-count-double-first" v-if="links.neuron_raw_reports.newReports && links.neuron_raw_reports.newReports > 0">{{ links.neuron_raw_reports.newReports }}</div>
+              <div class="block-body-left-item-count-double-last" v-if="links.neuron_raw_reports.newReports && links.neuron_raw_reports.allReports > 0">{{ links.neuron_raw_reports.allReports }}</div>
+            </div>
+            <div class="block-body-left-item-icon-arr"></div>
           </div>
         </NuxtLink>
         <NuxtLink :to="'/dashboard/' + projectId + '?tab=alerts'">
@@ -266,7 +272,7 @@
             </div>
           </div>
           <div class="block-body-content">
-            <project-raw-report :portalProject="portalProject"></project-raw-report>
+            <project-raw-report :portalProject="portalProject" :links="linksRawReport" :filter="filter"></project-raw-report>
           </div>
         </template>
         <template v-else-if="tab === 2">
@@ -359,7 +365,7 @@ import RawReportFilter from "../../components/rawReportFilter.vue";
 export default {
   components: {RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
   layout: 'admin',
-  name: "_project",
+  name: "project",
   data() {
     return {
       alias: '',
@@ -371,9 +377,23 @@ export default {
       portalProject: null,
       filterModal: false,
       links: null,
+      filter: {
+        target: "all",
+        service: "All",
+        status: "ALL",
+        draft: "ALL",
+        search: ''
+      },
     }
   },
   computed: {
+    linksRawReport() {
+      let rawReport = null;
+      if (this.links && this.links.neuron_raw_reports) {
+        rawReport = this.links.neuron_raw_reports;
+      }
+      return rawReport;
+    },
     projectId() {
       let id = null;
       if (this.$route.params.project) {
@@ -406,6 +426,9 @@ export default {
     this.getLinksById();
   },
   methods: {
+    setFilter(filter) {
+      this.filter = filter;
+    },
     async getProjectById() {
       let project = await this.$store.dispatch('localStorage/portalProject_firstById', this.projectId);
       if (project.data) {

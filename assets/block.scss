@@ -496,6 +496,28 @@ a {
           padding: 2px 8px 2px 8px;
           border-radius: 15px;
           font-size: 12px;
+          &-double {
+            position: absolute;
+            right: 50px;
+            border-radius: 15px;
+            font-size: 12px;
+            display: flex;
+            gap: 5px;
+            &-first {
+              color: #28a745;
+              background: #c8f1d2;
+              padding: 2px 8px 2px 8px;
+              border-radius: 15px;
+              font-size: 12px;
+            }
+            &-last {
+              background: #f9d3d7;
+              color: #dc3545;
+              padding: 2px 8px 2px 8px;
+              border-radius: 15px;
+              font-size: 12px;
+            }
+          }
         }
         & > span {
           text-decoration: none;

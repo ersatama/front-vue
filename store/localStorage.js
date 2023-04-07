@@ -21,6 +21,22 @@ export const mutations = {
 }
 
 export const actions = {
+    async scanReportRawMaster_getByProjectId({commit}, payload) {
+        const res = await this.$repository.scanReportRawMaster.getByProjectId(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async scanNeuronJob_getByProjectId({commit}, id) {
+        const res = await this.$repository.scanNeuronJob.getByProjectId(id);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProjectType_get({commit}) {
         const res = await this.$repository.portalProjectType.get();
         const { status, data } = res
