@@ -4,16 +4,15 @@
       <img src="/images/logo/logo-immuniweb.svg" width="150">
     </div>
     <div class="list-group list-group-flush d-flex">
-      <NuxtLink to="/profile" class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" :class="{'bg-light':($route.name === 'profile'),'text-primary':($route.name === 'profile')}">
-        <img src="/images/icons/profile.png" width="24" class="mr-1"> Profile
+      <NuxtLink to="/profile" class="list-group-item" :class="{'list-group-item-active':($route.name === 'profile')}">
+        <img src="/images/icons/profile.png" width="24" height="24"> Profile <div class="block-body-left-item-icon-arr"></div>
       </NuxtLink>
-      <NuxtLink to="/dashboard" class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" :class="{'bg-light':($route.name === 'dashboard'),'text-primary':($route.name === 'dashboard')}">
-        <img src="/images/icons/dashboard.png" width="24" class="mr-1"> Dashboard
+      <NuxtLink to="/dashboard" class="list-group-item" :class="{'list-group-item-active':($route.name === 'dashboard')}">
+        <img src="/images/icons/dashboard.png" width="24" height="24"> Dashboard <div class="block-body-left-item-icon-arr"></div>
       </NuxtLink>
-      <a class="list-group-item list-group-item-action list-group-item-light border-0 rounded-lg" @click="logout">
-        <img src="/images/icons/log-out.png" width="24" class="mr-1"> Log out
+      <a class="list-group-item" @click="logout">
+        <img src="/images/icons/log-out.png" width="24" height="24"> Log out <div class="block-body-left-item-icon-arr"></div>
       </a>
-
     </div>
   </div>
 </template>
@@ -35,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #wrapper {
   overflow-x: hidden;
 }
@@ -44,7 +43,9 @@ export default {
   margin: 25px 0 25px 25px !important;
   border-radius: 10px;
   transition: margin 0.25s ease-out;
-  height: calc(100vh - 50px);
+  height: max-content;
+  min-width: 300px;
+  font-weight: bold;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -54,14 +55,30 @@ export default {
 }
 
 #sidebar-wrapper .list-group {
-  margin: 25px;
-  gap: 5px;
+
 }
 .list-group-item {
-  width: 250px;
+  width: 100%;
   font-size: 14px;
-  padding: 10px 15px 10px 15px;
-  background: transparent;
+  padding: 15px 15px 15px 25px;
+  border-bottom: 1px solid #F1F4F8;
+  display: flex;
+  gap: 10px;
+  background: transparent !important;
+  color: #6c757d !important;
+  align-items: center;
+  &:last-child {
+    border-bottom: none;
+  }
+  &:hover, &-active {
+    color: #0b76a6 !important;
+    & > .block-body-left-item-icon-arr {
+
+      &:before, &:after {
+        background: #0b76a6;
+      }
+    }
+  }
 }
 
 @media (min-width: 768px) {
