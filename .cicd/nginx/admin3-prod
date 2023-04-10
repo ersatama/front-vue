@@ -27,7 +27,7 @@ server {
         #routing block
         location /
         {
-                root /var/www/prod/immuniweb-front-nuxt;
+                root /var/www/prod/immuniweb-front-nuxt/dist;
         }
 
         location /api
