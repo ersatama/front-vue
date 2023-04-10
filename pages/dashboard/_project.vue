@@ -290,7 +290,7 @@
             <div class="block-body-right-desc">Project scan jobs</div>
           </div>
           <div class="block-body-content">
-
+            <project-scan-jobs :portalProject="portalProject"></project-scan-jobs>
           </div>
         </template>
         <template v-else-if="tab === 4">
@@ -313,9 +313,10 @@ import ProjectRawReport from "../../components/projectRawReport.vue";
 import ModalBox from "../../components/modalBox.vue";
 import RawReportFilter from "../../components/rawReportFilter.vue";
 import ProjectSitemap from "../../components/projectSitemap.vue";
+import ProjectScanJobs from "../../components/projectScanJobs.vue";
 
 export default {
-  components: {ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
+  components: {ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
   layout: 'admin',
   name: "project",
   data() {
