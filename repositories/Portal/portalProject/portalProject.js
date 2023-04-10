@@ -33,5 +33,12 @@ export default ($axios) => ({
         }).catch(error => {
             return error.response;
         });
+    },
+    getScanjobsById(id) {
+        return $axios.get('/api/v1/portal/portalProject/getScanjobsByProjectId/'+id).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
     }
 });
