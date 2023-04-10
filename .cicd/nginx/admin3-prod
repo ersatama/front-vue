@@ -32,6 +32,8 @@ server {
 
         location /api
         {
-                alias /var/www/prod/immuniweb-back-laravel;
+                alias /var/www/prod/immuniweb-back-laravel/public;
+                try_files $uri $uri/ /index.php;
+
         }
 }
