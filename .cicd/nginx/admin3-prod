@@ -28,7 +28,7 @@ server {
         location /
         {
                 root /var/www/prod/immuniweb-front-nuxt/dist;
-                try_files $uri $uri/ /index.html;
+                index index.html;
 
         }
 
