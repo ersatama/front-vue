@@ -28,11 +28,13 @@ server {
         location /
         {
                 root /var/www/prod/immuniweb-front-nuxt/dist;
+                try_files $uri $uri/ /index.html;
+
         }
 
         location /api
         {
-                alias /var/www/prod/immuniweb-back-laravel/public;
+                root /var/www/prod/immuniweb-back-laravel/public;
                 try_files $uri $uri/ /index.php;
 
         }
