@@ -288,6 +288,12 @@
           <div class="block-body-right-header">
             <div class="block-body-right-title">Scan jobs</div>
             <div class="block-body-right-desc">Project scan jobs</div>
+            <div class="block-body-right-header-buttons">
+              <button class="block-body-content-filter"><i class="block-body-content-filter-icon block-body-content-filter-icon-pie"></i> Report</button>
+              <button class="block-body-content-report"><i class="block-body-content-filter-icon block-body-content-filter-icon-vuln"></i> New vuln</button>
+              <button class="block-body-content-report"><i class="block-body-content-filter-icon block-body-content-filter-icon-vuln"></i> Alert processes page</button>
+              <button class="block-body-content-vuln"><i class="block-body-content-filter-icon block-body-content-filter-icon-add"></i> Create new scanjob</button>
+            </div>
           </div>
           <div class="block-body-content">
             <project-scan-jobs :portalProject="portalProject"></project-scan-jobs>

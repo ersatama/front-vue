@@ -43,6 +43,12 @@ a {
           &-graph {
             background-image: url('/images/icons/graph.png');
           }
+          &-add {
+            background-image: url('/images/icons/add.png');
+          }
+          &-pie {
+            background-image: url('/images/icons/pie-chart.png');
+          }
           &-vuln {
             background-image: url('/images/icons/vuln.png');
           }
@@ -119,6 +125,87 @@ a {
           flex-grow: 1;
           display: flex;
           align-items: center;
+          &-hover {
+            position: relative;
+            &-title {
+              color: rgb(11, 118, 166);
+              font-weight: bold;
+            }
+            &-content {
+              padding: 15px;
+              position: absolute;
+              width: 260px;
+              background: #fff;
+              box-shadow: 0 0 3px 1px rgba(0,0,0,0.14902);
+              border-radius: 5px;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              z-index: 2;
+              bottom: 40px;
+              left: -30px;
+              visibility: hidden;
+              opacity: 0;
+              transition: all .05s linear;
+              &-angle {
+                width: 20px;
+                height: 10px;
+                position: absolute;
+                top: 100%;
+                left: 30px;
+                overflow: hidden;
+                &:before {
+                  content: '';
+                  position: absolute;
+                  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.14902);
+                  width: 16px;
+                  height: 16px;
+                  background: #fff;
+                  transform: rotate(44deg);
+                  left: 2px;
+                  top: -10px;
+                }
+              }
+              & > div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+              }
+              &-title {
+                color: #000;
+                font-size: 12px;
+                text-transform: uppercase;
+                font-weight: bold;
+              }
+              &-body {
+                display: flex;
+                flex-direction: column;
+                gap:  5px;
+                &-item {
+                  display: flex;
+                  gap: 10px;
+                  &-key {
+                    flex-grow: 1;
+                    width: 45%;
+                    max-width: 45%;
+                    word-break: break-all;
+                  }
+                  &-value {
+                    flex-grow: 1;
+                    color: rgb(11, 118, 166);
+                    word-break: break-all;
+                  }
+                }
+              }
+            }
+            &:hover {
+              & > .block-body-content-table-item-hover-content {
+                bottom: 30px;
+                visibility: visible;
+                opacity: 1;
+              }
+            }
+          }
           &-configure {
             width: 18px;
             height: 18px;
@@ -163,6 +250,9 @@ a {
           }
           &-id {
             max-width: 100px;
+            &-short {
+              max-width: 80px;
+            }
           }
           &-process {
             max-width: 100px;
@@ -178,6 +268,16 @@ a {
           }
           &-rawbase {
             max-width: 100px;
+          }
+          &-date {
+            max-width: 150px;
+          }
+          &-url {
+            max-width: 200px;
+            word-break: break-all;
+          }
+          &-engine {
+            max-width: 200px;
           }
           &-down {
             width: 12px;
