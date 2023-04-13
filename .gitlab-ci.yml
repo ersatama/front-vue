@@ -8,9 +8,6 @@ syntax-check:
   stage: test
   # variables:
   #   CI_DEBUG_TRACE: "true"
-  before_script:
-    - chmod +x ./setup_env.sh
-    - ./setup_env.sh
   script:
 #    - apk update && apk add git
     - chmod a+x ./.cicd/syntax/*.sh
@@ -109,6 +106,7 @@ deploy-prod2:
     - rsync -atv --delete --progress ./.cicd/integration cicd@${HOSTNAME}:${DEPLOYPATH}/.cicd
     - ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH}/.cicd/integration && chmod a+x *.sh && ./run.sh ${DEPLOYPATH}"
     - rsync -atv --delete --progress ./ cicd@${HOSTNAME}:${DEPLOYPATH} --exclude '/main'
+    - ssh cicd@${HOSTNAME} "cp ${DEPLOYPATH}/.env.prod ${DEPLOYPATH}/.env"
     - ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH}/.cicd/deploy && chmod a+x *.sh &&  ./run.sh ${DEPLOYPATH}"
     - git diff-tree --no-commit-id --name-only -r $CI_COMMIT_SHA | ssh cicd@${HOSTNAME} "cd ${DEPLOYPATH} && chmod a+x ${DEPLOYPATH}/.cicd/nginx/nginx.sh && ${DEPLOYPATH}/.cicd/nginx/nginx.sh prod"
     - ssh cicd@${HOSTNAME} "echo -n \"<?php define('GITADMVERSION3', '${CI_COMMIT_SHA}'); ?>\" > /var/www/prod/conf/admversion3.inc.php";
