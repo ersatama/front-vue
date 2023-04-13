@@ -1,0 +1,1 @@
+echo BASE_URL=https://admin3.iw:1450/ >> .env
