@@ -43,6 +43,13 @@
             <div class="block-body-left-item-icon-arr"></div>
           </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + projectId + '?tab=unpatched'">
+          <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 5)}">
+            <div class="block-body-left-item-icon block-body-left-item-icon-unpatched"></div>
+            Unpatched
+            <div class="block-body-left-item-icon-arr"></div>
+          </div>
+        </NuxtLink>
       </div>
       <div class="block-body-right" >
         <template v-if="tab === 0">
@@ -308,6 +315,15 @@
             <project-sitemap :links="links"></project-sitemap>
           </div>
         </template>
+        <template v-else-if="tab === 5">
+          <div class="block-body-right-header">
+            <div class="block-body-right-title">Unpatched</div>
+            <div class="block-body-right-desc">Project details</div>
+          </div>
+          <div class="block-body-content">
+            <project-unpatched :portalProject="portalProject"></project-unpatched>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -320,9 +336,12 @@ import ModalBox from "../../components/modalBox.vue";
 import RawReportFilter from "../../components/rawReportFilter.vue";
 import ProjectSitemap from "../../components/projectSitemap.vue";
 import ProjectScanJobs from "../../components/projectScanJobs.vue";
+import ProjectUnpatched from "../../components/projectUnpatched.vue";
 
 export default {
-  components: {ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
+  components: {
+    ProjectUnpatched,
+    ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
   layout: 'admin',
   name: "project",
   data() {
@@ -375,6 +394,8 @@ export default {
           tab = 3;
         } else if (query === 'sitemaps') {
           tab = 4;
+        } else if (query === 'unpatched') {
+          tab = 5;
         }
       }
       return tab;
