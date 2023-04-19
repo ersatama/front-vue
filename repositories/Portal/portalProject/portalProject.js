@@ -42,7 +42,7 @@ export default ($axios) => ({
         });
     },
     getTasksByIdAndAuditorId(payload) {
-        return $axios.get('https://admin3.iw:1450/api/v1/portal/portalProject/getTasksByIdAndAuditorId/'+payload.id+'/'+payload.auditor_id).then(response => {
+        return $axios.get('/api/v1/portal/portalProject/getTasksByIdAndAuditorId/'+payload.id+'/'+payload.auditor_id).then(response => {
             return response;
         }).catch(error => {
             return error.response;
