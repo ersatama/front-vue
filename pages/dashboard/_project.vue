@@ -47,8 +47,16 @@
           <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 5)}">
             <div class="block-body-left-item-icon block-body-left-item-icon-unpatched"></div>
             Unpatched
+            <div class="block-body-left-item-count" v-if="links && links.unpatched">{{ links.unpatched }}</div>
             <div class="block-body-left-item-icon-arr"></div>
           </div>
+        </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + projectId + '?tab=tasks'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 6)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-tasks"></div>
+                Tasks
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
         </NuxtLink>
       </div>
       <div class="block-body-right" >
@@ -324,6 +332,15 @@
             <project-unpatched :portalProject="portalProject"></project-unpatched>
           </div>
         </template>
+        <template v-else-if="tab === 6">
+          <div class="block-body-right-header">
+              <div class="block-body-right-title">Tasks</div>
+              <div class="block-body-right-desc">Project tasks</div>
+          </div>
+          <div class="block-body-content">
+            <project-tasks :portalProject="portalProject"></project-tasks>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -337,9 +354,11 @@ import RawReportFilter from "../../components/rawReportFilter.vue";
 import ProjectSitemap from "../../components/projectSitemap.vue";
 import ProjectScanJobs from "../../components/projectScanJobs.vue";
 import ProjectUnpatched from "../../components/projectUnpatched.vue";
+import ProjectTasks from "../../components/projectTasks.vue";
 
 export default {
   components: {
+      ProjectTasks,
     ProjectUnpatched,
     ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
   layout: 'admin',
@@ -395,7 +414,9 @@ export default {
         } else if (query === 'sitemaps') {
           tab = 4;
         } else if (query === 'unpatched') {
-          tab = 5;
+            tab = 5;
+        } else if (query === 'tasks') {
+            tab = 6;
         }
       }
       return tab;
@@ -420,7 +441,7 @@ export default {
       if (links.data) {
         this.links  = links.data;
       }
-    }
+    },
   }
 }
 </script>
