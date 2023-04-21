@@ -41,6 +41,13 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getRawbaseById(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getRawbaseById/'+payload.id, payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     getTasksByIdAndAuditorId(payload) {
         return $axios.get('/api/v1/portal/portalProject/getTasksByIdAndAuditorId/'+payload.id+'/'+payload.auditor_id).then(response => {
             return response;

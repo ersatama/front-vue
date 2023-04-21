@@ -70,11 +70,6 @@ export default {
         code: 'en',
         name: 'English',
         file: 'en.js'
-      },
-      {
-        code: 'ru',
-        name: 'Русский',
-        file: 'ru.js'
       }
     ]
   },

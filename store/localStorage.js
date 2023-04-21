@@ -37,6 +37,14 @@ export const actions = {
         }
         return null;
     },
+    async portalProjectType_getRawbaseById({commit}, payload){
+        const res = await this.$repository.portalProject.getRawbaseById(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProject_tasksByIdAndAuditorId({commit}, payload) {
         const res = await this.$repository.portalProject.getTasksByIdAndAuditorId(payload);
         const { status, data } = res

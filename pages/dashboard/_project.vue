@@ -58,6 +58,13 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + projectId + '?tab=rawbase'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 7)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-rawbase"></div>
+                All rawbase
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
       </div>
       <div class="block-body-right" >
         <template v-if="tab === 0">
@@ -341,6 +348,15 @@
             <project-tasks :portalProject="portalProject"></project-tasks>
           </div>
         </template>
+        <template v-else-if="tab === 7">
+            <div class="block-body-right-header">
+                <div class="block-body-right-title">All rawbase</div>
+                <div class="block-body-right-desc">Project tasks</div>
+            </div>
+            <div class="block-body-content">
+                <project-rawbase :portalProject="portalProject"></project-rawbase>
+            </div>
+        </template>
       </div>
     </div>
   </div>
@@ -355,9 +371,11 @@ import ProjectSitemap from "../../components/projectSitemap.vue";
 import ProjectScanJobs from "../../components/projectScanJobs.vue";
 import ProjectUnpatched from "../../components/projectUnpatched.vue";
 import ProjectTasks from "../../components/projectTasks.vue";
+import ProjectRawbase from "../../components/projectRawbase.vue";
 
 export default {
   components: {
+      ProjectRawbase,
       ProjectTasks,
     ProjectUnpatched,
     ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
@@ -417,6 +435,8 @@ export default {
             tab = 5;
         } else if (query === 'tasks') {
             tab = 6;
+        } else if (query === 'rawbase') {
+            tab = 7;
         }
       }
       return tab;

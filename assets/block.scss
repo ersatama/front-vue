@@ -119,7 +119,7 @@ a {
           border-bottom: 1px solid #F1F4F8;
           display: flex;
           padding: 0 25px 0 25px;
-          height: 70px;
+          min-height: 70px;
           align-items: center;
           gap: 15px;
           &:only-child, &:last-child {
@@ -485,9 +485,11 @@ a {
           &-sitemap {
             &-data {
               max-width: 200px;
+              word-break: break-all;
             }
             &-size {
               max-width: 250px;
+              word-break: break-all;
             }
           }
         }
@@ -769,6 +771,9 @@ a {
           }
           &-tasks {
             background-image: url("/images/icons/task.png");
+          }
+          &-rawbase {
+            background-image: url("/images/icons/raw.png");
           }
           &-arr {
             width: 30px;
