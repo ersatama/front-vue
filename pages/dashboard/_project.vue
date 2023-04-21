@@ -62,6 +62,7 @@
             <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 7)}">
                 <div class="block-body-left-item-icon block-body-left-item-icon-rawbase"></div>
                 All rawbase
+                <div class="block-body-left-item-count" v-if="links && links.rawbase && links.rawbase > 0">{{ links.rawbase }}</div>
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>

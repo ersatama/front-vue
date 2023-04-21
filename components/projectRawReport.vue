@@ -90,6 +90,9 @@ export default {
           status = false;
         }
       });
+        if (this.selected.length === 0) {
+            status  =   false;
+        }
       return status;
     }
   },

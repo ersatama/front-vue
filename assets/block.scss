@@ -309,15 +309,18 @@ a {
           }
           &-service {
             max-width: 100px;
+            word-break: break-all;
           }
           &-status {
             max-width: 100px;
           }
           &-rawbase {
             max-width: 100px;
+            word-break: break-all;
           }
           &-date {
             max-width: 150px;
+            word-break: break-all;
           }
           &-url {
             width: 200px;
@@ -366,6 +369,10 @@ a {
             width: 12px;
             height: 8px;
             margin-left: 5px;
+            transition: all .05s linear;
+            &-up {
+              transform: rotate(180deg) !important;
+            }
             &:before, &:after {
               content: '';
               position: absolute;
@@ -380,6 +387,16 @@ a {
             &:after {
               margin: 3px 0 0 5px;
               transform: rotate(-45deg);
+            }
+            &-disabled {
+              &:before, &:after {
+                background: #c0c4c7 !important;
+              }
+              &:hover {
+                &:before, &:after {
+                  background: #0b76a6 !important;
+                }
+              }
             }
           }
           &-field {
@@ -805,7 +822,6 @@ a {
     &-right {
       border-left: 1px solid #F1F4F8;
       min-height: 250px;
-      overflow: hidden;
       flex-grow: 1;
       border-radius: 10px;
       background: #fff;
