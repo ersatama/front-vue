@@ -8,7 +8,16 @@
         <img src="/images/icons/profile.png" width="24" height="24"> Profile <div class="block-body-left-item-icon-arr"></div>
       </NuxtLink>
       <NuxtLink to="/dashboard" class="list-group-item" :class="{'list-group-item-active':($route.name === 'dashboard')}">
-        <img src="/images/icons/dashboard.png" width="24" height="24"> Dashboard <div class="block-body-left-item-icon-arr"></div>
+        <img src="/images/icons/dashboard.png" width="24" height="24"> Projects <div class="block-body-left-item-icon-arr"></div>
+      </NuxtLink>
+      <NuxtLink to="/tickets" class="list-group-item" :class="{'list-group-item-active':($route.name === 'tickets')}">
+          <img src="/images/icons/receipt.png" width="24" height="24"> Tickets <div class="block-body-left-item-icon-arr"></div>
+      </NuxtLink>
+      <NuxtLink to="/system" class="list-group-item" :class="{'list-group-item-active':($route.name === 'system')}">
+          <img src="/images/icons/management.png" width="24" height="24"> System <div class="block-body-left-item-icon-arr"></div>
+      </NuxtLink>
+      <NuxtLink to="/neuron" class="list-group-item" :class="{'list-group-item-active':($route.name === 'neuron')}">
+          <img src="/images/icons/neuron.png" width="24" height="24"> Neuron <div class="block-body-left-item-icon-arr"></div>
       </NuxtLink>
       <a class="list-group-item" @click="logout">
         <img src="/images/icons/log-out.png" width="24" height="24"> Log out <div class="block-body-left-item-icon-arr"></div>
