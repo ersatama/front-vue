@@ -361,10 +361,12 @@ a {
           }
           &-rawbase {
             max-width: 100px;
+            width: 100px;
             word-break: break-all;
           }
           &-date {
             max-width: 150px;
+            width: 150px;
             word-break: break-all;
           }
           &-url {
@@ -374,10 +376,12 @@ a {
           }
           &-text {
             width: 200px;
+            max-width: 200px;
             word-break: break-all;
           }
           &-comment {
             width: 200px;
+            max-width: 200px;
             word-break: break-all;
           }
           &-text {
