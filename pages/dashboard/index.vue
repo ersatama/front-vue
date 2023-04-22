@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import ProjectStatus from "../../components/projectStatus.vue";
-import ProjectItem from "../../components/projectItem.vue";
-import DashboardFilter from "../../components/dashboardFilter.vue";
+import ProjectStatus from "../../components/dashboard/projectStatus.vue";
+import ProjectItem from "../../components/dashboard/projectItem.vue";
+import DashboardFilter from "../../components/dashboard/dashboardFilter.vue";
 
 export default {
   components: {DashboardFilter, ProjectItem, ProjectStatus},

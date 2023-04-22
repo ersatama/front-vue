@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss">
 #wrapper {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #sidebar-wrapper {

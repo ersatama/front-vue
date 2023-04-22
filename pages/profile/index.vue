@@ -175,7 +175,7 @@
 </template>
 
 <script>
-import ExtraProfileContent from "../../components/extraProfileContent.vue";
+import ExtraProfileContent from "../../components/profile/extraProfileContent.vue";
 
 export default {
   components: {ExtraProfileContent},
