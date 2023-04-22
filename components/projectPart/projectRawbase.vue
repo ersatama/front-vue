@@ -18,7 +18,7 @@
                             <div class="block-body-content-table-item block-body-content-table-item-id" @click="setOrderBy('id')">
                                 ID <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'id'), 'block-body-content-table-item-down-up':(orderBy === 'id' && orderByType === 'desc')}"></div>
                             </div>
-                            <div class="block-body-content-table-item block-body-content-table-item-comment" @click="setOrderBy('display_name')">
+                            <div class="block-body-content-table-item block-body-content-table-item-text" @click="setOrderBy('display_name')">
                                 Title <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'display_name'), 'block-body-content-table-item-down-up':(orderBy === 'display_name' && orderByType === 'desc')}"></div>
                             </div>
                             <div class="block-body-content-table-item block-body-content-table-item-url" @click="setOrderBy('active_path')">
@@ -51,7 +51,7 @@
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(rawbase.id)}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ rawbase.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ rawbase.display_name }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ rawbase.display_name }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-url">{{ rawbase.active_path.replace('%', '') }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-service">{{ rawbase.display_params }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-date">{{ rawbase.dt }}</div>
