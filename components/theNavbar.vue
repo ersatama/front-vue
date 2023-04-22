@@ -4,7 +4,10 @@
       <div class="nav-close rounded-lg" :class="{'nav-close-rotate':!sidebar}" @click="$store.commit('localStorage/sidebar')"></div>
       <div class="nav-title">{{ navTitle }}</div>
       <div class="nav-options d-flex align-items-center">
-        <div></div>
+        <div class="nav-options-detail">
+            <div class="nav-options-detail-title">{{ user.name }} {{ user.surname }}</div>
+            <div class="nav-options-detail-desc">{{ user.role }}</div>
+        </div>
         <div class="nav-profile bg-primary text-white d-flex align-items-center justify-content-center" v-if="user">
           <div>{{ getNameLetter(user) }}</div>
         </div>
@@ -70,6 +73,24 @@ export default {
     }
     &-options {
       margin-left: auto;
+      display: flex;
+      gap: 15px;
+      &-detail {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        &-title {
+          color: #0b76a6;
+          text-transform: capitalize;
+          font-size: 12px;
+          font-weight: bold;
+        }
+        &-desc {
+          font-size: 10px;
+          color: #7d7f81;
+          text-transform: capitalize;
+        }
+      }
     }
     &-close {
       width: 30px;
