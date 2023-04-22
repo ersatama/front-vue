@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="block-body-content-table-body">
-                        <template v-if="unpatched && unpatched.length > 0">
+                        <template v-if="unpatched && unpatched.data.length > 0">
                             <div class="block-body-content-table-tr" v-for="(unpatch, key) in unpatched.data" :key="key">
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ unpatch.id }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-comment">{{ unpatch.title }}</div>
