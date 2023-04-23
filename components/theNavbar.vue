@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light nav-main">
+  <nav class="navbar navbar-expand-lg navbar-light nav-main">
     <div class="nav bg-white d-flex align-items-center">
       <div class="nav-close rounded-lg" :class="{'nav-close-rotate':!sidebar}" @click="$store.commit('localStorage/sidebar')"></div>
       <div class="nav-title">{{ navTitle }}</div>

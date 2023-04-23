@@ -45,7 +45,7 @@ export default {
     background: url('/images/photos/bg.png');
     width: 100%;
     height: 100vh;
-    opacity: 0.03;
+    opacity: 0.025;
     position: fixed;
     z-index: -1;
 }
