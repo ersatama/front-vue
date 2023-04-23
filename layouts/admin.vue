@@ -1,16 +1,19 @@
 <template>
-  <div class="d-flex" id="wrapper">
-    <!-- Sidebar-->
-    <sidebar></sidebar>
-    <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
-      <!-- Top navigation-->
-      <the-navbar></the-navbar>
-      <!-- Page content-->
-      <div class="admin">
-        <Nuxt />
+  <div>
+      <div class="bg"></div>
+      <div class="d-flex" id="wrapper">
+          <!-- Sidebar-->
+          <sidebar></sidebar>
+          <!-- Page content wrapper-->
+          <div id="page-content-wrapper">
+              <!-- Top navigation-->
+              <the-navbar></the-navbar>
+              <!-- Page content-->
+              <div class="admin">
+                  <Nuxt />
+              </div>
+          </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -37,6 +40,14 @@ export default {
 @import "assets/modal.scss";
 .admin {
   margin: 0 25px 25px 25px;
+}
+.bg {
+    background: url('/images/photos/bg.png');
+    width: 100%;
+    height: 100vh;
+    opacity: 0.03;
+    position: fixed;
+    z-index: -1;
 }
 
 #page-content-wrapper {
