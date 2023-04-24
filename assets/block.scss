@@ -56,8 +56,21 @@ a {
     border-radius: 10px;
     background: #fff;
     position: relative;
-    & > span {
-      color: #6c757d;
+
+    &-data {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      &-name {
+        font-size: 14px;
+        & > span {
+          color: #6c757d;
+        }
+      }
+      &-desc {
+        font-size: 12px;
+        color: #7d7f81;
+      }
     }
   }
   &-body {

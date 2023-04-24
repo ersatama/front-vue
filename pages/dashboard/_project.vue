@@ -1,7 +1,14 @@
 <template>
   <div class="block">
     <div class="block-title">
-        <span>Project</span> #{{ projectId }}
+        <div class="block-title-data">
+            <div class="block-title-data-name">
+                <span>Project</span> #{{ projectId }}
+            </div>
+            <div class="block-title-data-desc" v-if="portalProject.portalProjectType">
+                <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template><template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template><template v-if="portalProject.rescan > 0"> Patch Verification</template>
+            </div>
+        </div>
         <div class="block-body-right-header-buttons">
             <button class="block-body-content-vuln"><i class="block-body-content-filter-icon block-body-content-filter-icon-vuln"></i> New vuln</button>
             <button class="block-body-content-report"><i class="block-body-content-filter-icon block-body-content-filter-icon-graph"></i> Report</button>
