@@ -165,10 +165,10 @@ export default {
     checkRawReportAll() {
       if (this.isAllSelected) {
         this.selected = [];
-      } else {
-        this.selected = this.rawReports.map((rawReport) => {
-          return rawReport.id;
-        });
+      } else if (this.rawReports) {
+          this.selected = this.rawReports.map((rawReport) => {
+              return rawReport.id;
+          });
       }
     },
     checkRawReport(id) {

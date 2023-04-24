@@ -17,6 +17,7 @@
       <project-unpatched :portalProject="portalProject" v-else-if="tab === 5"></project-unpatched>
       <project-tasks :portalProject="portalProject" v-else-if="tab === 6"></project-tasks>
       <project-rawbase :portalProject="portalProject" v-else-if="tab === 7"></project-rawbase>
+      <project-blacklist :portalProject="portalProject" v-else-if="tab === 8"></project-blacklist>
     </div>
     <project-loading v-else></project-loading>
   </div>
@@ -36,9 +37,11 @@ import ProjectDetails from "../../components/projectPart/projectDetails.vue";
 import ProjectAlerts from "../../components/projectPart/projectAlerts.vue";
 import ProjectSidebar from "../../components/projectPart/projectSidebar.vue";
 import ProjectLoading from "../../components/modal/projectLoading.vue";
+import ProjectBlacklist from "../../components/projectPart/projectBlacklist.vue";
 
 export default {
   components: {
+      ProjectBlacklist,
       ProjectLoading,
       ProjectSidebar,
       ProjectAlerts,
@@ -97,6 +100,8 @@ export default {
             tab = 6;
         } else if (query === 'rawbase') {
             tab = 7;
+        } else if (query === 'blacklist') {
+            tab = 8;
         }
       }
       return tab;

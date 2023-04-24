@@ -1,12 +1,12 @@
 <template>
     <div class="block-body-right" >
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Unpatched</div>
-            <div class="block-body-right-desc">Project details</div>
+            <div class="block-body-right-title">Blacklist</div>
+            <div class="block-body-right-desc">Blacklist page</div>
         </div>
         <div class="block-body-content">
-            <div class="block-body-content-table block-body-content-table-bottom">
-                <template v-if="unpatched">
+            <div class="block-body-content-table">
+                <template v-if="blacklists">
                     <div class="block-body-content-table-header">
                         <div class="block-body-content-table-tr">
                             <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -27,19 +27,19 @@
                         </div>
                     </div>
                     <div class="block-body-content-table-body">
-                        <template v-if="unpatched && unpatched.data.length > 0">
-                            <div class="block-body-content-table-tr" v-for="(unpatch, key) in unpatched.data" :key="key" @click="checkSelected(unpatch.id)">
+                        <template v-if="blacklists && blacklists.data.length > 0">
+                            <div class="block-body-content-table-tr" v-for="(blacklist, key) in blacklists.data" :key="key" @click="checkSelected(blacklist.id)">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(unpatch.id)}"></div>
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(blacklist.id)}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ unpatch.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ unpatch.title }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.cwe }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.asvs }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ unpatch.category }}<template v-if="unpatch.cvss"> / {{ unpatch.cvss }}</template></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.param }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.source }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ unpatch.dt_add }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ blacklist.id }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ blacklist.title }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.cwe }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.asvs }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ blacklist.category }}<template v-if="blacklist.cvss"> / {{ blacklist.cvss }}</template></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.param }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.source }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ blacklist.dt_add }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status"></div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
@@ -68,21 +68,22 @@
 
 <script>
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
+
 export default {
-  name: "projectUnpatched",
+    name: "projectBlacklist",
     components: {ProjectPartLoading},
-  props: ['portalProject'],
-  data() {
-    return {
-      unpatched: null,
-      selected: []
-    }
-  },
+    props: ['portalProject'],
+    data() {
+        return {
+            blacklists: null,
+            selected: [],
+        }
+    },
     computed: {
         isAllSelected() {
             let status = true;
-            if (this.unpatched) {
-                this.unpatched.data.forEach(rawReport => {
+            if (this.blacklists) {
+                this.blacklists.data.forEach(rawReport => {
                     if (!this.selected.includes(rawReport.id)) {
                         status = false;
                     }
@@ -94,41 +95,41 @@ export default {
             return status;
         }
     },
-  created() {
-    this.getUnpatched();
-  },
-  methods: {
-      checkSelected(id) {
-          if (this.selected.includes(id)) {
-              let index = this.selected.indexOf(id);
-              if (index !== -1) {
-                  this.selected.splice(index, 1);
-              }
-          } else {
-              this.selected.push(id);
-          }
-      },
-      checkAll() {
-          if (this.isAllSelected) {
-              this.selected = [];
-          } else if (this.unpatched) {
-              this.selected = this.unpatched.data.map((unpatch) => {
-                  return unpatch.id;
-              });
-          }
-      },
-    async getUnpatched() {
-      if (this.portalProject) {
-        this.unpatched = await this.$store.dispatch('localStorage/portalProjectType_getUnpatchedByIdAndStatus', {
-            id: this.portalProject.id,
-            status: 'new'
-        });
-      }
+    created() {
+        this.getBlacklists();
     },
-  }
+    methods: {
+        checkAll() {
+            if (this.isAllSelected) {
+                this.selected = [];
+            } else if (this.blacklists) {
+                this.selected = this.blacklists.data.map((unpatch) => {
+                    return unpatch.id;
+                });
+            }
+        },
+        checkSelected(id) {
+            if (this.selected.includes(id)) {
+                let index = this.selected.indexOf(id);
+                if (index !== -1) {
+                    this.selected.splice(index, 1);
+                }
+            } else {
+                this.selected.push(id);
+            }
+        },
+        async getBlacklists() {
+            if (this.portalProject) {
+                this.blacklists = await this.$store.dispatch('localStorage/portalProjectType_getUnpatchedByIdAndStatus', {
+                    id: this.portalProject.id,
+                    status: 'deleted'
+                });
+            }
+        },
+    }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

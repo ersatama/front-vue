@@ -60,6 +60,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=blacklist'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 8)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-blacklist"></div>
+                Blacklist
+                <div class="block-body-left-item-count" v-if="links && links.blacklist">{{ links.blacklist }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 

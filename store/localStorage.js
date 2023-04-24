@@ -53,8 +53,8 @@ export const actions = {
         }
         return null;
     },
-    async portalProjectType_getUnpatchedById({commit}, id) {
-        const res = await this.$repository.portalProject.getUnpatchedById(id);
+    async portalProjectType_getUnpatchedByIdAndStatus({commit}, payload) {
+        const res = await this.$repository.portalProject.getUnpatchedByIdAndStatus(payload);
         const { status, data } = res
         if (status === 200) {
             return data;

@@ -55,8 +55,8 @@ export default ($axios) => ({
             return error.response;
         });
     },
-    getUnpatchedById(projectId) {
-        return $axios.get('/api/v1/portal/portalProject/getUnpatchedById/'+projectId).then(response => {
+    getUnpatchedByIdAndStatus(payload) {
+        return $axios.get('/api/v1/portal/portalProject/getUnpatchedByIdAndStatus/'+payload.id+'/'+payload.status).then(response => {
             return response;
         }).catch(error => {
             return error.response;
