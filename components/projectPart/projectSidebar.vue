@@ -68,6 +68,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=patch_verification'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 9)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-patch"></div>
+                Patch verification
+                <div class="block-body-left-item-count" v-if="links && links.patch_verification">{{ links.patch_verification }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 

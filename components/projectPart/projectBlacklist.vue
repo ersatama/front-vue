@@ -7,27 +7,28 @@
         <div class="block-body-content">
             <div class="block-body-content-table">
                 <template v-if="blacklists">
-                    <div class="block-body-content-table-header">
-                        <div class="block-body-content-table-tr">
-                            <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkAll()" onselectstart="return false"></div>
-                            </div>
-                            <div class="block-body-content-table-item block-body-content-table-item-id">ID</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-comment">Title</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-status">CWE-ID</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-status">ASVS</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-text">CVSS</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-status">Parameters</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-status">Created by</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-date">Added on</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-status">Modified by</div>
-                            <div class="block-body-content-table-item block-body-content-table-item-field-option">
-                                <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
+                    <template v-if="blacklists.data.length > 0">
+                        <div class="block-body-content-table-header">
+                            <div class="block-body-content-table-tr">
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox">
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkAll()" onselectstart="return false"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">ID</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-comment">Title</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">CWE-ID</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">ASVS</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">CVSS</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">Parameters</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">Created by</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-date">Added on</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">Modified by</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-field-option">
+                                    <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="block-body-content-table-body">
-                        <template v-if="blacklists && blacklists.data.length > 0">
+                        <div class="block-body-content-table-body">
+
                             <div class="block-body-content-table-tr" v-for="(blacklist, key) in blacklists.data" :key="key" @click="checkSelected(blacklist.id)">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(blacklist.id)}"></div>
@@ -56,9 +57,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </template>
-                        <div class="block-body-content-table-body-empty" v-else>No data</div>
-                    </div>
+
+                        </div>
+                    </template>
+                    <project-no-data v-else></project-no-data>
                 </template>
                 <project-part-loading v-else></project-part-loading>
             </div>
@@ -68,10 +70,11 @@
 
 <script>
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
+import ProjectNoData from "./projectNoData.vue";
 
 export default {
     name: "projectBlacklist",
-    components: {ProjectPartLoading},
+    components: {ProjectNoData, ProjectPartLoading},
     props: ['portalProject'],
     data() {
         return {

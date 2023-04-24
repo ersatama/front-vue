@@ -1,13 +1,13 @@
 <template>
     <div class="block-body-right" >
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Unpatched</div>
-            <div class="block-body-right-desc">Project details</div>
+            <div class="block-body-right-title">Patch verification</div>
+            <div class="block-body-right-desc">Project patch verification page</div>
         </div>
         <div class="block-body-content">
-            <div class="block-body-content-table block-body-content-table-bottom">
-                <template v-if="unpatched">
-                    <template v-if="unpatched.data.length > 0">
+            <div class="block-body-content-table">
+                <template v-if="patchVerifications">
+                    <template v-if="patchVerifications.data.length > 0">
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -29,18 +29,18 @@
                         </div>
                         <div class="block-body-content-table-body">
 
-                            <div class="block-body-content-table-tr" v-for="(unpatch, key) in unpatched.data" :key="key" @click="checkSelected(unpatch.id)">
+                            <div class="block-body-content-table-tr" v-for="(patchVerification, key) in patchVerifications.data" :key="key" @click="checkSelected(patchVerification.id)">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(unpatch.id)}"></div>
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(patchVerification.id)}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ unpatch.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ unpatch.title }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.cwe }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.asvs }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ unpatch.category }}<template v-if="unpatch.cvss"> / {{ unpatch.cvss }}</template></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.param }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ unpatch.source }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ unpatch.dt_add }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ patchVerification.id }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ patchVerification.title }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ patchVerification.cwe }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ patchVerification.asvs }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ patchVerification.category }}<template v-if="patchVerification.cvss"> / {{ patchVerification.cvss }}</template></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ patchVerification.param }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ patchVerification.source }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ patchVerification.dt_add }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status"></div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
@@ -71,21 +71,22 @@
 <script>
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
 import ProjectNoData from "./projectNoData.vue";
+
 export default {
-  name: "projectUnpatched",
+    name: "projectPatchVerification",
     components: {ProjectNoData, ProjectPartLoading},
-  props: ['portalProject'],
-  data() {
-    return {
-      unpatched: null,
-      selected: []
-    }
-  },
+    props: ['portalProject'],
+    data() {
+        return {
+            patchVerifications: null,
+            selected: [],
+        }
+    },
     computed: {
         isAllSelected() {
             let status = true;
-            if (this.unpatched) {
-                this.unpatched.data.forEach(rawReport => {
+            if (this.patchVerifications) {
+                this.patchVerifications.data.forEach(rawReport => {
                     if (!this.selected.includes(rawReport.id)) {
                         status = false;
                     }
@@ -95,43 +96,43 @@ export default {
                 status  =   false;
             }
             return status;
-        }
+        },
     },
-  created() {
-    this.getUnpatched();
-  },
-  methods: {
-      checkSelected(id) {
-          if (this.selected.includes(id)) {
-              let index = this.selected.indexOf(id);
-              if (index !== -1) {
-                  this.selected.splice(index, 1);
-              }
-          } else {
-              this.selected.push(id);
-          }
-      },
-      checkAll() {
-          if (this.isAllSelected) {
-              this.selected = [];
-          } else if (this.unpatched) {
-              this.selected = this.unpatched.data.map((unpatch) => {
-                  return unpatch.id;
-              });
-          }
-      },
-    async getUnpatched() {
-      if (this.portalProject) {
-        this.unpatched = await this.$store.dispatch('localStorage/portalProjectType_getUnpatchedByIdAndStatus', {
-            id: this.portalProject.id,
-            status: 'new'
-        });
-      }
+    created() {
+        this.getPatchVerifications();
     },
-  }
+    methods: {
+        checkAll() {
+            if (this.isAllSelected) {
+                this.selected = [];
+            } else if (this.patchVerifications) {
+                this.selected = this.patchVerifications.data.map((unpatch) => {
+                    return unpatch.id;
+                });
+            }
+        },
+        checkSelected(id) {
+            if (this.selected.includes(id)) {
+                let index = this.selected.indexOf(id);
+                if (index !== -1) {
+                    this.selected.splice(index, 1);
+                }
+            } else {
+                this.selected.push(id);
+            }
+        },
+        async getPatchVerifications() {
+            if (this.portalProject) {
+                this.patchVerifications = await this.$store.dispatch('localStorage/portalProjectType_getUnpatchedByIdAndStatus', {
+                    id: this.portalProject.id,
+                    status: 'check'
+                });
+            }
+        },
+    }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

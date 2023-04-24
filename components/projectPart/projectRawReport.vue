@@ -16,26 +16,27 @@
         <div class="block-body-content">
             <div class="block-body-content-table">
                 <template v-if="rawReports">
-                    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
-                    <div class="block-body-content-table-header">
-                        <div class="block-body-content-table-tr">
-                            <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkRawReportAll()" onselectstart="return false"></div>
-                            </div>
-                            <div class="block-body-content-table-item block-body-content-table-item-id">ID <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-process">Process <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-scan">Scan <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-service">Service <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-name">Name <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-status">Status <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-rawbase">Rawbase <div class="block-body-content-table-item-down"></div></div>
-                            <div class="block-body-content-table-item block-body-content-table-item-field-option">
-                                <div class="block-body-content-table-item-configure" @click="tableSettingsModal = true"></div>
+                    <template v-if="rawReports.length > 0">
+                        <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
+                        <div class="block-body-content-table-header">
+                            <div class="block-body-content-table-tr">
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox">
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkRawReportAll()" onselectstart="return false"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">ID <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-process">Process <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-scan">Scan <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-service">Service <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-name">Name <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">Status <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-rawbase">Rawbase <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-field-option">
+                                    <div class="block-body-content-table-item-configure" @click="tableSettingsModal = true"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="block-body-content-table-body">
-                        <template v-if="rawReports && rawReports.length > 0">
+                        <div class="block-body-content-table-body">
+
                             <div class="block-body-content-table-tr" v-for="(rawReport, key) in rawReports" :key="key" @click="checkRawReport(rawReport.id)">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(rawReport.id)}"></div>
@@ -63,10 +64,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </template>
-                        <div class="block-body-content-table-body-empty" v-else>No data</div>
-                    </div>
-                    <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
+
+                        </div>
+                        <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
+                    </template>
+                    <project-no-data v-else></project-no-data>
                 </template>
                 <project-part-loading v-else></project-part-loading>
             </div>
@@ -81,10 +83,11 @@ import RawReportTableSettings from "../modal/rawReportTableSettings.vue";
 import RawReportDetail from "./rawReportDetail.vue";
 import RawReportFilter from "../modal/rawReportFilter.vue";
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
+import ProjectNoData from "./projectNoData.vue";
 
 export default {
   name: "projectRawReport",
-  components: {ProjectPartLoading, RawReportFilter, RawReportDetail, RawReportTableSettings, ModalBox},
+  components: {ProjectNoData, ProjectPartLoading, RawReportFilter, RawReportDetail, RawReportTableSettings, ModalBox},
   props: ['portalProject','links'],
   data() {
     return {

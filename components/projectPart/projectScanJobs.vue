@@ -12,21 +12,22 @@
             <div style="width: 100%;">
                 <div class="block-body-content-table">
                     <template v-if="scanjobs">
-                        <div class="block-body-content-table-header">
-                            <div class="block-body-content-table-tr">
-                                <div class="block-body-content-table-item block-body-content-table-item-id">ID</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-url">URL</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-sitemap-size">Scan Engine & Config</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">STATUS</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-comment">COMMENT</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">Start / End Date</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-field-option">
-                                    <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
+                        <template v-if="scanjobs.data && Object.entries(scanjobs.data).length > 0">
+                            <div class="block-body-content-table-header">
+                                <div class="block-body-content-table-tr">
+                                    <div class="block-body-content-table-item block-body-content-table-item-id">ID</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-url">URL</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-sitemap-size">Scan Engine & Config</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-status">STATUS</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-comment">COMMENT</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-date">Start / End Date</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-field-option">
+                                        <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="block-body-content-table-body">
-                            <template v-if="scanjobs && scanjobs.data && Object.entries(scanjobs.data).length > 0">
+                            <div class="block-body-content-table-body">
+
                                 <div class="block-body-content-table-tr" v-for="(job, key) in Object.entries(scanjobs.data)" :key="key">
                                     <div class="block-body-content-table-item block-body-content-table-item-id">{{ job[1].job_id }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-url">{{ job[1].target_url }}</div>
@@ -50,9 +51,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </template>
-                            <div class="block-body-content-table-body-empty" v-else>No data</div>
-                        </div>
+                            </div>
+                        </template>
+                        <project-no-data v-else></project-no-data>
                     </template>
                     <project-part-loading v-else></project-part-loading>
                 </div>
@@ -62,23 +63,24 @@
                 </div>
                 <div class="block-body-content-table">
                     <template v-if="scanjobs">
-                        <div class="block-body-content-table-header">
-                            <div class="block-body-content-table-tr">
-                                <div class="block-body-content-table-item block-body-content-table-item-id-short">ID</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">Neuron targets id</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-url">URL</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-engine">Scan Engine & Config</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">Command</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">Status</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-comment">Comment</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">Start / End Date</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-field-option">
-                                    <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
+                        <template v-if="scanjobs.neuronData && scanjobs.neuronData.length > 0">
+                            <div class="block-body-content-table-header">
+                                <div class="block-body-content-table-tr">
+                                    <div class="block-body-content-table-item block-body-content-table-item-id-short">ID</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-id">Neuron targets id</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-url">URL</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-engine">Scan Engine & Config</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-status">Command</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-status">Status</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-comment">Comment</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-date">Start / End Date</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-field-option">
+                                        <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="block-body-content-table-body">
-                            <template v-if="scanjobs && scanjobs.neuronData && scanjobs.neuronData.length > 0">
+                            <div class="block-body-content-table-body">
+
                                 <div class="block-body-content-table-tr" v-for="(neuronJob, key) in scanjobs.neuronData" :key="key">
                                     <div class="block-body-content-table-item block-body-content-table-item-id-short">{{ neuronJob.id }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-id">{{ neuronJob.neuron_targets_id }}</div>
@@ -105,9 +107,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </template>
-                            <div class="block-body-content-table-body-empty" v-else>No data</div>
-                        </div>
+
+                            </div>
+                        </template>
+                        <project-no-data v-else></project-no-data>
                     </template>
                     <project-part-loading v-else></project-part-loading>
                 </div>
@@ -119,10 +122,11 @@
 <script>
 import ProjectScanJobsServices from "./projectScanJobsServices.vue";
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
+import ProjectNoData from "./projectNoData.vue";
 
 export default {
   name: "projectScanJobs",
-  components: {ProjectPartLoading, ProjectScanJobsServices},
+  components: {ProjectNoData, ProjectPartLoading, ProjectScanJobsServices},
   props: ['portalProject'],
   data() {
     return {

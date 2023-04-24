@@ -9,6 +9,7 @@
     </div>
     <div class="block-body" v-if="portalProject">
       <project-sidebar :portalProject="portalProject" :tab="tab" :links="links"></project-sidebar>
+
       <project-details :portalProject="portalProject" v-if="tab === 0"></project-details>
       <project-raw-report :portalProject="portalProject" :links="linksRawReport" v-else-if="tab === 1"></project-raw-report>
       <project-alerts :portalProject="portalProject" v-else-if="tab === 2"></project-alerts>
@@ -18,6 +19,7 @@
       <project-tasks :portalProject="portalProject" v-else-if="tab === 6"></project-tasks>
       <project-rawbase :portalProject="portalProject" v-else-if="tab === 7"></project-rawbase>
       <project-blacklist :portalProject="portalProject" v-else-if="tab === 8"></project-blacklist>
+      <project-patch-verification :portalProject="portalProject" v-else-if="tab === 9"></project-patch-verification>
     </div>
     <project-loading v-else></project-loading>
   </div>
@@ -38,9 +40,11 @@ import ProjectAlerts from "../../components/projectPart/projectAlerts.vue";
 import ProjectSidebar from "../../components/projectPart/projectSidebar.vue";
 import ProjectLoading from "../../components/modal/projectLoading.vue";
 import ProjectBlacklist from "../../components/projectPart/projectBlacklist.vue";
+import ProjectPatchVerification from "../../components/projectPart/projectPatchVerification.vue";
 
 export default {
   components: {
+      ProjectPatchVerification,
       ProjectBlacklist,
       ProjectLoading,
       ProjectSidebar,
@@ -102,6 +106,8 @@ export default {
             tab = 7;
         } else if (query === 'blacklist') {
             tab = 8;
+        } else if (query === 'patch_verification') {
+            tab = 9;
         }
       }
       return tab;

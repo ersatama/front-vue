@@ -856,6 +856,9 @@ a {
           &-blacklist {
             background-image: url("/images/icons/block.png");
           }
+          &-patch {
+            background-image: url("/images/icons/patch.png");
+          }
           &-arr {
             width: 30px;
             height: 30px;
@@ -889,6 +892,7 @@ a {
       border-radius: 10px;
       background: #fff;
       padding-bottom: 15px;
+      height: max-content;
       &-header {
         display: flex;
         flex-direction: column;
