@@ -1,23 +1,24 @@
 <template>
     <div class="block-body-right" >
+        <modal-box v-if="portalProject" :modal="filterModal" @closeModal="filterModal = false">
+            <unverified-filter :project="portalProject" @setFilter="setFilter" @closeModal="filterModal = false"></unverified-filter>
+        </modal-box>
         <div class="block-body-right-header">
-            <div class="block-body-right-title">All rawbase</div>
-            <div class="block-body-right-desc">Project tasks</div>
+            <div class="block-body-right-title">Unverified</div>
+            <div class="block-body-right-desc">Project unverified page</div>
             <div class="block-body-right-header-buttons">
-                <button class="block-body-content-filter" @click="tableSettingsModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
+                <button class="block-body-content-filter" @click="filterModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
             </div>
         </div>
         <div class="block-body-content">
             <div class="block-body-content-table">
-                <modal-box :modal="tableSettingsModal" @closeModal="tableSettingsModal = false">
-                    <rawbase-filter @setFilter="setFilter" @closeModal="tableSettingsModal = false"></rawbase-filter>
-                </modal-box>
-                <template v-if="rawbases">
-                    <template v-if="rawbases.length > 0">
+                <template v-if="unverified">
+                    <template v-if="unverified.length > 0">
+                        <unverified-detail :size="unverifiedSize" @setTake="setTake" :take="take" :page="page"></unverified-detail>
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr" onselectstart="return false">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkRawbaseAll()"></div>
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkAll()"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id" @click="setOrderBy('id')">
                                     ID <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'id'), 'block-body-content-table-item-down-up':(orderBy === 'id' && orderByType === 'desc')}"></div>
@@ -50,18 +51,18 @@
                         </div>
                         <div class="block-body-content-table-body">
 
-                            <div class="block-body-content-table-tr" v-for="(rawbase, key) in rawbases" :key="key" @click="checkRawbase(rawbase.id)">
+                            <div class="block-body-content-table-tr" v-for="(item, key) in unverified" :key="key" @click="check(item.id)">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(rawbase.id)}"></div>
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(item.id)}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ rawbase.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ rawbase.display_name }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-url">{{ rawbase.active_path.replace('%', '') }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-service">{{ rawbase.display_params }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ rawbase.dt }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ rawbase.rawbase_type }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-rawbase">{{ rawbase.service }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ rawbase.status }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ item.id }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ item.display_name }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-url">{{ item.active_path.replace('%', '') }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-service">{{ item.display_params }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ item.dt }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ item.rawbase_type }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-rawbase">{{ item.service }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ item.status }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
                                         <div class="block-body-content-table-item-option-select">
@@ -77,6 +78,7 @@
                             </div>
 
                         </div>
+                        <unverified-detail :size="unverifiedSize" @setTake="setTake" :take="take" :page="page"></unverified-detail>
                     </template>
                     <project-no-data v-else></project-no-data>
                 </template>
@@ -88,43 +90,52 @@
 
 <script>
 import ModalBox from "../modal/modalBox.vue";
-import RawbaseFilter from "../modal/rawbaseFilter.vue";
-import RawReportFilter from "../modal/rawReportFilter.vue";
+import UnverifiedFilter from "../modal/unverifiedFilter.vue";
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
 import ProjectNoData from "./projectNoData.vue";
+import RawReportDetail from "./rawReportDetail.vue";
+import UnverifiedDetail from "./unverifiedDetail.vue";
 
 export default {
-    name: "projectRawbase",
-    components: {ProjectNoData, ProjectPartLoading, RawReportFilter, RawbaseFilter, ModalBox},
-    props: ['portalProject'],
+    name: "projectUnverified",
+    components: {UnverifiedDetail, RawReportDetail, ProjectNoData, ProjectPartLoading, UnverifiedFilter, ModalBox},
+    props: ['portalProject', 'links'],
     data() {
         return {
-            rawbases: null,
             selected: [],
             orderBy: 'id',
             orderByType: 'asc',
-            tableSettingsModal: false,
+            unverified: null,
+            unverifiedSize: 0,
+            take: 20,
+            page: 1,
+            filterModal: false,
             filter: {
-                status: "ALL",
                 type: "ALL",
+                status: "NEW",
                 search: ''
-            }
+            },
         }
     },
     watch: {
-
+        filter() {
+            this.page = 1;
+            this.getUnverified();
+        },
     },
     created() {
-        this.getRawbase();
+        this.getUnverified();
     },
     computed: {
         isAllSelected() {
             let status = true;
-            this.rawbases.forEach(rawbase => {
-                if (!this.selected.includes(rawbase.id)) {
-                    status = false;
-                }
-            });
+            if (this.unverified) {
+                this.unverified.forEach(item => {
+                    if (!this.selected.includes(item.id)) {
+                        status = false;
+                    }
+                });
+            }
             if (this.selected.length === 0) {
                 status  =   false;
             }
@@ -132,6 +143,25 @@ export default {
         }
     },
     methods: {
+        check(id) {
+            if (this.selected.includes(id)) {
+                let index = this.selected.indexOf(id);
+                if (index !== -1) {
+                    this.selected.splice(index, 1);
+                }
+            } else {
+                this.selected.push(id);
+            }
+        },
+        checkAll() {
+            if (this.isAllSelected) {
+                this.selected = [];
+            } else if (this.unverified) {
+                this.selected = this.unverified.map((rawbase) => {
+                    return rawbase.id;
+                });
+            }
+        },
         setOrderBy(orderBy) {
             if (orderBy === this.orderBy) {
 
@@ -144,46 +174,36 @@ export default {
                 this.orderBy        =   orderBy;
                 this.orderByType    =   'asc';
             }
-            this.getRawbase();
+            this.getUnverified();
         },
         setFilter(filter) {
             this.filter = filter;
-            this.getRawbase();
         },
-        checkRawbaseAll() {
-            if (this.isAllSelected) {
-                this.selected = [];
-            } else {
-                this.selected = this.rawbases.map((rawbase) => {
-                    return rawbase.id;
-                });
+        async getUnverified() {
+            let data = {
+                id: this.portalProject.id,
+                take: this.take,
+                page: this.page,
+                orderBy: this.orderBy,
+                orderByType: this.orderByType
+            };
+            if (this.filter.type !== 'ALL') {
+                data.type = this.filter.type;
+            }
+            if (this.filter.status !== 'ALL') {
+                data.status = this.filter.status;
+            }
+            let unverified = await this.$store.dispatch('localStorage/rawbase_getUnverifiedByProjectId', data);
+            if (unverified.data) {
+                this.unverified = unverified.data;
+                this.unverifiedSize = unverified.count;
             }
         },
-        checkRawbase(id) {
-            if (this.selected.includes(id)) {
-                let index = this.selected.indexOf(id);
-                if (index !== -1) {
-                    this.selected.splice(index, 1);
-                }
-            } else {
-                this.selected.push(id);
-            }
+        setTake(data) {
+            this.take = data.take;
+            this.page = data.page;
+            this.getUnverified();
         },
-        async getRawbase() {
-            if (this.portalProject) {
-                let data    =   {
-                    id: this.portalProject.id,
-                    type: this.filter.type,
-                    orderBy: this.orderBy,
-                    orderByType: this.orderByType
-                };
-                if (this.filter.status && this.filter.status !== 'ALL') {
-                    data.status =   this.filter.status;
-                }
-                let rawbases = await this.$store.dispatch('localStorage/portalProjectType_getRawbaseById', data);
-                this.rawbases = rawbases.data;
-            }
-        }
     }
 }
 </script>

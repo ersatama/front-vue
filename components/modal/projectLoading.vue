@@ -8,8 +8,10 @@
           <div class="block-loading-item-field"></div>
           <div class="block-loading-item-field"></div>
           <div class="block-loading-item-field"></div>
+          <div class="block-loading-item-field"></div>
       </div>
       <div class="block-loading-item">
+          <div class="block-loading-item-field"></div>
           <div class="block-loading-item-field"></div>
           <div class="block-loading-item-field"></div>
           <div class="block-loading-item-field"></div>

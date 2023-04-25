@@ -7,6 +7,7 @@
         <div class="block-loading-item-field"></div>
         <div class="block-loading-item-field"></div>
         <div class="block-loading-item-field"></div>
+        <div class="block-loading-item-field"></div>
     </div>
 </template>
 

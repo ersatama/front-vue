@@ -21,6 +21,14 @@ export const mutations = {
 }
 
 export const actions = {
+    async rawbase_getUnverifiedByProjectId({commit}, payload){
+        const res = await this.$repository.rawbase.getUnverifiedByProjectId(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async scanReportRawMaster_getByProjectId({commit}, payload) {
         const res = await this.$repository.scanReportRawMaster.getByProjectId(payload);
         const { status, data } = res

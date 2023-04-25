@@ -17,7 +17,7 @@
             <div class="block-body-content-table">
                 <template v-if="rawReports">
                     <template v-if="rawReports.length > 0">
-                        <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
+                        <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :take="take" :page="page"></raw-report-detail>
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -66,7 +66,7 @@
                             </div>
 
                         </div>
-                        <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :page="page"></raw-report-detail>
+                        <raw-report-detail :links="links" :size="rawReportSize" @setTake="setTake" :take="take" :page="page"></raw-report-detail>
                     </template>
                     <project-no-data v-else></project-no-data>
                 </template>

@@ -774,16 +774,20 @@ a {
       overflow: hidden;
       &-item {
         text-decoration: none !important;
-        padding: 15px 15px 15px 25px;
+        padding: 12px 15px 12px 25px;
         border-bottom: 1px solid #F1F4F8;
-        font-size: 14px;
+        font-size: 12px;
         display: flex;
-        gap: 15px;
+        gap: 10px;
         align-items: center;
         cursor: pointer;
         font-weight: bold;
         color: #6c757d;
         position: relative;
+        text-transform: uppercase;
+        background-color: transparent;
+        background-position: center;
+        transition: background 0.8s;
         &-count {
           background: #f9d3d7;
           color: #dc3545;
@@ -791,12 +795,12 @@ a {
           right: 50px;
           padding: 2px 8px 2px 8px;
           border-radius: 15px;
-          font-size: 12px;
+          font-size: 10px;
           &-double {
             position: absolute;
             right: 50px;
             border-radius: 15px;
-            font-size: 12px;
+            font-size: 10px;
             display: flex;
             gap: 5px;
             &-first {
@@ -804,14 +808,14 @@ a {
               background: #c8f1d2;
               padding: 2px 8px 2px 8px;
               border-radius: 15px;
-              font-size: 12px;
+              font-size: 10px;
             }
             &-last {
               background: #f9d3d7;
               color: #dc3545;
               padding: 2px 8px 2px 8px;
               border-radius: 15px;
-              font-size: 12px;
+              font-size: 10px;
             }
           }
         }
@@ -819,13 +823,20 @@ a {
           text-decoration: none;
         }
         &:hover, &-active {
-          background: #fdfdfd;
           color: #0b76a6;
           & > .block-body-left-item-icon-arr {
             &:before, &:after {
               background: #0b76a6;
             }
           }
+        }
+        &:hover {
+          background: #fff radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+        }
+        &:active {
+          background-color: #e7eaee;
+          background-size: 100%;
+          transition: background 0s;
         }
         &-icon {
           width: 24px;
@@ -885,6 +896,9 @@ a {
           &-generated {
             background-image: url('/images/icons/generated.png');
           }
+          &-verified {
+            background-image: url('/images/icons/verified.png');
+          }
           &-arr {
             width: 30px;
             height: 30px;
@@ -936,6 +950,7 @@ a {
       &-title {
         font-size: 16px;
         font-weight: bold;
+        text-transform: uppercase;
       }
       &-desc {
         color: #7d7f81;

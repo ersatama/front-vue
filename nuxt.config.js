@@ -41,7 +41,10 @@ export default {
   buildModules: [
       '@nuxtjs/dotenv'
   ],
-
+  loading: {
+    color: '#0b76a6',
+    height: '2px'
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
      'nuxt-vuex-localstorage',

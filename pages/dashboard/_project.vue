@@ -31,6 +31,7 @@
       <project-patched :portalProject="portalProject" v-else-if="tab === 11"></project-patched>
       <project-draft :portalProject="portalProject" v-else-if="tab === 12"></project-draft>
       <project-generated :portalProject="portalProject" v-else-if="tab === 13"></project-generated>
+      <project-unverified :portalProject="portalProject" v-else-if="tab === 14"></project-unverified>
     </div>
     <project-loading v-else></project-loading>
   </div>
@@ -56,9 +57,11 @@ import ProjectArchived from "../../components/projectPart/projectArchived.vue";
 import ProjectPatched from "../../components/projectPart/projectPatched.vue";
 import ProjectDraft from "../../components/projectPart/projectDraft.vue";
 import ProjectGenerated from "../../components/projectPart/projectGenerated.vue";
+import ProjectUnverified from "../../components/projectPart/projectUnverified.vue";
 
 export default {
   components: {
+      ProjectUnverified,
       ProjectGenerated,
       ProjectDraft,
       ProjectPatched,
@@ -135,6 +138,8 @@ export default {
             tab = 12;
         } else if (query === 'generated') {
             tab = 13;
+        } else if (query === 'unverified') {
+            tab = 14;
         }
       }
       return tab;

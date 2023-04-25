@@ -108,6 +108,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=unverified'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 14)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-verified"></div>
+                Unverified
+                <div class="block-body-left-item-count" v-if="links && links.unverified">{{ links.unverified }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 

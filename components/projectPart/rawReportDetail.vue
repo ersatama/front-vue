@@ -10,10 +10,10 @@
         <div class="page-left-header-pages page-left-header-next" v-if="next" @click="pageBreak++"></div>
       </div>
       <div class="page-left-header-take">
-        <select v-model="take" @change="setTake">
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
+        <select @change="setTake($event.target.value)">
+          <option value="20" :selected="take === 20">20</option>
+          <option value="50" :selected="take === 50">50</option>
+          <option value="100" :selected="take === 100">100</option>
         </select>
       </div>
     </div>
@@ -23,10 +23,9 @@
 <script>
 export default {
   name: "rawReportDetail",
-  props: ['links', 'size', 'page'],
+  props: ['links', 'size', 'page', 'take'],
   data() {
     return {
-      take: 20,
       view: 5,
       pageBreak: 1,
     }
@@ -83,10 +82,10 @@ export default {
         take: this.take
       });
     },
-    setTake() {
+    setTake(take) {
       this.$emit('setTake', {
         page: 1,
-        take: this.take
+        take: take
       });
     }
   }
