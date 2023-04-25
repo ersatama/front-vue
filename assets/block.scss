@@ -377,6 +377,7 @@ a {
           &-status {
             width: 90px;
             max-width: 90px;
+            word-break: break-word;
           }
           &-rawbase {
             max-width: 100px;
@@ -877,6 +878,9 @@ a {
           }
           &-patched {
             background-image: url('/images/icons/patched.png');
+          }
+          &-draft {
+            background-image: url('/images/icons/draft.png');
           }
           &-arr {
             width: 30px;

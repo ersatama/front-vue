@@ -125,6 +125,8 @@ export default {
             tab = 10;
         } else if (query === 'patched') {
             tab = 11;
+        } else if (query === 'draft') {
+            tab = 12;
         }
       }
       return tab;

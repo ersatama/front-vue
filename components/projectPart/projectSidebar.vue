@@ -92,6 +92,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=draft'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 12)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-draft"></div>
+                Drafts
+                <div class="block-body-left-item-count" v-if="links && links.drafts">{{ links.drafts }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 
