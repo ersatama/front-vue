@@ -100,6 +100,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=generated'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 13)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-generated"></div>
+                Generated
+                <div class="block-body-left-item-count" v-if="links && links.generated">{{ links.generated }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 
