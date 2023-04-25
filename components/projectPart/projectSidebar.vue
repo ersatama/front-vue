@@ -84,6 +84,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=patched'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 11)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-patched"></div>
+                Patched
+                <div class="block-body-left-item-count" v-if="links && links.patched">{{ links.patched }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 
