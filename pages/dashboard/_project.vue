@@ -29,6 +29,7 @@
       <project-patch-verification :portalProject="portalProject" v-else-if="tab === 9"></project-patch-verification>
       <project-archived :portalProject="portalProject" v-else-if="tab === 10"></project-archived>
       <project-patched :portalProject="portalProject" v-else-if="tab === 11"></project-patched>
+      <project-draft :portalProject="portalProject" v-else-if="tab === 12"></project-draft>
     </div>
     <project-loading v-else></project-loading>
   </div>
@@ -52,9 +53,11 @@ import ProjectBlacklist from "../../components/projectPart/projectBlacklist.vue"
 import ProjectPatchVerification from "../../components/projectPart/projectPatchVerification.vue";
 import ProjectArchived from "../../components/projectPart/projectArchived.vue";
 import ProjectPatched from "../../components/projectPart/projectPatched.vue";
+import ProjectDraft from "../../components/projectPart/projectDraft.vue";
 
 export default {
   components: {
+      ProjectDraft,
       ProjectPatched,
       ProjectArchived,
       ProjectPatchVerification,
