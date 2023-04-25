@@ -1,7 +1,7 @@
 <template>
     <div class="block-body-content-table-info">
         <div class="block-body-content-table-info-detail">
-            <div class="block-body-content-table-info-detail-title">Unverified <template v-if="size > 0">{{ size }}</template></div>
+            <div class="block-body-content-table-info-detail-title">Found <template v-if="size > 0">{{ size }}</template></div>
         </div>
         <div class="page-left-header-detail">
             <div class="page-left-header-pagination">
