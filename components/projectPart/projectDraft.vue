@@ -1,8 +1,8 @@
 <template>
     <div class="block-body-right" >
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Archived</div>
-            <div class="block-body-right-desc">Project archives page</div>
+            <div class="block-body-right-title">Drafts</div>
+            <div class="block-body-right-desc">Project drafts page</div>
         </div>
         <div class="block-body-content">
             <div class="block-body-content-table">
