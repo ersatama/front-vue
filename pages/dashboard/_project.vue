@@ -5,7 +5,7 @@
             <div class="block-title-data-name">
                 <span>Project</span> #{{ projectId }}
             </div>
-            <div class="block-title-data-desc" v-if="portalProject.portalProjectType">
+            <div class="block-title-data-desc" v-if="portalProject && portalProject.portalProjectType">
                 <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template><template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template><template v-if="portalProject.rescan > 0"> Patch Verification</template>
             </div>
         </div>
@@ -27,6 +27,7 @@
       <project-rawbase :portalProject="portalProject" v-else-if="tab === 7"></project-rawbase>
       <project-blacklist :portalProject="portalProject" v-else-if="tab === 8"></project-blacklist>
       <project-patch-verification :portalProject="portalProject" v-else-if="tab === 9"></project-patch-verification>
+      <project-archived :portalProject="portalProject" v-else-if="tab === 10"></project-archived>
     </div>
     <project-loading v-else></project-loading>
   </div>
@@ -48,9 +49,11 @@ import ProjectSidebar from "../../components/projectPart/projectSidebar.vue";
 import ProjectLoading from "../../components/modal/projectLoading.vue";
 import ProjectBlacklist from "../../components/projectPart/projectBlacklist.vue";
 import ProjectPatchVerification from "../../components/projectPart/projectPatchVerification.vue";
+import ProjectArchived from "../../components/projectPart/projectArchived.vue";
 
 export default {
   components: {
+      ProjectArchived,
       ProjectPatchVerification,
       ProjectBlacklist,
       ProjectLoading,
@@ -115,6 +118,8 @@ export default {
             tab = 8;
         } else if (query === 'patch_verification') {
             tab = 9;
+        } else if (query === 'archived') {
+            tab = 10;
         }
       }
       return tab;

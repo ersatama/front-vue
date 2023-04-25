@@ -1,13 +1,13 @@
 <template>
     <div class="block-body-right" >
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Blacklist</div>
-            <div class="block-body-right-desc">Blacklist page</div>
+            <div class="block-body-right-title">Archived</div>
+            <div class="block-body-right-desc">Project archives page</div>
         </div>
         <div class="block-body-content">
             <div class="block-body-content-table">
-                <template v-if="blacklists">
-                    <template v-if="blacklists.data.length > 0">
+                <template v-if="archives">
+                    <template v-if="archives.data.length > 0">
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -29,18 +29,18 @@
                         </div>
                         <div class="block-body-content-table-body">
 
-                            <div class="block-body-content-table-tr" v-for="(blacklist, key) in blacklists.data" :key="key" @click="checkSelected(blacklist.id)">
+                            <div class="block-body-content-table-tr" v-for="(archive, key) in archives.data" :key="key" @click="checkSelected(archive.id)">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(blacklist.id)}"></div>
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(archive.id)}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ blacklist.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ blacklist.title }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.cwe }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.asvs }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ blacklist.category }}<template v-if="blacklist.cvss"> / {{ blacklist.cvss }}</template></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.param }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ blacklist.source }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ blacklist.dt_add }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ archive.id }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-comment">{{ archive.title }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ archive.cwe }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ archive.asvs }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ archive.category }}<template v-if="archive.cvss"> / {{ archive.cvss }}</template></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ archive.param }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ archive.source }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ archive.dt_add }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status"></div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
@@ -73,21 +73,21 @@ import ProjectPartLoading from "../modal/projectPartLoading.vue";
 import ProjectNoData from "./projectNoData.vue";
 
 export default {
-    name: "projectBlacklist",
+    name: "projectArchived",
     components: {ProjectNoData, ProjectPartLoading},
     props: ['portalProject'],
     data() {
         return {
-            blacklists: null,
+            archives: null,
             selected: [],
         }
     },
     computed: {
         isAllSelected() {
             let status = true;
-            if (this.blacklists) {
-                this.blacklists.data.forEach(blacklist => {
-                    if (!this.selected.includes(blacklist.id)) {
+            if (this.archives) {
+                this.archives.data.forEach(archive => {
+                    if (!this.selected.includes(archive.id)) {
                         status = false;
                     }
                 });
@@ -99,15 +99,15 @@ export default {
         }
     },
     created() {
-        this.getBlacklists();
+        this.getArchives();
     },
     methods: {
         checkAll() {
             if (this.isAllSelected) {
                 this.selected = [];
-            } else if (this.blacklists) {
-                this.selected = this.blacklists.data.map((blacklist) => {
-                    return blacklist.id;
+            } else if (this.archives) {
+                this.selected = this.archives.data.map((archive) => {
+                    return archive.id;
                 });
             }
         },
@@ -121,11 +121,11 @@ export default {
                 this.selected.push(id);
             }
         },
-        async getBlacklists() {
+        async getArchives() {
             if (this.portalProject) {
-                this.blacklists = await this.$store.dispatch('localStorage/portalProjectType_getUnpatchedByIdAndStatus', {
+                this.archives = await this.$store.dispatch('localStorage/portalProjectType_getUnpatchedByIdAndStatus', {
                     id: this.portalProject.id,
-                    status: 'deleted'
+                    status: 'ignore'
                 });
             }
         },

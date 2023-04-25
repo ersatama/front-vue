@@ -76,6 +76,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=archived'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 10)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-archive"></div>
+                Archived
+                <div class="block-body-left-item-count" v-if="links && links.archived">{{ links.archived }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 
