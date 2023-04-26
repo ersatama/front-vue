@@ -135,8 +135,8 @@ export default {
     methods: {
         async getTickets() {
             let data = {
-                project_id: 3896348,
-                jit: 1,//this.portalProject.jit,
+                project_id: this.portalProject.id,
+                jit: this.portalProject.jit,
                 take: this.take,
                 page: this.page,
                 orderBy: this.orderBy,
