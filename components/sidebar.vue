@@ -75,7 +75,7 @@ export default {
   transition: margin 0.25s ease-out;
   height: max-content;
   min-width: 300px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -89,7 +89,7 @@ export default {
 }
 .list-group-item {
   width: 100%;
-  font-size: 14px;
+  font-size: 12px;
   padding: 12px 15px 12px 25px;
   border-bottom: 1px solid #F1F4F8;
   display: flex;
@@ -97,6 +97,9 @@ export default {
   background: transparent !important;
   color: #6c757d !important;
   align-items: center;
+    & > img {
+        transform: scale(.9);
+    }
   &:last-child {
     border-bottom: none;
   }

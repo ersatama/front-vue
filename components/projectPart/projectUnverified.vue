@@ -76,7 +76,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <unverified-detail :size="unverifiedSize" @setTake="setTake" :take="take" :page="page"></unverified-detail>
                     </template>

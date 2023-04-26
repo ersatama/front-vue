@@ -62,7 +62,7 @@ export default {
     }
     &-title {
       color: #212529;
-      font-weight: bold;
+      font-weight: 600;
     }
     &-profile {
       width: 36px;
@@ -79,16 +79,15 @@ export default {
         display: flex;
         flex-direction: column;
         text-align: right;
+        text-transform: capitalize;
         &-title {
           color: #0b76a6;
-          text-transform: capitalize;
           font-size: 12px;
-          font-weight: bold;
+          font-weight: 600;
         }
         &-desc {
           font-size: 10px;
           color: #7d7f81;
-          text-transform: capitalize;
         }
       }
     }

@@ -116,6 +116,14 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=tickets'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 15)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-ticket"></div>
+                Tickets
+                <div class="block-body-left-item-count" v-if="links && links.tickets">{{ links.tickets }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 

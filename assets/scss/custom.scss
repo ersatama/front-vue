@@ -3,3 +3,7 @@ $light: #F1F4F8;
 
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'bootstrap-vue/src/index.scss';
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
