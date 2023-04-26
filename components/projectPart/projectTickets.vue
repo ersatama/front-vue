@@ -49,8 +49,8 @@
                                     <template v-else>N/A</template>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-longdate">
-                                    Open: <template v-if="live.hasOwnProperty('opendate')">{{ live['opendate'] }}</template><template v-else>N/A/</template><br>
-                                    Updated: <template v-if="live.hasOwnProperty('lastdate')">{{ live['lastdate'] }}</template><template v-else>N/A/</template>
+                                    Open: <template v-if="live.hasOwnProperty('opendate')">{{ live['opendate'] }}</template><template v-else>N/A</template><br>
+                                    Updated: <template v-if="live.hasOwnProperty('lastdate')">{{ live['lastdate'] }}</template><template v-else>N/A</template>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
