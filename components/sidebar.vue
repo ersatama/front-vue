@@ -74,7 +74,7 @@ export default {
   border-radius: 10px;
   transition: margin 0.25s ease-out;
   height: max-content;
-  min-width: 300px;
+  min-width: 280px;
   font-weight: 600;
 }
 

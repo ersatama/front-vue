@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="bg"></div>
-      <div class="d-flex" id="wrapper">
+      <div class="d-flex justify-content-center" id="wrapper">
           <!-- Sidebar-->
           <sidebar></sidebar>
           <!-- Page content wrapper-->
@@ -52,6 +52,7 @@ export default {
 
 #page-content-wrapper {
   min-width: 100vw;
+    max-width: 1500px;
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {

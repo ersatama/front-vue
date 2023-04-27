@@ -124,6 +124,13 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=monitoring'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 16)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-monitoring"></div>
+                Soft vuln monitor
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 

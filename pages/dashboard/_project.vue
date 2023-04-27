@@ -33,6 +33,7 @@
       <project-generated :portalProject="portalProject" v-else-if="tab === 13"></project-generated>
       <project-unverified :portalProject="portalProject" v-else-if="tab === 14"></project-unverified>
       <project-tickets :portalProject="portalProject" v-else-if="tab === 15"></project-tickets>
+      <project-soft-vuln-monitor :portalProject="portalProject" v-else-if="tab === 16"></project-soft-vuln-monitor>
     </div>
     <project-loading v-else></project-loading>
   </div>
@@ -60,9 +61,11 @@ import ProjectDraft from "../../components/projectPart/projectDraft.vue";
 import ProjectGenerated from "../../components/projectPart/projectGenerated.vue";
 import ProjectUnverified from "../../components/projectPart/projectUnverified.vue";
 import ProjectTickets from "../../components/projectPart/projectTickets.vue";
+import ProjectSoftVulnMonitor from "../../components/projectPart/projectSoftVulnMonitor.vue";
 
 export default {
   components: {
+      ProjectSoftVulnMonitor,
       ProjectTickets,
       ProjectUnverified,
       ProjectGenerated,
@@ -145,6 +148,8 @@ export default {
             tab = 14;
         } else if (query === 'tickets') {
             tab = 15;
+        } else if (query === 'monitoring') {
+            tab = 16;
         }
       }
       return tab;

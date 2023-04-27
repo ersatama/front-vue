@@ -40,9 +40,9 @@ a {
     }
     & > div {
       &:first-child {
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+        width: 280px;
+        max-width: 280px;
+        min-width: 280px;
       }
       &:last-child {
         flex-grow: 1;
@@ -122,7 +122,7 @@ a {
           padding-bottom: 25px;
         }
         width: 100%;
-        font-size: 12px;
+        font-size: 10px;
         &-info {
           padding: 25px;
           border-bottom: 1px solid #F1F4F8;
@@ -134,7 +134,7 @@ a {
             &-title {
               font-size: 12px;
               color: #0b76a6;
-              font-weight: bold;
+              font-weight: 600;
               text-transform: uppercase;
             }
           }
@@ -148,9 +148,9 @@ a {
         }
         &-header {
           color: #000;
-          font-size: 12px;
+          font-size: 10px;
           text-transform: uppercase;
-          font-weight: bold;
+          font-weight: 600;
           border-bottom: 1px solid #F1F4F8;
         }
         &-body {
@@ -669,7 +669,7 @@ a {
             text-transform: uppercase;
           }
           &-desc {
-            font-size: 14px;
+            font-size: 12px;
             word-break: break-all;
             & > span {
               font-weight: bold;
@@ -710,7 +710,7 @@ a {
           display: flex;
           align-items: center;
           color: #0b76a6;
-          font-weight: bold;
+          font-weight: 600;
           cursor: pointer;
           border-top: 1px solid #F1F4F8;
           &-status {
@@ -789,7 +789,7 @@ a {
       overflow: hidden;
       &-item {
         text-decoration: none !important;
-        padding: 12px 15px 12px 25px;
+        padding: 10px 15px 10px 25px;
         border-bottom: 1px solid #F1F4F8;
         font-size: 12px;
         display: flex;
@@ -917,6 +917,9 @@ a {
           &-ticket {
             background-image: url('/images/icons/ticket.png');
           }
+          &-monitoring {
+            background-image: url('/images/icons/monitoring.png');
+          }
           &-arr {
             width: 30px;
             height: 30px;
@@ -928,17 +931,17 @@ a {
               content: '';
               position: absolute;
               background: #d0d5dd;
-              width: 4px;
-              height: 13px;
+              width: 3px;
+              height: 9px;
               border-radius: 3px;
             }
             &:before {
               transform: rotate(45deg);
-              margin: 5px 0 0 12px;
+              margin: 8px 0 0 12px;
             }
             &:after {
               transform: rotate(-45deg);
-              margin: 12px 0 0 12px;
+              margin: 13px 0 0 12px;
             }
           }
         }
@@ -951,6 +954,7 @@ a {
       background: #fff;
       padding-bottom: 15px;
       height: max-content;
+      max-width: 1145px;
       &-header {
         display: flex;
         flex-direction: column;

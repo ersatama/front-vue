@@ -31,7 +31,7 @@
                                 <div class="block-body-content-table-tr" v-for="(job, key) in Object.entries(scanjobs.data)" :key="key">
                                     <div class="block-body-content-table-item block-body-content-table-item-id">{{ job[1].job_id }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-url">{{ job[1].target_url }}</div>
-                                    <div class="block-body-content-table-item block-body-content-table-item-sitemap-size" style="color: #0b76a6; font-weight: bold;" v-html="parseServices(job[1].services)"></div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-sitemap-size" style="color: #0b76a6; font-weight: 600;" v-html="parseServices(job[1].services)"></div>
                                     <div class="block-body-content-table-item block-body-content-table-item-status">{{ job[1].status }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-comment">{{ job[1].comment }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-date">{{ job[1].starttime }}<br>{{ job[1].endtime }}</div>
