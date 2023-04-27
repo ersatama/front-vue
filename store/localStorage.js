@@ -45,6 +45,14 @@ export const actions = {
         }
         return null;
     },
+    async projsoft_getSoftVulnByProjectId({commit}, projectId){
+        const res = await this.$repository.projsoft.getSoftVulnByProjectId(projectId);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalTicket_getWhere({commit}, payload){
         const res = await this.$repository.portalTicket.getWhere(payload);
         const { status, data } = res

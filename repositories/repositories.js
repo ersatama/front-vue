@@ -6,6 +6,7 @@ import portalTicket from "./Portal/portalTicket/portalTicket";
 import rawbase from "./Master/rawbase/rawbase";
 import scanNeuronJob from "./Master/scanNeuronJob/scanNeuronJob";
 import scanReportRawMaster from "./Master/scanReportRawMaster/scanReportRawMaster";
+import projsoft from "./Master/projsoft/projsoft";
 
 export const repository = ($axios) => ({
     user: user($axios),
@@ -13,7 +14,8 @@ export const repository = ($axios) => ({
     portalProjectType: portalProjectType($axios),
     portalTicket: portalTicket($axios),
 
+    rawbase: rawbase($axios),
     scanNeuronJob: scanNeuronJob($axios),
     scanReportRawMaster: scanReportRawMaster($axios),
-    rawbase: rawbase($axios)
+    projsoft: projsoft($axios)
 });

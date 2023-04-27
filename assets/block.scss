@@ -352,9 +352,26 @@ a {
           &-id {
             width: 100px;
             max-width: 100px;
+            min-width: 100px;
             &-short {
               width: 80px;
               max-width: 80px;
+              min-width: 80px;
+              &-60 {
+                width: 60px;
+                max-width: 60px;
+                min-width: 60px;
+              }
+              &-50 {
+                width: 50px;
+                max-width: 50px;
+                min-width: 50px;
+              }
+              &-40 {
+                width: 40px;
+                max-width: 40px;
+                min-width: 40px;
+              }
             }
           }
           & > div {
@@ -376,7 +393,26 @@ a {
           &-status {
             width: 90px;
             max-width: 90px;
+            min-width: 90px;
             word-break: break-word;
+            &-100 {
+              width: 100px;
+              max-width: 100px;
+              min-width: 100px;
+              word-break: break-word;
+            }
+            &-short {
+              width: 50px;
+              max-width: 50px;
+              min-width: 50px;
+              word-break: break-word;
+            }
+            &-short-60 {
+              width: 60px;
+              max-width: 60px;
+              min-width: 60px;
+              word-break: break-word;
+            }
           }
           &-longstatus {
             width: 150px;
@@ -394,9 +430,37 @@ a {
             word-break: break-word;
           }
           &-longdate {
+            min-width: 200px;
             max-width: 200px;
             width: 200px;
             word-break: break-word;
+          }
+          &-cuttext {
+            min-width: 220px;
+            max-width: 220px;
+            width: 220px;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            & > span {
+              min-width: 220px;
+              max-width: 220px;
+              width: 220px;
+              display: inline-block;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              &:hover {
+                color: #0b76a6;
+                border-bottom-color: #0b76a6;
+              }
+            }
+            &-dotted {
+              & > span {
+                border-bottom: 1px dotted #b5bfc9;
+              }
+            }
           }
           &-url {
             width: 200px;
@@ -546,7 +610,7 @@ a {
                 min-width: 100%;
                 padding: 10px 15px 10px 15px;
                 border-bottom: 1px solid #F1F4F8;
-                font-weight: bold;
+                font-weight: 600;
                 font-size: 12px;
                 text-transform: uppercase;
                 color: #000;
