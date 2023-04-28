@@ -187,6 +187,9 @@
         &-value {
           color: #6c757d;
           font-size: 12px;
+          &-pre {
+            white-space: pre-wrap;
+          }
         }
         &-links {
           display: flex;
