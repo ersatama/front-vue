@@ -1,5 +1,8 @@
 <template>
     <div class="block-body-right" >
+        <modal-detail :show="showDetail" @closeModal="showDetail = false">
+            <project-draft-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-draft-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">Drafts</div>
             <div class="block-body-right-desc">Project drafts page</div>
@@ -29,8 +32,8 @@
                         </div>
                         <div class="block-body-content-table-body">
 
-                            <div class="block-body-content-table-tr" v-for="(draft, key) in drafts.data" :key="key" @click="checkSelected(draft.id)">
-                                <div class="block-body-content-table-item block-body-content-table-item-checkbox">
+                            <div class="block-body-content-table-tr" v-for="(draft, key) in drafts.data" :key="key" @click.stop="showDetailInfo(draft)">
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click="checkSelected(draft.id)">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(draft.id)}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ draft.id }}</div>
@@ -41,7 +44,9 @@
                                 <div class="block-body-content-table-item block-body-content-table-item-status">{{ draft.param }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status">{{ draft.source }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-date">{{ draft.dt_add }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status"></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">
+                                    <template v-if="draft.lastModifiedBy && draft.lastModifiedBy.value">{{ draft.lastModifiedBy.value }}</template>
+                                </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
                                         <div class="block-body-content-table-item-option-select">
@@ -69,17 +74,22 @@
 </template>
 
 <script>
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectDraftDetail from "./projectDraftDetail.vue";
+import ProjectTicketsDetail from "../projectTickets/projectTicketsDetail.vue";
 
 export default {
     name: "projectDraft",
-    components: {ProjectNoData, ProjectPartLoading},
+    components: {ProjectTicketsDetail, ProjectDraftDetail, ModalDetail, ProjectNoData, ProjectPartLoading},
     props: ['portalProject'],
     data() {
         return {
             drafts: null,
             selected: [],
+            showDetail: false,
+            data: null
         }
     },
     computed: {
@@ -102,6 +112,10 @@ export default {
         this.getDrafts();
     },
     methods: {
+        showDetailInfo(data) {
+            this.data       =   data;
+            this.showDetail =   true;
+        },
         checkAll() {
             if (this.isAllSelected) {
                 this.selected = [];

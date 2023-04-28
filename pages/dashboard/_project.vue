@@ -57,7 +57,7 @@ import ProjectBlacklist from "../../components/projectPart/projectBlacklist.vue"
 import ProjectPatchVerification from "../../components/projectPart/projectPatchVerification.vue";
 import ProjectArchived from "../../components/projectPart/projectArchived.vue";
 import ProjectPatched from "../../components/projectPart/projectPatched.vue";
-import ProjectDraft from "../../components/projectPart/projectDraft.vue";
+import ProjectDraft from "../../components/projectPart/projectDraft/projectDraft.vue";
 import ProjectGenerated from "../../components/projectPart/projectGenerated.vue";
 import ProjectUnverified from "../../components/projectPart/projectUnverified/projectUnverified.vue";
 import ProjectTickets from "../../components/projectPart/projectTickets/projectTickets.vue";
