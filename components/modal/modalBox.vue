@@ -11,8 +11,8 @@
 
 <script>
 export default {
-  name: "modalBox",
-  props: ['modal']
+    name: "modalBox",
+    props: ['modal'],
 }
 </script>
 

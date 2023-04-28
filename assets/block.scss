@@ -413,6 +413,12 @@ a {
               min-width: 60px;
               word-break: break-word;
             }
+            &-short-70 {
+              width: 70px;
+              max-width: 70px;
+              min-width: 70px;
+              word-break: break-word;
+            }
           }
           &-longstatus {
             width: 150px;
