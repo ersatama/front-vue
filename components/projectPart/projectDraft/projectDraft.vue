@@ -33,7 +33,7 @@
                         <div class="block-body-content-table-body">
 
                             <div class="block-body-content-table-tr" v-for="(draft, key) in drafts.data" :key="key" @click.stop="showDetailInfo(draft)">
-                                <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click="checkSelected(draft.id)">
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click.stop="checkSelected(draft.id)">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(draft.id)}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ draft.id }}</div>
