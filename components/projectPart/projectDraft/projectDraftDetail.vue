@@ -246,15 +246,15 @@
                     <div class="modalbox-detail-content-item-value modalbox-detail-content-item-links" v-if="data.vulndescr">
                         <template v-if="isCutTextVuln">
                             <template v-if="!showFullVuln">
-                                <div class="modalbox-detail-content-item-value-pre" v-html="findUrl(cutVuln)"></div>
+                                <div class="modalbox-detail-content-item-value-pre" v-html="cutVuln"></div>
                                 <div class="modalbox-detail-content-item-btn" onselectstart="return false" @click="showFullVuln = true">Show full text</div>
                             </template>
                             <template v-else>
-                                <div class="modalbox-detail-content-item-value-pre" v-html="findUrl(data.vulndescr)"></div>
+                                <div class="modalbox-detail-content-item-value-pre" v-html="data.vulndescr"></div>
                                 <div class="modalbox-detail-content-item-btn" onselectstart="return false" @click="showFullVuln = false">Hide</div>
                             </template>
                         </template>
-                        <div v-else class="modalbox-detail-content-item-value-pre" v-html="findUrl(data.vulndescr)"></div>
+                        <div v-else class="modalbox-detail-content-item-value-pre" v-html="data.vulndescr"></div>
                     </div>
                     <div class="modalbox-detail-content-item-value" v-else>-</div>
                 </div>
