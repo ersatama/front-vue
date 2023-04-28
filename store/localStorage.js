@@ -45,8 +45,8 @@ export const actions = {
         }
         return null;
     },
-    async projsoft_getSoftVulnByProjectId({commit}, projectId){
-        const res = await this.$repository.projsoft.getSoftVulnByProjectId(projectId);
+    async projsoft_getSoftVulnByProjectId({commit}, payload){
+        const res = await this.$repository.projsoft.getSoftVulnByProjectId(payload);
         const { status, data } = res
         if (status === 200) {
             return data;

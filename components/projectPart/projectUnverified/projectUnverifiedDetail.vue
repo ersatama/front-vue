@@ -16,7 +16,7 @@
                         <div class="modalbox-detail-content-header-btn-select-angle"></div>
                         <div class="block-body-content-table-item-option-select-list">
                             <div class="block-body-content-table-item-option-select-item">Edit</div>
-                            <div class="block-body-content-table-item-option-select-item">Delete</div>
+                            <div class="block-body-content-table-item-option-select-item">Log</div>
                         </div>
                     </div>
                 </div>

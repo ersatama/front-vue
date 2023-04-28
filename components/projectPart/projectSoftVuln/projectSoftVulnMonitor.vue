@@ -18,14 +18,30 @@
                     <template v-if="softVulns.length > 0">
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr">
-                                <div class="block-body-content-table-item block-body-content-table-item-id-short-60">ID</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70">Vendor</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70">Software</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short">Version</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-cuttext">Link</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id-short-50">Alert</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-cuttext">Details</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-100">Comment</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id-short-60" @click="setOrderBy('id')">
+                                    ID <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'id'), 'block-body-content-table-item-down-up':(orderBy === 'id' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70" @click="setOrderBy('vendor')">
+                                    Vendor <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'vendor'), 'block-body-content-table-item-down-up':(orderBy === 'vendor' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70" @click="setOrderBy('software')">
+                                    Software <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'software'), 'block-body-content-table-item-down-up':(orderBy === 'software' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short" @click="setOrderBy('version')">
+                                    Version <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'version'), 'block-body-content-table-item-down-up':(orderBy === 'version' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-cuttext" @click="setOrderBy('link')">
+                                    Link <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'link'), 'block-body-content-table-item-down-up':(orderBy === 'link' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id-short-50" @click="setOrderBy('alert')">
+                                    Alert <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'alert'), 'block-body-content-table-item-down-up':(orderBy === 'alert' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-cuttext" @click="setOrderBy('vuln')">
+                                    Details <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'vuln'), 'block-body-content-table-item-down-up':(orderBy === 'vuln' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-100" @click="setOrderBy('comment')">
+                                    Comment <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'comment'), 'block-body-content-table-item-down-up':(orderBy === 'comment' && orderByType === 'desc')}"></div>
+                                </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status">Projects</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-configure" style="visibility: hidden;"></div>
@@ -87,6 +103,8 @@ export default {
     props: ['portalProject'],
     data() {
         return {
+            orderBy: 'id',
+            orderByType: 'asc',
             softVuln: null,
             softVulns: null,
             showDetail: false
@@ -96,13 +114,30 @@ export default {
         this.getSoftVulns();
     },
     methods: {
+        setOrderBy(orderBy) {
+            if (orderBy === this.orderBy) {
+                if (this.orderByType === 'asc') {
+                    this.orderByType    =   'desc';
+                } else {
+                    this.orderByType    =   'asc';
+                }
+            } else {
+                this.orderBy        =   orderBy;
+                this.orderByType    =   'asc';
+            }
+            this.getSoftVulns();
+        },
         showDetailInfo(softVuln) {
             this.softVuln   =   softVuln;
             this.showDetail =   true;
         },
         async getSoftVulns() {
             if (this.portalProject) {
-                let softVulns = await this.$store.dispatch('localStorage/projsoft_getSoftVulnByProjectId', this.portalProject.id);
+                let softVulns = await this.$store.dispatch('localStorage/projsoft_getSoftVulnByProjectId', {
+                    project_id: this.portalProject.id,
+                    orderBy: this.orderBy,
+                    orderByType: this.orderByType
+                });
                 if (softVulns.data) {
                     this.softVulns  =  softVulns.data;
                 }

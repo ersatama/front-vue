@@ -1,6 +1,6 @@
 export default ($axios) => ({
-    getSoftVulnByProjectId(projectId) {
-        return $axios.get('/api/v1/master/projsoft/getSoftVulnByProjectId/'+projectId).then(response => {
+    getSoftVulnByProjectId(payload) {
+        return $axios.post('/api/v1/master/projsoft/getSoftVulnByProjectId/'+payload.project_id, payload).then(response => {
             return response;
         }).catch(error => {
             return error.response;
