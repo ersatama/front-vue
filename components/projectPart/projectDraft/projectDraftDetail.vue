@@ -208,6 +208,20 @@
                     <div class="modalbox-detail-content-item-value" v-else>-</div>
                 </div>
                 <div class="modalbox-detail-content-item">
+                    <div class="modalbox-detail-content-item-title">Alerted</div>
+                    <div class="modalbox-detail-content-item-value" v-if="data.alerted">
+                        {{ data.alerted }}
+                    </div>
+                    <div class="modalbox-detail-content-item-value" v-else>-</div>
+                </div>
+                <div class="modalbox-detail-content-item">
+                    <div class="modalbox-detail-content-item-title">Alerted sms</div>
+                    <div class="modalbox-detail-content-item-value" v-if="data.alertedsms">
+                        {{ data.alertedsms }}
+                    </div>
+                    <div class="modalbox-detail-content-item-value" v-else>-</div>
+                </div>
+                <div class="modalbox-detail-content-item">
                     <div class="modalbox-detail-content-item-title">Body</div>
                     <div class="modalbox-detail-content-item-value modalbox-detail-content-item-links" v-if="data.body">
                         <template v-if="isCutText">
