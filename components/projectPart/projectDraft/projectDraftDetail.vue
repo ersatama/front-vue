@@ -298,7 +298,7 @@ export default {
         cutVuln() {
             let text = '';
             if (this.data && this.data.vulndescr) {
-                text = this.data.vulndescr.slice(0, this.detailSize);
+                text = this.data.vulndescr.trim().slice(0, this.detailSize);
                 text += ' ...';
             }
             return text;
@@ -316,7 +316,7 @@ export default {
         cutRemed() {
             let text = '';
             if (this.data && this.data.remed) {
-                text = this.data.remed.slice(0, this.detailSize);
+                text = this.data.remed.trim().slice(0, this.detailSize);
                 text += ' ...';
             }
             return text;
@@ -334,7 +334,7 @@ export default {
         cutDetails() {
             let text = '';
             if (this.data && this.data.body) {
-                text = this.data.body.slice(0, this.detailSize);
+                text = this.data.body.trim().slice(0, this.detailSize);
                 text += ' ...';
             }
             return text;
