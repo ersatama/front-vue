@@ -84,15 +84,15 @@
                     <div class="modalbox-detail-content-item-value modalbox-detail-content-item-links" v-if="data.vuln">
                         <template v-if="isCutText">
                             <template v-if="!showFullDetails">
-                                <div class="modalbox-detail-content-item-value-pre">{{ findUrl(cutDetails) }}</div>
+                                <div class="modalbox-detail-content-item-value-pre" v-html="findUrl(cutDetails)"></div>
                                 <div class="modalbox-detail-content-item-btn" onselectstart="return false" @click="showFullDetails = true">Show full details</div>
                             </template>
                             <template v-else>
-                                <div class="modalbox-detail-content-item-value-pre">{{ findUrl(data.vuln) }}</div>
+                                <div class="modalbox-detail-content-item-value-pre" v-html="findUrl(data.vuln)"></div>
                                 <div class="modalbox-detail-content-item-btn" onselectstart="return false" @click="showFullDetails = false">Hide</div>
                             </template>
                         </template>
-                        <div v-else class="modalbox-detail-content-item-value-pre">{{ findUrl(data.vuln) }}</div>
+                        <div v-else class="modalbox-detail-content-item-value-pre" v-html="findUrl(data.vuln)"></div>
                     </div>
                     <div class="modalbox-detail-content-item-value" v-else>-</div>
                 </div>
@@ -198,12 +198,6 @@ export default {
         }
     },
     computed: {
-        findUrl(text) {
-            let urlRegex = /(https?:\/\/[^\s]+)/g;
-            return text.toString().replace(urlRegex, function(url) {
-                return '<a href="' + url + '" target="_blank">' + url + '</a>';
-            })
-        },
         isCutText() {
             let cut = false;
             if (this.data && this.data.vuln) {
@@ -235,6 +229,12 @@ export default {
         }
     },
     methods: {
+        findUrl(text) {
+            let urlRegex = /(https?:\/\/[^\s]+)/g;
+            return text.toString().replace(urlRegex, function(url) {
+                return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            })
+        },
         checkSelected(id) {
             if (this.projsofts.includes(id)) {
                 let index = this.projsofts.indexOf(id);
