@@ -112,7 +112,7 @@
 import ProjectPartLoading from "../modal/projectPartLoading.vue";
 import ProjectNoData from "./projectNoData.vue";
 import PaginationDetail from "./paginationDetail.vue";
-import UnverifiedDetail from "./unverifiedDetail.vue";
+import UnverifiedDetail from "./projectUnverified/unverifiedPagination.vue";
 
 export default {
     name: "projectTickets",

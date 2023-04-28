@@ -10,19 +10,18 @@
   height: 100%;
   overflow: auto;
   &-detail {
-    width: 500px;
     background: #fff;
-    position: fixed;
-    top: 25px;
-    z-index: 100;
-    right: 25px;
-    bottom: 25px;
-    border-radius: 10px;
+    bottom: 0;
     box-shadow: 0 0 3px 1px rgba(0,0,0,.149);
-    transition: all .1s linear;
-    visibility: visible;
     opacity: 1;
     overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: all .1s linear;
+    visibility: visible;
+    width: 500px;
+    z-index: 100;
     &-hide {
       visibility: hidden;
       opacity: 0;

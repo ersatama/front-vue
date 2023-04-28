@@ -3,6 +3,9 @@
         <modal-box v-if="portalProject" :modal="filterModal" @closeModal="filterModal = false">
             <unverified-filter :project="portalProject" @setFilter="setFilter" @closeModal="filterModal = false"></unverified-filter>
         </modal-box>
+        <modal-detail :show="showDetail" @closeModal="showDetail = false">
+            <project-unverified-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-unverified-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">Unverified</div>
             <div class="block-body-right-desc">Project unverified page</div>
@@ -51,14 +54,14 @@
                         </div>
                         <div class="block-body-content-table-body">
 
-                            <div class="block-body-content-table-tr" v-for="(item, key) in unverified" :key="key" @click="check(item.id)">
-                                <div class="block-body-content-table-item block-body-content-table-item-checkbox">
+                            <div class="block-body-content-table-tr" v-for="(item, key) in unverified" :key="key" @click.stop="showDetailInfo(item)" @mousedown.stop>
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click.stop="check(item.id)">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(item.id)}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ item.id }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-text">{{ item.display_name }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-url">{{ item.active_path.replace('%', '') }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-service">{{ item.display_params }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-service">{{ item.display_param }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-date">{{ item.dt }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status">{{ item.rawbase_type }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-rawbase">{{ item.service }}</div>
@@ -88,16 +91,23 @@
 </template>
 
 <script>
-import ModalBox from "../modal/modalBox.vue";
-import UnverifiedFilter from "../modal/unverifiedFilter.vue";
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
-import RawReportDetail from "./rawReportDetail.vue";
-import UnverifiedDetail from "./unverifiedDetail.vue";
+import ModalBox from "../../modal/modalBox.vue";
+import UnverifiedFilter from "../../modal/unverifiedFilter.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import RawReportDetail from "../rawReportDetail.vue";
+import UnverifiedDetail from "./unverifiedPagination.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectUnverifiedDetail from "./projectUnverifiedDetail.vue";
+import ProjectSoftVulnDetail from "../projectSoftVuln/projectSoftVulnDetail.vue";
 
 export default {
     name: "projectUnverified",
-    components: {UnverifiedDetail, RawReportDetail, ProjectNoData, ProjectPartLoading, UnverifiedFilter, ModalBox},
+    components: {
+        ProjectSoftVulnDetail,
+        ProjectUnverifiedDetail,
+        ModalDetail,
+        UnverifiedDetail, RawReportDetail, ProjectNoData, ProjectPartLoading, UnverifiedFilter, ModalBox},
     props: ['portalProject', 'links'],
     data() {
         return {
@@ -108,7 +118,9 @@ export default {
             unverifiedSize: 0,
             take: 20,
             page: 1,
+            showDetail: false,
             filterModal: false,
+            data: null,
             filter: {
                 type: "ALL",
                 status: "NEW",
@@ -142,6 +154,10 @@ export default {
         }
     },
     methods: {
+        showDetailInfo(data) {
+            this.data       =   data;
+            this.showDetail =   true;
+        },
         check(id) {
             if (this.selected.includes(id)) {
                 let index = this.selected.indexOf(id);

@@ -6,7 +6,7 @@
                     Soft vuln monitor
                 </div>
                 <div class="modalbox-detail-content-header-detail-desc">
-                    Details #{{ data.id }}
+                    #{{ data.id }}
                 </div>
             </div>
             <div class="modalbox-detail-content-header-btns">

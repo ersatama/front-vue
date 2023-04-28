@@ -76,9 +76,9 @@
 </template>
 
 <script>
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
-import ModalDetail from "../modal/modalDetail.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
 import ProjectSoftVulnDetail from "./projectSoftVulnDetail.vue";
 
 export default {

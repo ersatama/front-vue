@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    name: "unverifiedDetail",
+    name: "unverifiedPagination",
     props: ['size', 'page', 'take'],
     data() {
         return {
