@@ -21,22 +21,22 @@
                                 <div class="block-body-content-table-item block-body-content-table-item-id-short-60" @click="setOrderBy('id')">
                                     ID <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'id'), 'block-body-content-table-item-down-up':(orderBy === 'id' && orderByType === 'desc')}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70" @click="setOrderBy('vendor')">
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-80" @click="setOrderBy('vendor')">
                                     Vendor <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'vendor'), 'block-body-content-table-item-down-up':(orderBy === 'vendor' && orderByType === 'desc')}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70" @click="setOrderBy('software')">
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-80" @click="setOrderBy('software')">
                                     Software <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'software'), 'block-body-content-table-item-down-up':(orderBy === 'software' && orderByType === 'desc')}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short" @click="setOrderBy('version')">
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70" @click="setOrderBy('version')">
                                     Version <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'version'), 'block-body-content-table-item-down-up':(orderBy === 'version' && orderByType === 'desc')}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-cuttext" @click="setOrderBy('link')">
+                                <div class="block-body-content-table-item block-body-content-table-item-cuttext d-flex" @click="setOrderBy('link')">
                                     Link <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'link'), 'block-body-content-table-item-down-up':(orderBy === 'link' && orderByType === 'desc')}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id-short-50" @click="setOrderBy('alert')">
                                     Alert <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'alert'), 'block-body-content-table-item-down-up':(orderBy === 'alert' && orderByType === 'desc')}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-cuttext" @click="setOrderBy('vuln')">
+                                <div class="block-body-content-table-item block-body-content-table-item-cuttext d-flex" @click="setOrderBy('vuln')">
                                     Details <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'vuln'), 'block-body-content-table-item-down-up':(orderBy === 'vuln' && orderByType === 'desc')}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-status-100" @click="setOrderBy('comment')">
@@ -51,9 +51,9 @@
                         <div class="block-body-content-table-body">
                             <div class="block-body-content-table-tr" v-for="(softVuln,key) in softVulns" :key="key" @click.stop="showDetailInfo(softVuln)" @mousedown.stop>
                                 <div class="block-body-content-table-item block-body-content-table-item-id-short-60">{{ softVuln.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70">{{ softVuln.vendor }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70">{{ softVuln.software }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status-short">{{ softVuln.version }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-80">{{ softVuln.vendor }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-80">{{ softVuln.software }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status-short-70">{{ softVuln.version }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-cuttext block-body-content-table-item-cuttext-dotted">
                                     <span v-if="softVuln.link && softVuln.link.trim() !== ''" :title="softVuln.link">{{ softVuln.link }}</span>
                                 </div>

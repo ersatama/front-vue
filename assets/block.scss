@@ -419,6 +419,12 @@ a {
               min-width: 70px;
               word-break: break-word;
             }
+            &-short-80 {
+              width: 80px;
+              max-width: 80px;
+              min-width: 80px;
+              word-break: break-word;
+            }
           }
           &-longstatus {
             width: 150px;
@@ -442,17 +448,17 @@ a {
             word-break: break-word;
           }
           &-cuttext {
-            min-width: 220px;
-            max-width: 220px;
-            width: 220px;
+            min-width: 200px;
+            max-width: 200px;
+            width: 200px;
             display: inline-block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             & > span {
-              min-width: 220px;
-              max-width: 220px;
-              width: 220px;
+              min-width: 200px;
+              max-width: 200px;
+              width: 200px;
               display: inline-block;
               overflow: hidden;
               text-overflow: ellipsis;
