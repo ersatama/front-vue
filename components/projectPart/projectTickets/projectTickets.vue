@@ -1,5 +1,8 @@
 <template>
     <div class="block-body-right" >
+        <modal-detail :show="showDetail" @closeModal="showDetail = false">
+            <project-tickets-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-tickets-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">Tickets</div>
             <div class="block-body-right-desc">Project tickets</div>
@@ -64,7 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="block-body-content-table-tr" v-for="(ticket,key) in tickets" :key="key">
+                            <div class="block-body-content-table-tr" v-for="(ticket,key) in tickets" :key="key" @click.stop="showDetailInfo(ticket)">
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ ticket.id }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-longtext">{{ ticket.name }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-longstatus">
@@ -109,14 +112,25 @@
 </template>
 
 <script>
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
-import PaginationDetail from "./paginationDetail.vue";
-import UnverifiedDetail from "./projectUnverified/unverifiedPagination.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import PaginationDetail from "../paginationDetail.vue";
+import UnverifiedDetail from "../projectUnverified/unverifiedPagination.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectTicketsDetail from "./projectTicketsDetail.vue";
+import ProjectUnverifiedDetail from "../projectUnverified/projectUnverifiedDetail.vue";
 
 export default {
     name: "projectTickets",
-    components: {UnverifiedDetail, PaginationDetail, ProjectNoData, ProjectPartLoading},
+    components: {
+        ProjectUnverifiedDetail,
+        ProjectTicketsDetail,
+        ModalDetail,
+        UnverifiedDetail,
+        PaginationDetail,
+        ProjectNoData,
+        ProjectPartLoading
+    },
     props: ['portalProject'],
     data() {
         return {
@@ -127,12 +141,18 @@ export default {
             ticketsSize: 0,
             take: 20,
             page: 1,
+            showDetail: false,
+            data: null,
         }
     },
     created() {
         this.getTickets();
     },
     methods: {
+        showDetailInfo(data) {
+            this.data       =   data;
+            this.showDetail =   true;
+        },
         async getTickets() {
             let data = {
                 project_id: this.portalProject.id,

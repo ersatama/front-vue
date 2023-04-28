@@ -60,7 +60,7 @@ import ProjectPatched from "../../components/projectPart/projectPatched.vue";
 import ProjectDraft from "../../components/projectPart/projectDraft.vue";
 import ProjectGenerated from "../../components/projectPart/projectGenerated.vue";
 import ProjectUnverified from "../../components/projectPart/projectUnverified/projectUnverified.vue";
-import ProjectTickets from "../../components/projectPart/projectTickets.vue";
+import ProjectTickets from "../../components/projectPart/projectTickets/projectTickets.vue";
 import ProjectSoftVulnMonitor from "../../components/projectPart/projectSoftVuln/projectSoftVulnMonitor.vue";
 
 export default {

@@ -246,17 +246,6 @@ export default {
             }
             return text;
         },
-        parsedLinks() {
-            let list    =   [];
-            if (this.data && this.data.link) {
-                let splitLinks  =   this.data.link.split(',');
-                splitLinks.forEach(link => {
-                    list.push(link);
-                    //html += '<a href="'+link+'" class="modalbox-detail-content-item-link" target="_blank">'+link+'</a>';
-                });
-            }
-            return list;
-        }
     },
     methods: {
         findUrl(text) {
@@ -279,6 +268,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

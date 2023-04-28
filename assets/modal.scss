@@ -109,7 +109,6 @@
             box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.14902);
             border-radius: 5px;
             width: 200px;
-            min-height: 50px;
             z-index: 2;
             top: 45px;
             right: -25px;
@@ -156,7 +155,7 @@
         padding: 25px;
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 15px;
       }
       &-item {
         display: flex;
