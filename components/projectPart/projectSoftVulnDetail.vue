@@ -200,7 +200,7 @@ export default {
     computed: {
         findUrl(text) {
             let urlRegex = /(https?:\/\/[^\s]+)/g;
-            return text.replace(urlRegex, function(url) {
+            return text.toString().replace(urlRegex, function(url) {
                 return '<a href="' + url + '" target="_blank">' + url + '</a>';
             })
         },
