@@ -84,15 +84,15 @@
                     <div class="modalbox-detail-content-item-value modalbox-detail-content-item-links" v-if="data.vuln">
                         <template v-if="isCutText">
                             <template v-if="!showFullDetails">
-                                <div>{{ cutDetails }}</div>
+                                <div class="modalbox-detail-content-item-value-pre">{{ cutDetails }}</div>
                                 <div class="modalbox-detail-content-item-btn" onselectstart="return false" @click="showFullDetails = true">Show full details</div>
                             </template>
                             <template v-else>
-                                <div>{{ data.vuln }}</div>
+                                <div class="modalbox-detail-content-item-value-pre">{{ data.vuln }}</div>
                                 <div class="modalbox-detail-content-item-btn" onselectstart="return false" @click="showFullDetails = false">Hide</div>
                             </template>
                         </template>
-                        <div v-else>{{ data.vuln }}</div>
+                        <div v-else class="modalbox-detail-content-item-value-pre">{{ data.vuln }}</div>
                     </div>
                     <div class="modalbox-detail-content-item-value" v-else>-</div>
                 </div>
