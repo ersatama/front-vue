@@ -81,7 +81,7 @@ a {
     &-content {
       display: flex;
       border-top: 1px solid #F1F4F8;
-      &-filter, &-vuln, &-report {
+      &-filter, &-vuln, &-add, &-report, &-delete {
         background: #0b76a6;
         font-size: 12px;
         height: 36px;
@@ -103,6 +103,18 @@ a {
           &-add {
             background-image: url('/images/icons/add.png');
           }
+          &-approve {
+            background-image: url('/images/icons/checkmark.png');
+          }
+          &-exchange {
+            background-image: url('/images/icons/exchange.png');
+          }
+          &-delete {
+            background-image: url('/images/icons/trash-can.png');
+          }
+          &-move {
+            background-image: url('/images/icons/move.png');
+          }
           &-pie {
             background-image: url('/images/icons/pie-chart.png');
           }
@@ -111,10 +123,13 @@ a {
           }
         }
       }
-      &-vuln {
+      &-vuln, &-add {
         background: #28a745;
       }
       &-report {
+        background: #dc3545;
+      }
+      &-delete {
         background: #dc3545;
       }
       &-table {
@@ -133,9 +148,11 @@ a {
           &-detail {
             &-title {
               font-size: 12px;
-              color: #0b76a6;
-              font-weight: 600;
-              text-transform: uppercase;
+              color: #7d7f81;
+              & > span {
+                font-weight: 600;
+                color: #0b76a6;
+              }
             }
           }
         }
@@ -362,6 +379,11 @@ a {
                 max-width: 60px;
                 min-width: 60px;
               }
+              &-65 {
+                width: 65px;
+                max-width: 65px;
+                min-width: 65px;
+              }
               &-50 {
                 width: 50px;
                 max-width: 50px;
@@ -498,9 +520,22 @@ a {
             max-width: 150px;
             word-break: break-word;
           }
+          &-mediumtext {
+            width: 300px;
+            max-width: 300px;
+            min-width: 300px;
+            word-break: break-word;
+          }
           &-longtext {
             width: 400px;
             max-width: 400px;
+            min-width: 400px;
+            word-break: break-word;
+          }
+          &-longcomment {
+            width: 650px;
+            max-width: 650px;
+            min-width: 650px;
             word-break: break-word;
           }
           &-engine {
@@ -513,7 +548,7 @@ a {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            font-size: 12px;
+            font-size: 10px;
             & > select {
               width: 100%;
               height: 20px;

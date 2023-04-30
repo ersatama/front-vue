@@ -37,14 +37,6 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
-        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=unpatched'">
-            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 5)}">
-                <div class="block-body-left-item-icon block-body-left-item-icon-unpatched"></div>
-                Unpatched
-                <div class="block-body-left-item-count" v-if="links && links.unpatched">{{ links.unpatched }}</div>
-                <div class="block-body-left-item-icon-arr"></div>
-            </div>
-        </NuxtLink>
         <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=tasks'">
             <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 6)}">
                 <div class="block-body-left-item-icon block-body-left-item-icon-tasks"></div>
@@ -57,6 +49,14 @@
                 <div class="block-body-left-item-icon block-body-left-item-icon-rawbase"></div>
                 All rawbase
                 <div class="block-body-left-item-count" v-if="links && links.rawbase && links.rawbase > 0">{{ links.rawbase }}</div>
+                <div class="block-body-left-item-icon-arr"></div>
+            </div>
+        </NuxtLink>
+        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=unpatched'">
+            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 5)}">
+                <div class="block-body-left-item-icon block-body-left-item-icon-unpatched"></div>
+                Unpatched
+                <div class="block-body-left-item-count" v-if="links && links.unpatched">{{ links.unpatched }}</div>
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>

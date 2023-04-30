@@ -6,10 +6,24 @@
         <modal-box :modal="tableSettingsModal" @closeModal="tableSettingsModal = false">
             <raw-report-table-settings></raw-report-table-settings>
         </modal-box>
+        <modal-detail :show="showDetail" @closeModal="showDetail = false">
+            <project-raw-report-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-raw-report-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">Raw reports</div>
             <div class="block-body-right-desc">Neuron raw reports</div>
             <div class="block-body-right-header-buttons">
+                <template v-if="selected.length > 0">
+                    <button class="block-body-content-delete">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-delete"></i> Delete drafts
+                    </button>
+                    <button class="block-body-content-filter">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-move"></i> Mark as FP
+                    </button>
+                    <button class="block-body-content-filter">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-move"></i> Change status
+                    </button>
+                </template>
                 <button class="block-body-content-filter" @click="filterModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
             </div>
         </div>
@@ -23,13 +37,27 @@
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkRawReportAll()" onselectstart="return false"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">ID <div class="block-body-content-table-item-down"></div></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-process">Process <div class="block-body-content-table-item-down"></div></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-scan">Scan <div class="block-body-content-table-item-down"></div></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-service">Service <div class="block-body-content-table-item-down"></div></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-name">Name <div class="block-body-content-table-item-down"></div></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">Status <div class="block-body-content-table-item-down"></div></div>
-                                <div class="block-body-content-table-item block-body-content-table-item-rawbase">Rawbase <div class="block-body-content-table-item-down"></div></div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id" @click="setOrderBy('id')">
+                                    ID <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'id'), 'block-body-content-table-item-down-up':(orderBy === 'id' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-process" @click="setOrderBy('process')">
+                                    Process <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'process'), 'block-body-content-table-item-down-up':(orderBy === 'process' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-scan" @click="setOrderBy('scan')">
+                                    Scan <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'scan'), 'block-body-content-table-item-down-up':(orderBy === 'scan' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-service" @click="setOrderBy('service')">
+                                    Service <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'service'), 'block-body-content-table-item-down-up':(orderBy === 'service' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-name" @click="setOrderBy('name')">
+                                    Name <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'name'), 'block-body-content-table-item-down-up':(orderBy === 'name' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status" @click="setOrderBy('status')">
+                                    Status <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'status'), 'block-body-content-table-item-down-up':(orderBy === 'status' && orderByType === 'desc')}"></div>
+                                </div>
+                                <div class="block-body-content-table-item block-body-content-table-item-rawbase" @click="setOrderBy('rawbase')">
+                                    Rawbase <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'rawbase'), 'block-body-content-table-item-down-up':(orderBy === 'rawbase' && orderByType === 'desc')}"></div>
+                                </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-configure" @click="tableSettingsModal = true"></div>
                                 </div>
@@ -37,8 +65,8 @@
                         </div>
                         <div class="block-body-content-table-body">
 
-                            <div class="block-body-content-table-tr" v-for="(rawReport, key) in rawReports" :key="key" @click="checkRawReport(rawReport.id)">
-                                <div class="block-body-content-table-item block-body-content-table-item-checkbox">
+                            <div class="block-body-content-table-tr" v-for="(rawReport, key) in rawReports" :key="key" @click.stop="showDetailInfo(rawReport)">
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click.stop="checkRawReport(rawReport.id)">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(rawReport.id)}"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id">{{ rawReport.id }}</div>
@@ -78,16 +106,23 @@
 </template>
 
 <script>
-import ModalBox from "../modal/modalBox.vue";
-import RawReportTableSettings from "../modal/rawReportTableSettings.vue";
-import RawReportDetail from "./rawReportDetail.vue";
-import RawReportFilter from "../modal/rawReportFilter.vue";
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
+import ModalBox from "../../modal/modalBox.vue";
+import RawReportTableSettings from "../../modal/rawReportTableSettings.vue";
+import RawReportDetail from "../rawReportDetail.vue";
+import RawReportFilter from "../../modal/rawReportFilter.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectRawReportDetail from "./projectRawReportDetail.vue";
+import ProjectUnpatchedDetail from "../projectUnpatched/projectUnpatchedDetail.vue";
 
 export default {
   name: "projectRawReport",
-  components: {ProjectNoData, ProjectPartLoading, RawReportFilter, RawReportDetail, RawReportTableSettings, ModalBox},
+  components: {
+      ProjectUnpatchedDetail,
+      ProjectRawReportDetail,
+      ModalDetail,
+      ProjectNoData, ProjectPartLoading, RawReportFilter, RawReportDetail, RawReportTableSettings, ModalBox},
   props: ['portalProject','links'],
   data() {
     return {
@@ -97,7 +132,11 @@ export default {
       rawReportSize: 0,
       take: 20,
       page: 1,
+        orderBy: 'id',
+        orderByType: 'asc',
       filterModal: false,
+        data: null,
+        showDetail: false,
         filter: {
             target: "all",
             service: "All",
@@ -106,9 +145,6 @@ export default {
             search: ''
         },
     }
-  },
-  mounted() {
-    this.getRawReports();
   },
   watch: {
     filter() {
@@ -133,15 +169,34 @@ export default {
     }
   },
   methods: {
+      showDetailInfo(data) {
+          this.data       =   data;
+          this.showDetail =   true;
+      },
+      setOrderBy(orderBy) {
+          if (orderBy === this.orderBy) {
+              if (this.orderByType === 'asc') {
+                  this.orderByType    =   'desc';
+              } else {
+                  this.orderByType    =   'asc';
+              }
+          } else {
+              this.orderBy        =   orderBy;
+              this.orderByType    =   'asc';
+          }
+          this.getRawReports();
+      },
       setFilter(filter) {
           this.filter = filter;
       },
     async getRawReports() {
-      if (this.filter) {
+      if (this.filter && this.portalProject) {
         let data  = {
           id: this.portalProject.id,
           take: this.take,
-          page: this.page
+          page: this.page,
+            orderBy: this.orderBy,
+            orderByType: this.orderByType
         };
         if (this.filter.target !== 'all') {
           data.target = this.filter.target;

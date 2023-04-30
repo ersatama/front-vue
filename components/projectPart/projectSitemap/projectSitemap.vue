@@ -1,5 +1,8 @@
 <template>
     <div class="block-body-right" >
+        <modal-detail :show="showDetail" @closeModal="showDetail = false">
+            <project-sitemap-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-sitemap-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">Sitemaps</div>
             <div class="block-body-right-desc">Project sitemaps</div>
@@ -20,7 +23,7 @@
                     </div>
                     <div class="block-body-content-table-body">
 
-                        <div class="block-body-content-table-tr" v-for="(sitemap, key) in Object.entries(links.sitemaps)" :key="key">
+                        <div class="block-body-content-table-tr" v-for="(sitemap, key) in Object.entries(links.sitemaps)" :key="key" @click.stop="showDetailInfo(sitemap)" @mousedown.stop>
                             <div class="block-body-content-table-item block-body-content-table-item-comment">{{ sitemap[0] }} [{{ sitemap[1].sitename }}]</div>
                             <div class="block-body-content-table-item block-body-content-table-item-sitemap-size">{{ sitemap[1].total }} / {{ sitemap[1].part }} / {{ sitemap[1].fuzzed }}</div>
                             <div class="block-body-content-table-item block-body-content-table-item-sitemap-size">{{ sitemap[1].clusterFuzzed.clusters }} / {{ sitemap[1].clusterFuzzed.fuzzedClusters }}</div>
@@ -50,15 +53,30 @@
 </template>
 
 <script>
-import ProjectNoData from "./projectNoData.vue";
+import ProjectNoData from "../projectNoData.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectSitemapDetail from "./projectSitemapDetail.vue";
+import ProjectRawbaseDetail from "../projectRawbase/projectRawbaseDetail.vue";
 
 export default {
-  name: "projectSitemap",
-    components: {ProjectNoData},
-  props: ['links']
+    name: "projectSitemap",
+    components: {ProjectRawbaseDetail, ProjectSitemapDetail, ModalDetail, ProjectNoData},
+    props: ['links'],
+    data() {
+        return {
+            data: null,
+            showDetail: false
+        }
+    },
+    methods: {
+        showDetailInfo(data) {
+            this.data       =   data;
+            this.showDetail =   true;
+        },
+    }
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

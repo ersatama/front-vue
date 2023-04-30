@@ -1,11 +1,11 @@
 <template>
     <div class="block-body-right" >
         <modal-detail :show="showDetail" @closeModal="showDetail = false">
-            <project-draft-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-draft-detail>
+            <project-unpatched-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-unpatched-detail>
         </modal-detail>
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Drafts</div>
-            <div class="block-body-right-desc">Project drafts page</div>
+            <div class="block-body-right-title">Unpatched</div>
+            <div class="block-body-right-desc">Project unpatched details</div>
             <div class="block-body-right-header-buttons" v-if="selected.length > 0">
                 <button class="block-body-content-filter">
                     <i class="block-body-content-filter-icon block-body-content-filter-icon-move"></i> Move
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="block-body-content">
-            <div class="block-body-content-table">
+            <div class="block-body-content-table block-body-content-table-bottom">
                 <template v-if="list">
                     <template v-if="list.length > 0">
                         <project-pagination :size="size" @setTake="setTake" :take="take" :page="page"></project-pagination>
@@ -103,18 +103,14 @@
 import ProjectPartLoading from "../../modal/projectPartLoading.vue";
 import ProjectNoData from "../projectNoData.vue";
 import ModalDetail from "../../modal/modalDetail.vue";
-import ProjectDraftDetail from "./projectDraftDetail.vue";
+import ProjectUnpatchedDetail from "./projectUnpatchedDetail.vue";
+import ProjectBlacklistDetail from "../projectBlacklist/projectBlacklistDetail.vue";
 import ProjectPagination from "../projectPagination.vue";
-
 export default {
-    name: "projectDraft",
+    name: "projectUnpatched",
     components: {
         ProjectPagination,
-        ProjectDraftDetail,
-        ModalDetail,
-        ProjectNoData,
-        ProjectPartLoading
-    },
+        ProjectBlacklistDetail, ProjectUnpatchedDetail, ModalDetail, ProjectNoData, ProjectPartLoading},
     props: ['portalProject'],
     data() {
         return {
@@ -128,6 +124,9 @@ export default {
             orderBy: 'id',
             orderByType: 'asc',
         }
+    },
+    created() {
+        this.getList();
     },
     computed: {
         isAllSelected() {
@@ -144,9 +143,6 @@ export default {
             }
             return status;
         }
-    },
-    created() {
-        this.getList();
     },
     methods: {
         setTake(data) {
@@ -168,33 +164,33 @@ export default {
             this.getList();
         },
         showDetailInfo(data) {
-            this.data       =   data;
-            this.showDetail =   true;
+          this.data       =   data;
+          this.showDetail =   true;
         },
         checkAll() {
-            if (this.isAllSelected) {
-                this.selected = [];
-            } else if (this.list) {
-                this.selected = this.list.map((item) => {
-                    return item.id;
-                });
-            }
+          if (this.isAllSelected) {
+              this.selected = [];
+          } else if (this.list) {
+              this.selected = this.list.map((item) => {
+                  return item.id;
+              });
+          }
         },
         checkSelected(id) {
-            if (this.selected.includes(id)) {
-                let index = this.selected.indexOf(id);
-                if (index !== -1) {
-                    this.selected.splice(index, 1);
-                }
-            } else {
-                this.selected.push(id);
-            }
+          if (this.selected.includes(id)) {
+              let index = this.selected.indexOf(id);
+              if (index !== -1) {
+                  this.selected.splice(index, 1);
+              }
+          } else {
+              this.selected.push(id);
+          }
         },
         async getList() {
             if (this.portalProject) {
                 let portalJitReports    =   await this.$store.dispatch('localStorage/portalJitReport_getWhere', {
                     project_id: this.portalProject.id,
-                    status: 'draft',
+                    status: 'new',
                     take: this.take,
                     page: this.page,
                     orderBy: this.orderBy,
@@ -210,6 +206,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

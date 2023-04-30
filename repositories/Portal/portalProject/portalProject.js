@@ -42,7 +42,7 @@ export default ($axios) => ({
         });
     },
     getRawbaseById(payload) {
-        return $axios.post('/api/v1/portal/portalProject/getRawbaseById/'+payload.id, payload).then(response => {
+        return $axios.post('https://admin3.iw:1450/api/v1/portal/portalProject/getRawbaseById/'+payload.id, payload).then(response => {
             return response;
         }).catch(error => {
             return error.response;

@@ -1,11 +1,11 @@
 <template>
     <div class="block-body-right" >
         <modal-detail :show="showDetail" @closeModal="showDetail = false">
-            <project-draft-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-draft-detail>
+            <project-patch-verification-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-patch-verification-detail>
         </modal-detail>
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Drafts</div>
-            <div class="block-body-right-desc">Project drafts page</div>
+            <div class="block-body-right-title">Patch verification</div>
+            <div class="block-body-right-desc">Project patch verification page</div>
             <div class="block-body-right-header-buttons" v-if="selected.length > 0">
                 <button class="block-body-content-filter">
                     <i class="block-body-content-filter-icon block-body-content-filter-icon-move"></i> Move
@@ -103,14 +103,13 @@
 import ProjectPartLoading from "../../modal/projectPartLoading.vue";
 import ProjectNoData from "../projectNoData.vue";
 import ModalDetail from "../../modal/modalDetail.vue";
-import ProjectDraftDetail from "./projectDraftDetail.vue";
+import ProjectPatchVerificationDetail from "./projectPatchVerificationDetail.vue";
 import ProjectPagination from "../projectPagination.vue";
-
 export default {
-    name: "projectDraft",
+    name: "projectPatchVerification",
     components: {
         ProjectPagination,
-        ProjectDraftDetail,
+        ProjectPatchVerificationDetail,
         ModalDetail,
         ProjectNoData,
         ProjectPartLoading
@@ -129,6 +128,9 @@ export default {
             orderByType: 'asc',
         }
     },
+    created() {
+        this.getList();
+    },
     computed: {
         isAllSelected() {
             let status = true;
@@ -144,9 +146,6 @@ export default {
             }
             return status;
         }
-    },
-    created() {
-        this.getList();
     },
     methods: {
         setTake(data) {
@@ -194,7 +193,7 @@ export default {
             if (this.portalProject) {
                 let portalJitReports    =   await this.$store.dispatch('localStorage/portalJitReport_getWhere', {
                     project_id: this.portalProject.id,
-                    status: 'draft',
+                    status: 'check',
                     take: this.take,
                     page: this.page,
                     orderBy: this.orderBy,
@@ -210,6 +209,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

@@ -3,7 +3,7 @@
         <div class="modalbox-detail-content-header">
             <div class="modalbox-detail-content-header-detail">
                 <div class="modalbox-detail-content-header-detail-title">
-                    Draft
+                    Generated
                 </div>
                 <div class="modalbox-detail-content-header-detail-desc">
                     #{{ data.id }}
@@ -281,7 +281,7 @@
 import vueCustomScrollbar from 'vue-custom-scrollbar'
 import "vue-custom-scrollbar/dist/vueScrollbar.css"
 export default {
-    name: "projectDraftDetail",
+    name: "projectGeneratedDetail",
     props: ['data'],
     components: { vueCustomScrollbar },
     data() {
@@ -372,9 +372,10 @@ export default {
             }
         },
     }
+
 }
 </script>
 
-<style lang="scss">
+<style>
 
 </style>

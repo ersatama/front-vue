@@ -21,8 +21,8 @@ export const mutations = {
 }
 
 export const actions = {
-    async rawbase_getUnverifiedByProjectId({commit}, payload){
-        const res = await this.$repository.rawbase.getUnverifiedByProjectId(payload);
+    async rawbase_getWhere({commit}, payload){
+        const res = await this.$repository.rawbase.getWhere(payload);
         const { status, data } = res
         if (status === 200) {
             return data;
@@ -53,8 +53,24 @@ export const actions = {
         }
         return null;
     },
+    async portalJitReport_getWhere({commit}, payload){
+        const res = await this.$repository.portalJitReport.getWhere(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalTicket_getWhere({commit}, payload){
         const res = await this.$repository.portalTicket.getWhere(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async auditorTask_getWhere({commit}, payload) {
+        const res = await this.$repository.auditorTask.getWhere(payload);
         const { status, data } = res
         if (status === 200) {
             return data;
@@ -79,6 +95,22 @@ export const actions = {
     },
     async portalProjectType_getUnpatchedByIdAndStatus({commit}, payload) {
         const res = await this.$repository.portalProject.getUnpatchedByIdAndStatus(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async scanJob_getByProjectId({commit}, projectId){
+        const res = await this.$repository.scanJob.getByProjectId(projectId);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async scanNeuronJob_getJobsByProjectId({commit}, projectId) {
+        const res = await this.$repository.scanJob.getJobsByProjectId(projectId);
         const { status, data } = res
         if (status === 200) {
             return data;

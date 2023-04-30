@@ -1,9 +1,12 @@
 <template>
     <div class="block-body-content-table-info">
         <div class="block-body-content-table-info-detail">
-            <div class="block-body-content-table-info-detail-title">Found <template v-if="size > 0">{{ size }}</template></div>
+            <div class="block-body-content-table-info-detail-title">
+                Found <span v-if="size > 0">{{ size }}</span>
+                <template v-else>Empty result</template>
+            </div>
         </div>
-        <div class="page-left-header-detail">
+        <div class="page-left-header-detail" v-if="size > min">
             <div class="page-left-header-pagination">
                 <div class="page-left-header-pages page-left-header-prev" v-if="prev" @click="pageBreak--"></div>
                 <div class="page-left-header-pages" :class="{'page-left-header-pages-selected':(page === n)}" v-for="(n,key) in ranges" :key="key" @click="setPage(n)">{{ n }}</div>
@@ -11,9 +14,7 @@
             </div>
             <div class="page-left-header-take">
                 <select @change="setTake($event.target.value)">
-                    <option value="20" :selected="take === 20">20</option>
-                    <option value="50" :selected="take === 50">50</option>
-                    <option value="100" :selected="take === 100">100</option>
+                    <option v-for="(item, key) in list" :key="key" :value="item" :selected="take === item">{{ item }}</option>
                 </select>
             </div>
         </div>
@@ -22,12 +23,14 @@
 
 <script>
 export default {
-    name: "unverifiedPagination",
+    name: "projectPagination",
     props: ['size', 'page', 'take'],
     data() {
         return {
             view: 5,
             pageBreak: 1,
+            list: [20, 50, 100],
+            min: 20
         }
     },
     computed: {
@@ -92,6 +95,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped>
 
 </style>

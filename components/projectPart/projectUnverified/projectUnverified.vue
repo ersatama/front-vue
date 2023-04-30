@@ -10,14 +10,25 @@
             <div class="block-body-right-title">Unverified</div>
             <div class="block-body-right-desc">Project unverified page</div>
             <div class="block-body-right-header-buttons">
+                <template v-if="selected.length > 0">
+                    <button class="block-body-content-add">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-approve"></i> Set as approved
+                    </button>
+                    <button class="block-body-content-filter">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-exchange"></i> Set as FP
+                    </button>
+                    <button class="block-body-content-delete">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-delete"></i> Delete
+                    </button>
+                </template>
                 <button class="block-body-content-filter" @click="filterModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
             </div>
         </div>
         <div class="block-body-content">
             <div class="block-body-content-table">
-                <template v-if="unverified">
-                    <template v-if="unverified.length > 0">
-                        <unverified-detail :size="unverifiedSize" @setTake="setTake" :take="take" :page="page"></unverified-detail>
+                <template v-if="list">
+                    <template v-if="list.length > 0">
+                        <project-pagination :size="size" @setTake="setTake" :take="take" :page="page"></project-pagination>
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr" onselectstart="return false">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
@@ -53,8 +64,7 @@
                             </div>
                         </div>
                         <div class="block-body-content-table-body">
-
-                            <div class="block-body-content-table-tr" v-for="(item, key) in unverified" :key="key" @click.stop="showDetailInfo(item)" @mousedown.stop>
+                            <div class="block-body-content-table-tr" v-for="(item, key) in list" :key="key" @click.stop="showDetailInfo(item)" @mousedown.stop>
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click.stop="check(item.id)">
                                     <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(item.id)}"></div>
                                 </div>
@@ -80,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <unverified-detail :size="unverifiedSize" @setTake="setTake" :take="take" :page="page"></unverified-detail>
+                        <project-pagination :size="size" @setTake="setTake" :take="take" :page="page"></project-pagination>
                     </template>
                     <project-no-data v-else></project-no-data>
                 </template>
@@ -95,29 +105,31 @@ import ModalBox from "../../modal/modalBox.vue";
 import UnverifiedFilter from "../../modal/unverifiedFilter.vue";
 import ProjectPartLoading from "../../modal/projectPartLoading.vue";
 import ProjectNoData from "../projectNoData.vue";
-import RawReportDetail from "../rawReportDetail.vue";
-import UnverifiedDetail from "./unverifiedPagination.vue";
 import ModalDetail from "../../modal/modalDetail.vue";
 import ProjectUnverifiedDetail from "./projectUnverifiedDetail.vue";
-import ProjectSoftVulnDetail from "../projectSoftVuln/projectSoftVulnDetail.vue";
+import ProjectPagination from "../projectPagination.vue";
 
 export default {
     name: "projectUnverified",
     components: {
-        ProjectSoftVulnDetail,
-        ProjectUnverifiedDetail,
+        ProjectPagination,
         ModalDetail,
-        UnverifiedDetail, RawReportDetail, ProjectNoData, ProjectPartLoading, UnverifiedFilter, ModalBox},
-    props: ['portalProject', 'links'],
+        ProjectUnverifiedDetail,
+        ProjectNoData,
+        ProjectPartLoading,
+        UnverifiedFilter,
+        ModalBox
+    },
+    props: ['portalProject'],
     data() {
         return {
             selected: [],
-            orderBy: 'id',
-            orderByType: 'asc',
-            unverified: null,
-            unverifiedSize: 0,
+            list: null,
+            size: 0,
             take: 20,
             page: 1,
+            orderBy: 'id',
+            orderByType: 'asc',
             showDetail: false,
             filterModal: false,
             data: null,
@@ -131,17 +143,17 @@ export default {
     watch: {
         filter() {
             this.page = 1;
-            this.getUnverified();
+            this.getList();
         },
     },
     created() {
-        this.getUnverified();
+        this.getList();
     },
     computed: {
         isAllSelected() {
             let status = true;
-            if (this.unverified) {
-                this.unverified.forEach(item => {
+            if (this.list) {
+                this.list.forEach(item => {
                     if (!this.selected.includes(item.id)) {
                         status = false;
                     }
@@ -171,15 +183,14 @@ export default {
         checkAll() {
             if (this.isAllSelected) {
                 this.selected = [];
-            } else if (this.unverified) {
-                this.selected = this.unverified.map((rawbase) => {
-                    return rawbase.id;
+            } else if (this.list) {
+                this.selected = this.list.map((item) => {
+                    return item.id;
                 });
             }
         },
         setOrderBy(orderBy) {
             if (orderBy === this.orderBy) {
-
                 if (this.orderByType === 'asc') {
                     this.orderByType    =   'desc';
                 } else {
@@ -189,14 +200,14 @@ export default {
                 this.orderBy        =   orderBy;
                 this.orderByType    =   'asc';
             }
-            this.getUnverified();
+            this.getList();
         },
         setFilter(filter) {
             this.filter = filter;
         },
-        async getUnverified() {
+        async getList() {
             let data = {
-                id: this.portalProject.id,
+                project_id: this.portalProject.id,
                 take: this.take,
                 page: this.page,
                 orderBy: this.orderBy,
@@ -208,16 +219,16 @@ export default {
             if (this.filter.status !== 'ALL') {
                 data.status = this.filter.status;
             }
-            let unverified = await this.$store.dispatch('localStorage/rawbase_getUnverifiedByProjectId', data);
-            if (unverified.data) {
-                this.unverified = unverified.data;
-                this.unverifiedSize = unverified.count;
+            let list = await this.$store.dispatch('localStorage/rawbase_getWhere', data);
+            if (list.data) {
+                this.list   =   list.data;
+                this.size   =   list.count;
             }
         },
         setTake(data) {
             this.take = data.take;
             this.page = data.page;
-            this.getUnverified();
+            this.getList();
         },
     }
 }

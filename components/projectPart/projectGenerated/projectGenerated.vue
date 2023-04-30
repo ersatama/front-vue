@@ -1,19 +1,11 @@
 <template>
     <div class="block-body-right" >
         <modal-detail :show="showDetail" @closeModal="showDetail = false">
-            <project-draft-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-draft-detail>
+            <project-generated-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-generated-detail>
         </modal-detail>
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Drafts</div>
-            <div class="block-body-right-desc">Project drafts page</div>
-            <div class="block-body-right-header-buttons" v-if="selected.length > 0">
-                <button class="block-body-content-filter">
-                    <i class="block-body-content-filter-icon block-body-content-filter-icon-move"></i> Move
-                </button>
-                <button class="block-body-content-filter">
-                    <i class="block-body-content-filter-icon block-body-content-filter-icon-add"></i> Copy
-                </button>
-            </div>
+            <div class="block-body-right-title">Generated</div>
+            <div class="block-body-right-desc">Project generated page</div>
         </div>
         <div class="block-body-content">
             <div class="block-body-content-table">
@@ -103,18 +95,15 @@
 import ProjectPartLoading from "../../modal/projectPartLoading.vue";
 import ProjectNoData from "../projectNoData.vue";
 import ModalDetail from "../../modal/modalDetail.vue";
-import ProjectDraftDetail from "./projectDraftDetail.vue";
+import ProjectGeneratedDetail from "./projectGeneratedDetail.vue";
+import ProjectDraftDetail from "../projectDraft/projectDraftDetail.vue";
 import ProjectPagination from "../projectPagination.vue";
 
 export default {
-    name: "projectDraft",
+    name: "projectGenerated",
     components: {
         ProjectPagination,
-        ProjectDraftDetail,
-        ModalDetail,
-        ProjectNoData,
-        ProjectPartLoading
-    },
+        ProjectDraftDetail, ProjectGeneratedDetail, ModalDetail, ProjectNoData, ProjectPartLoading},
     props: ['portalProject'],
     data() {
         return {
@@ -194,7 +183,7 @@ export default {
             if (this.portalProject) {
                 let portalJitReports    =   await this.$store.dispatch('localStorage/portalJitReport_getWhere', {
                     project_id: this.portalProject.id,
-                    status: 'draft',
+                    status: 'generated',
                     take: this.take,
                     page: this.page,
                     orderBy: this.orderBy,

@@ -1,5 +1,11 @@
 <template>
     <div class="block-body-right" >
+        <modal-detail :show="scanJobDetail" @closeModal="scanJobDetail = false">
+            <project-scan-jobs-detail :data="scanJob" v-if="scanJob" @closeModal="scanJobDetail = false"></project-scan-jobs-detail>
+        </modal-detail>
+        <modal-detail :show="neuronScanJobDetail" @closeModal="neuronScanJobDetail = false">
+            <project-neuron-scan-jobs-detail :data="neuronScanJob" v-if="neuronScanJob" @closeModal="neuronScanJobDetail = false"></project-neuron-scan-jobs-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">Scan jobs</div>
             <div class="block-body-right-desc">Project scan jobs</div>
@@ -27,8 +33,7 @@
                                 </div>
                             </div>
                             <div class="block-body-content-table-body">
-
-                                <div class="block-body-content-table-tr" v-for="(job, key) in Object.entries(scanjobs.data)" :key="key">
+                                <div class="block-body-content-table-tr" v-for="(job, key) in Object.entries(scanjobs.data)" :key="key" @click.stop="showScanJobDetailInfo(job)" @mousedown.stop>
                                     <div class="block-body-content-table-item block-body-content-table-item-id">{{ job[1].job_id }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-url">{{ job[1].target_url }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-sitemap-size" style="color: #0b76a6; font-weight: 600;" v-html="parseServices(job[1].services)"></div>
@@ -66,8 +71,8 @@
                         <template v-if="scanjobs.neuronData && scanjobs.neuronData.length > 0">
                             <div class="block-body-content-table-header">
                                 <div class="block-body-content-table-tr">
-                                    <div class="block-body-content-table-item block-body-content-table-item-id-short">ID</div>
-                                    <div class="block-body-content-table-item block-body-content-table-item-id">Neuron targets id</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-id-short-60">ID</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-longstatus">Neuron targets id</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-url">URL</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-engine">Scan Engine & Config</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-status">Command</div>
@@ -81,9 +86,9 @@
                             </div>
                             <div class="block-body-content-table-body">
 
-                                <div class="block-body-content-table-tr" v-for="(neuronJob, key) in scanjobs.neuronData" :key="key">
-                                    <div class="block-body-content-table-item block-body-content-table-item-id-short">{{ neuronJob.id }}</div>
-                                    <div class="block-body-content-table-item block-body-content-table-item-id">{{ neuronJob.neuron_targets_id }}</div>
+                                <div class="block-body-content-table-tr" v-for="(neuronJob, key) in scanjobs.neuronData" :key="key" @click.stop="showNeuronScanJobDetailInfo(neuronJob)" @mousedown.stop>
+                                    <div class="block-body-content-table-item block-body-content-table-item-id-short-60">{{ neuronJob.id }}</div>
+                                    <div class="block-body-content-table-item block-body-content-table-item-longstatus">{{ neuronJob.neuron_targets_id }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-url">{{ neuronJob.target_url }}</div>
                                     <div class="block-body-content-table-item block-body-content-table-item-engine">
                                         <project-scan-jobs-services :services="JSON.parse(neuronJob.services_json)"></project-scan-jobs-services>
@@ -121,25 +126,48 @@
 
 <script>
 import ProjectScanJobsServices from "./projectScanJobsServices.vue";
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectScanJobsDetail from "./projectScanJobsDetail.vue";
+import ProjectRawbaseDetail from "../projectRawbase/projectRawbaseDetail.vue";
+import ProjectNeuronScanJobsDetail from "./projectNeuronScanJobsDetail.vue";
 
 export default {
   name: "projectScanJobs",
-  components: {ProjectNoData, ProjectPartLoading, ProjectScanJobsServices},
+  components: {
+      ProjectNeuronScanJobsDetail,
+      ProjectRawbaseDetail,
+      ProjectScanJobsDetail, ModalDetail, ProjectNoData, ProjectPartLoading, ProjectScanJobsServices},
   props: ['portalProject'],
   data() {
     return {
-      scanjobs: null
+        scanjobs: null,
+        scanJob: null,
+        scanJobDetail: false,
+        neuronScanJob: null,
+        neuronScanJobDetail: false,
     }
   },
   created() {
     this.getScanjobs();
   },
   methods: {
+      showScanJobDetailInfo(data) {
+          this.scanJob          =   data;
+          this.scanJobDetail    =   true;
+      },
+      showNeuronScanJobDetailInfo(data) {
+          this.neuronScanJob        =   data;
+          this.neuronScanJobDetail  =   true;
+      },
     async getScanjobs() {
       if (this.portalProject) {
-        this.scanjobs = await this.$store.dispatch('localStorage/portalProjectType_getScanjobsById', this.portalProject.id);
+          if (this.portalProject.type !== 3010) {
+              this.scanjobs = await this.$store.dispatch('localStorage/scanJob_getByProjectId', this.portalProject.id);
+          } else {
+              this.scanjobs = await this.$store.dispatch('localStorage/scanNeuronJob_getJobsByProjectId', this.portalProject.id);
+          }
       }
     },
     parseServices(services) {

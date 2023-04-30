@@ -114,20 +114,14 @@
 <script>
 import ProjectPartLoading from "../../modal/projectPartLoading.vue";
 import ProjectNoData from "../projectNoData.vue";
-import PaginationDetail from "../paginationDetail.vue";
-import UnverifiedDetail from "../projectUnverified/unverifiedPagination.vue";
 import ModalDetail from "../../modal/modalDetail.vue";
 import ProjectTicketsDetail from "./projectTicketsDetail.vue";
-import ProjectUnverifiedDetail from "../projectUnverified/projectUnverifiedDetail.vue";
 
 export default {
     name: "projectTickets",
     components: {
-        ProjectUnverifiedDetail,
         ProjectTicketsDetail,
         ModalDetail,
-        UnverifiedDetail,
-        PaginationDetail,
         ProjectNoData,
         ProjectPartLoading
     },
@@ -146,14 +140,27 @@ export default {
         }
     },
     created() {
-        this.getTickets();
+        this.getList();
     },
     methods: {
+        setOrderBy(orderBy) {
+            if (orderBy === this.orderBy) {
+                if (this.orderByType === 'asc') {
+                    this.orderByType    =   'desc';
+                } else {
+                    this.orderByType    =   'asc';
+                }
+            } else {
+                this.orderBy        =   orderBy;
+                this.orderByType    =   'asc';
+            }
+            this.getList();
+        },
         showDetailInfo(data) {
             this.data       =   data;
             this.showDetail =   true;
         },
-        async getTickets() {
+        async getList() {
             let data = {
                 project_id: this.portalProject.id,
                 jit: this.portalProject.jit,
@@ -182,7 +189,7 @@ export default {
         setTake(data) {
             this.take = data.take;
             this.page = data.page;
-            this.getTickets();
+            this.getList();
         },
     }
 }

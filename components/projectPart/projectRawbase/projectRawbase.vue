@@ -1,23 +1,35 @@
 <template>
     <div class="block-body-right" >
+        <modal-box v-if="portalProject" :modal="filterModal" @closeModal="filterModal = false">
+            <rawbase-filter @setFilter="setFilter" @closeModal="filterModal = false"></rawbase-filter>
+        </modal-box>
+        <modal-detail :show="showDetail" @closeModal="showDetail = false">
+            <project-rawbase-detail :data="data" v-if="data" @closeModal="showDetail = false"></project-rawbase-detail>
+        </modal-detail>
         <div class="block-body-right-header">
             <div class="block-body-right-title">All rawbase</div>
             <div class="block-body-right-desc">Project tasks</div>
             <div class="block-body-right-header-buttons">
-                <button class="block-body-content-filter" @click="tableSettingsModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
+                <template v-if="selected.length > 0">
+                    <button class="block-body-content-filter">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-move"></i> Move
+                    </button>
+                    <button class="block-body-content-filter">
+                        <i class="block-body-content-filter-icon block-body-content-filter-icon-add"></i> Copy
+                    </button>
+                </template>
+                <button class="block-body-content-filter" @click="filterModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
             </div>
         </div>
         <div class="block-body-content">
             <div class="block-body-content-table">
-                <modal-box :modal="tableSettingsModal" @closeModal="tableSettingsModal = false">
-                    <rawbase-filter @setFilter="setFilter" @closeModal="tableSettingsModal = false"></rawbase-filter>
-                </modal-box>
-                <template v-if="rawbases">
-                    <template v-if="rawbases.length > 0">
+                <template v-if="list">
+                    <template v-if="list.length > 0">
+                        <project-pagination :size="size" @setTake="setTake" :take="take" :page="page"></project-pagination>
                         <div class="block-body-content-table-header">
                             <div class="block-body-content-table-tr" onselectstart="return false">
                                 <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkRawbaseAll()"></div>
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':isAllSelected}" @click="checkAll()"></div>
                                 </div>
                                 <div class="block-body-content-table-item block-body-content-table-item-id" @click="setOrderBy('id')">
                                     ID <div class="block-body-content-table-item-down" :class="{'block-body-content-table-item-down-disabled':(orderBy !== 'id'), 'block-body-content-table-item-down-up':(orderBy === 'id' && orderByType === 'desc')}"></div>
@@ -49,19 +61,18 @@
                             </div>
                         </div>
                         <div class="block-body-content-table-body">
-
-                            <div class="block-body-content-table-tr" v-for="(rawbase, key) in rawbases" :key="key" @click="checkRawbase(rawbase.id)">
-                                <div class="block-body-content-table-item block-body-content-table-item-checkbox">
-                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(rawbase.id)}"></div>
+                            <div class="block-body-content-table-tr" v-for="(item, key) in list" :key="key" @click.stop="showDetailInfo(item)" @mousedown.stop>
+                                <div class="block-body-content-table-item block-body-content-table-item-checkbox" @click.stop="check(item.id)">
+                                    <div class="block-body-content-table-item-checkbox-input" :class="{'block-body-content-table-item-checkbox-input-checked':selected.includes(item.id)}"></div>
                                 </div>
-                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ rawbase.id }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ rawbase.display_name }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-url">{{ rawbase.active_path.replace('%', '') }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-service">{{ rawbase.display_params }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ rawbase.dt }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ rawbase.rawbase_type }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-rawbase">{{ rawbase.service }}</div>
-                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ rawbase.status }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-id">{{ item.id }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-text">{{ item.display_name }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-url">{{ item.active_path.replace('%', '') }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-service">{{ item.display_param }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-date">{{ item.dt }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ item.rawbase_type }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-rawbase">{{ item.service }}</div>
+                                <div class="block-body-content-table-item block-body-content-table-item-status">{{ item.status }}</div>
                                 <div class="block-body-content-table-item block-body-content-table-item-field-option">
                                     <div class="block-body-content-table-item-option">
                                         <div class="block-body-content-table-item-option-select">
@@ -75,8 +86,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        <project-pagination :size="size" @setTake="setTake" :take="take" :page="page"></project-pagination>
                     </template>
                     <project-no-data v-else></project-no-data>
                 </template>
@@ -87,23 +98,42 @@
 </template>
 
 <script>
-import ModalBox from "../modal/modalBox.vue";
-import RawbaseFilter from "../modal/rawbaseFilter.vue";
-import RawReportFilter from "../modal/rawReportFilter.vue";
-import ProjectPartLoading from "../modal/projectPartLoading.vue";
-import ProjectNoData from "./projectNoData.vue";
+import ModalBox from "../../modal/modalBox.vue";
+import RawbaseFilter from "../../modal/rawbaseFilter.vue";
+import RawReportFilter from "../../modal/rawReportFilter.vue";
+import ProjectPartLoading from "../../modal/projectPartLoading.vue";
+import ProjectNoData from "../projectNoData.vue";
+import ModalDetail from "../../modal/modalDetail.vue";
+import ProjectRawbaseDetail from "./projectRawbaseDetail.vue";
+import ProjectUnverifiedDetail from "../projectUnverified/projectUnverifiedDetail.vue";
+import ProjectPagination from "../projectPagination.vue";
 
 export default {
     name: "projectRawbase",
-    components: {ProjectNoData, ProjectPartLoading, RawReportFilter, RawbaseFilter, ModalBox},
+    components: {
+        ProjectPagination,
+        ProjectUnverifiedDetail,
+        ProjectRawbaseDetail,
+        ModalDetail,
+        ProjectNoData,
+        ProjectPartLoading,
+        RawReportFilter,
+        RawbaseFilter,
+        ModalBox
+    },
     props: ['portalProject'],
     data() {
         return {
-            rawbases: null,
             selected: [],
+            list: null,
+            size: 0,
+            take: 20,
+            page: 1,
             orderBy: 'id',
             orderByType: 'asc',
-            tableSettingsModal: false,
+            showDetail: false,
+            filterModal: false,
+            data: null,
             filter: {
                 status: "ALL",
                 type: "ALL",
@@ -112,19 +142,24 @@ export default {
         }
     },
     watch: {
-
+        filter() {
+            this.page = 1;
+            this.getList();
+        },
     },
     created() {
-        this.getRawbase();
+        this.getList();
     },
     computed: {
         isAllSelected() {
             let status = true;
-            this.rawbases.forEach(rawbase => {
-                if (!this.selected.includes(rawbase.id)) {
-                    status = false;
-                }
-            });
+            if (this.list) {
+                this.list.forEach(item => {
+                    if (!this.selected.includes(item.id)) {
+                        status = false;
+                    }
+                });
+            }
             if (this.selected.length === 0) {
                 status  =   false;
             }
@@ -132,34 +167,11 @@ export default {
         }
     },
     methods: {
-        setOrderBy(orderBy) {
-            if (orderBy === this.orderBy) {
-
-                if (this.orderByType === 'asc') {
-                    this.orderByType    =   'desc';
-                } else {
-                    this.orderByType    =   'asc';
-                }
-            } else {
-                this.orderBy        =   orderBy;
-                this.orderByType    =   'asc';
-            }
-            this.getRawbase();
+        showDetailInfo(data) {
+            this.data       =   data;
+            this.showDetail =   true;
         },
-        setFilter(filter) {
-            this.filter = filter;
-            this.getRawbase();
-        },
-        checkRawbaseAll() {
-            if (this.isAllSelected) {
-                this.selected = [];
-            } else {
-                this.selected = this.rawbases.map((rawbase) => {
-                    return rawbase.id;
-                });
-            }
-        },
-        checkRawbase(id) {
+        check(id) {
             if (this.selected.includes(id)) {
                 let index = this.selected.indexOf(id);
                 if (index !== -1) {
@@ -169,25 +181,60 @@ export default {
                 this.selected.push(id);
             }
         },
-        async getRawbase() {
-            if (this.portalProject) {
-                let data    =   {
-                    id: this.portalProject.id,
-                    type: this.filter.type,
-                    orderBy: this.orderBy,
-                    orderByType: this.orderByType
-                };
-                if (this.filter.status && this.filter.status !== 'ALL') {
-                    data.status =   this.filter.status;
-                }
-                let rawbases = await this.$store.dispatch('localStorage/portalProjectType_getRawbaseById', data);
-                this.rawbases = rawbases.data;
+        checkAll() {
+            if (this.isAllSelected) {
+                this.selected = [];
+            } else if (this.list) {
+                this.selected = this.list.map((item) => {
+                    return item.id;
+                });
             }
-        }
+        },
+        setOrderBy(orderBy) {
+            if (orderBy === this.orderBy) {
+                if (this.orderByType === 'asc') {
+                    this.orderByType    =   'desc';
+                } else {
+                    this.orderByType    =   'asc';
+                }
+            } else {
+                this.orderBy        =   orderBy;
+                this.orderByType    =   'asc';
+            }
+            this.getList();
+        },
+        setFilter(filter) {
+            this.filter = filter;
+        },
+        async getList() {
+            let data = {
+                project_id: this.portalProject.id,
+                take: this.take,
+                page: this.page,
+                orderBy: this.orderBy,
+                orderByType: this.orderByType
+            };
+            if (this.filter.type !== 'ALL') {
+                data.type = this.filter.type;
+            }
+            if (this.filter.status !== 'ALL') {
+                data.status = this.filter.status;
+            }
+            let list = await this.$store.dispatch('localStorage/rawbase_getWhere', data);
+            if (list.data) {
+                this.list   =   list.data;
+                this.size   =   list.count;
+            }
+        },
+        setTake(data) {
+            this.take = data.take;
+            this.page = data.page;
+            this.getList();
+        },
     }
 }
 </script>
 
-<style lang="scss">
+<style>
 
 </style>
