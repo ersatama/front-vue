@@ -130,8 +130,6 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
-                      <div class="item-body-left-table-body-items">
                           <div class="item-body-left-table-body-item">
                               <div class="item-body-left-table-body-icon item-body-left-table-body-icon-project"></div>
                               <div class="item-body-left-table-body-detail">
@@ -142,6 +140,8 @@
                                   </div>
                               </div>
                           </div>
+                      </div>
+                      <div class="item-body-left-table-body-items">
                           <div class="item-body-left-table-body-item">
                               <div class="item-body-left-table-body-icon item-body-left-table-body-icon-login"></div>
                               <div class="item-body-left-table-body-detail">
@@ -162,8 +162,6 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
-                      <div class="item-body-left-table-body-items">
                           <div class="item-body-left-table-body-item">
                               <div class="item-body-left-table-body-icon item-body-left-table-body-icon-user"></div>
                               <div class="item-body-left-table-body-detail">
@@ -186,6 +184,8 @@
                                   </div>
                               </div>
                           </div>
+                      </div>
+                      <div class="item-body-left-table-body-items">
                           <div class="item-body-left-table-body-item">
                               <div class="item-body-left-table-body-icon item-body-left-table-body-icon-position"></div>
                               <div class="item-body-left-table-body-detail">
@@ -196,8 +196,6 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
-                      <div class="item-body-left-table-body-items">
                           <div class="item-body-left-table-body-item">
                               <div class="item-body-left-table-body-icon item-body-left-table-body-icon-email"></div>
                               <div class="item-body-left-table-body-detail">
