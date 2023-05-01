@@ -108,7 +108,7 @@
 <script>
 import ModalBox from "../../modal/modalBox.vue";
 import RawReportTableSettings from "../../modal/rawReportTableSettings.vue";
-import RawReportDetail from "../rawReportDetail.vue";
+import RawReportDetail from "./projectRawReportPagination.vue";
 import RawReportFilter from "../../modal/rawReportFilter.vue";
 import ProjectPartLoading from "../../modal/projectPartLoading.vue";
 import ProjectNoData from "../projectNoData.vue";

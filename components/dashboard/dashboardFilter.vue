@@ -1,7 +1,7 @@
 <template>
   <div class="filter bg-white">
     <div class="filter-title d-flex align-items-center">
-      Filters <div class="filter-reset" @click="resetFilter"></div>
+      Filter <div class="filter-reset" @click="resetFilter"></div>
     </div>
     <div class="filter-options">
       <div class="filter-item">
@@ -147,7 +147,7 @@
           </div>
         </div>
       </div>
-      <button class="filter-item-btn btn btn-primary text-white" @click="searchPortalProjects">Поиск</button>
+      <button class="filter-item-btn btn btn-primary text-white" @click="searchPortalProjects">Search</button>
     </div>
   </div>
 </template>
@@ -295,106 +295,5 @@ export default {
 </script>
 
 <style lang="scss">
-.filter {
-  width: 350px;
-  min-width: 350px;
-  max-width: 350px;
-  padding: 25px;
-  border-radius: 10px;
-  height: fit-content;
-  &-reset {
-    background: url(/images/icons/undo.png) no-repeat center;
-    width: 24px;
-    height: 24px;
-    margin-left: auto;
-    cursor: pointer;
-    opacity: .5;
-    &:hover {
-      opacity: 1;
-    }
-  }
-  &-title {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  &-options {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    gap: 10px;
-  }
-  &-item {
-    width: 100%;
-    &-btn {
-      font-size: 14px;
-      font-weight: bold;
-      height: 40px;
-      margin: 10px 0 0 0;
-      border-radius: 5px;
-    }
-    &-double {
-      display: flex;
-      gap: 15px;
-    }
-    position: relative;
-    &-title {
-      font-size: 12px;
-      font-weight: bold;
-      pointer-events: none;
-      margin-bottom: 5px;
-    }
-    &-input {
-      border-radius: 5px;
-      height: 36px;
-      width: 100%;
-      background: #F1F4F8;
-      & > input, & > select {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: transparent;
-        padding: 0 10px 0 10px;
-        font-size: 12px;
-        outline: none;
-      }
-      &-date {
-        border: none;
-        background: transparent;
-        width: 142px;
-        max-width: 142px;
-        padding: 0 10px 0 10px;
-        font-size: 12px;
-        outline: none;
-        height: 36px;
-      }
-    }
-  }
-}
-.vdp-datepicker__calendar {
-  background: #fff;
-  width: 300px;
-  border-radius: 5px;
-  border: none !important;
-  box-shadow: 0 0 3px 2px #f1f4f8;
-  padding: 10px;
-  right: 0;
-  & > div {
-    & > span {
-      font-size: 12px;
-      font-weight: bold;
-      color: #6c757d;
-    }
-  }
-}
-.today {
-  color: #0b76a6 !important;
-  background: #c4e0ed !important;
-  border: 1px solid #0b76a6 !important;
-}
-.vdp-datepicker__clear-button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translate(0,-50%);
-}
+
 </style>

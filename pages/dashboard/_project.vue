@@ -50,7 +50,7 @@ import ProjectUnpatched from "../../components/projectPart/projectUnpatched/proj
 import ProjectTasks from "../../components/projectPart/projectTasks/projectTasks.vue";
 import ProjectRawbase from "../../components/projectPart/projectRawbase/projectRawbase.vue";
 import ProjectDetails from "../../components/projectPart/projectDetails.vue";
-import ProjectAlerts from "../../components/projectPart/projectAlerts.vue";
+import ProjectAlerts from "../../components/projectPart/projectAlerts/projectAlerts.vue";
 import ProjectSidebar from "../../components/projectPart/projectSidebar.vue";
 import ProjectLoading from "../../components/modal/projectLoading.vue";
 import ProjectBlacklist from "../../components/projectPart/projectBlacklist/projectBlacklist.vue";

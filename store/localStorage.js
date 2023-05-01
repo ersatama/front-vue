@@ -77,30 +77,6 @@ export const actions = {
         }
         return null;
     },
-    async portalProjectType_getRawbaseById({commit}, payload){
-        const res = await this.$repository.portalProject.getRawbaseById(payload);
-        const { status, data } = res
-        if (status === 200) {
-            return data;
-        }
-        return null;
-    },
-    async portalProject_tasksByIdAndAuditorId({commit}, payload) {
-        const res = await this.$repository.portalProject.getTasksByIdAndAuditorId(payload);
-        const { status, data } = res
-        if (status === 200) {
-            return data;
-        }
-        return null;
-    },
-    async portalProjectType_getUnpatchedByIdAndStatus({commit}, payload) {
-        const res = await this.$repository.portalProject.getUnpatchedByIdAndStatus(payload);
-        const { status, data } = res
-        if (status === 200) {
-            return data;
-        }
-        return null;
-    },
     async scanJob_getByProjectId({commit}, projectId){
         const res = await this.$repository.scanJob.getByProjectId(projectId);
         const { status, data } = res
@@ -111,14 +87,6 @@ export const actions = {
     },
     async scanNeuronJob_getJobsByProjectId({commit}, projectId) {
         const res = await this.$repository.scanJob.getJobsByProjectId(projectId);
-        const { status, data } = res
-        if (status === 200) {
-            return data;
-        }
-        return null;
-    },
-    async portalProjectType_getScanjobsById({commit}, id) {
-        const res = await this.$repository.portalProject.getScanjobsById(id);
         const { status, data } = res
         if (status === 200) {
             return data;
@@ -167,14 +135,6 @@ export const actions = {
             count: 0,
             data: []
         };
-    },
-    async user_firstById({commit}, id) {
-        const res = await this.$repository.user.firstById(id);
-        const { status, data } = res
-        if (status === 200) {
-            return data.data;
-        }
-        return null;
     },
     async user_auth({commit}, info) {
         const res = await this.$repository.user.auth(info);

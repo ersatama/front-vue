@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: "rawReportDetail",
+  name: "projectRawReportPagination",
   props: ['links', 'size', 'page', 'take'],
   data() {
     return {

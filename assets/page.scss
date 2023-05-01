@@ -10,32 +10,33 @@
     &-items {
       flex-grow: 1;
       & > div:first-child {
-        padding-top: 25px;
+        padding-top: 15px;
       }
       & > div:last-child {
-        padding-bottom: 25px;
+        padding-bottom: 15px;
       }
       &:first-child {
         & > div {
-          padding-left: 25px;
+          padding-left: 15px;
         }
       }
       &:last-child {
         & > div {
-          padding-right: 25px;
+          padding-right: 15px;
         }
       }
     }
     &-item {
       border-right: 1px solid #F1F4F8;
       border-bottom: 1px solid #F1F4F8;
-      padding: 10px;
-      gap: 10px;
+      padding: 5px 15px 5px 15px;
+      gap: 5px;
       &-icon {
         width: 32px;
         height: 32px;
         background: no-repeat center;
         background-size: contain;
+        transform: scale(.7);
         &-warning {
           background-image: url("/images/icons/warning.png");
         }
@@ -70,7 +71,8 @@
         flex-grow: 1;
       }
       &-title {
-        font-size: 14px;
+        font-size: 12px;
+        font-weight: 600;
       }
       &:last-child {
         border-bottom: none;
@@ -80,12 +82,12 @@
         gap: 10px;
         display: flex;
         & > div {
-          padding: 3px 10px 3px 10px;
-          border-radius: 5px;
+          padding: 2px 8px 2px 8px;
+          border-radius: 30px;
           display: flex;
           align-items: center;
-          font-size: 15px;
-          font-weight: bold;
+          font-size: 12px;
+          font-weight: 600;
         }
         &-danger {
           color: #dc3545;
@@ -121,13 +123,15 @@
       &-title {
         display: flex;
         align-items: center;
+        font-size: 12px;
+        text-transform: uppercase;
         &-success {
-          padding: 3px 10px 3px 10px;
-          border-radius: 5px;
+          padding: 2px 8px 2px 8px;
+          border-radius: 30px;
           display: flex;
           align-items: center;
-          font-size: 15px;
-          font-weight: bold;
+          font-size: 12px;
+          font-weight: 600;
           color: #28a745;
           background: #c8f1d2;
           margin-left: 15px;
@@ -143,7 +147,7 @@
         display: flex;
         gap: 10px;
         font-size: 12px;
-        font-weight: bold;
+        font-weight: 600;
       }
       &-pages {
         background: #F1F4F8;
@@ -169,6 +173,8 @@
           height: 36px;
           border-radius: 5px;
           font-size: 12px;
+          color: #6c757d;
+          font-weight: 600;
         }
       }
     }
