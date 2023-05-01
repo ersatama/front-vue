@@ -2,7 +2,7 @@
   width: 350px;
   min-width: 350px;
   max-width: 350px;
-  padding: 25px;
+  padding: 20px;
   border-radius: 10px;
   height: fit-content;
   &-reset {
@@ -23,8 +23,8 @@
   &-options {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    gap: 10px;
+    margin-top: 5px;
+    gap: 5px;
   }
   &-item {
     width: 100%;

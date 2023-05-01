@@ -139,7 +139,7 @@ a {
         width: 100%;
         font-size: 10px;
         &-info {
-          padding: 25px;
+          padding: 20px;
           border-bottom: 1px solid #F1F4F8;
           display: flex;
           height: 70px;
@@ -159,7 +159,7 @@ a {
         &-header, &-body {
           & > div {
             display: flex;
-            padding: 25px;
+            padding: 20px;
             gap: 15px;
           }
         }
@@ -796,7 +796,7 @@ a {
         display: flex;
         flex-direction: column;
         gap: 15px;
-        padding: 25px;
+        padding: 20px;
         width: 100%;
         &-list {
           display: flex;
@@ -816,7 +816,7 @@ a {
         display: flex;
         flex-direction: column;
         gap: 15px;
-        padding: 25px;
+        padding: 20px;
         border-right: 1px solid #F1F4F8;
         width: 450px;
         &-switcher {
@@ -904,7 +904,7 @@ a {
       overflow: hidden;
       &-item {
         text-decoration: none !important;
-        padding: 10px 15px 10px 25px;
+        padding: 10px 15px 10px 20px;
         border-bottom: 1px solid #F1F4F8;
         font-size: 12px;
         display: flex;
@@ -1073,11 +1073,11 @@ a {
       &-header {
         display: flex;
         flex-direction: column;
-        padding: 25px;
+        padding: 20px;
         position: relative;
         &-buttons {
           position: absolute;
-          right: 25px;
+          right: 20px;
           top: 50%;
           transform: translate(0, -50%);
           display: flex;

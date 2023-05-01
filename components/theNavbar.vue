@@ -54,8 +54,8 @@ export default {
 <style lang="scss">
   .nav {
     width: 100%;
-    gap: 25px;
-    padding: 25px;
+    gap: 20px;
+    padding: 20px;
     border-radius: 10px;
     &-main {
       padding: 25px;
