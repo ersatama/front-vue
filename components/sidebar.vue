@@ -90,7 +90,7 @@ export default {
 .list-group-item {
   width: 100%;
   font-size: 12px;
-  padding: 10px 15px 10px 25px;
+  padding: 10px 15px 10px 20px;
   border-bottom: 1px solid #F1F4F8;
   display: flex;
   gap: 10px;
