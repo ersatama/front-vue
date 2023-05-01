@@ -58,7 +58,7 @@ export default {
     padding: 20px;
     border-radius: 10px;
     &-main {
-      padding: 25px;
+      padding: 20px;
     }
     &-title {
       color: #212529;

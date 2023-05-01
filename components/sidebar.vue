@@ -70,7 +70,7 @@ export default {
 }
 
 #sidebar-wrapper {
-  margin: 25px 0 25px 25px !important;
+  margin: 20px 0 20px 20px !important;
   border-radius: 10px;
   transition: margin 0.25s ease-out;
   height: max-content;

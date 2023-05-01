@@ -42,7 +42,7 @@ export default {
 @import "assets/filter.scss";
 @import "assets/item.scss";
 .admin {
-  margin: 0 25px 25px 25px;
+  margin: 0 20px 20px 20px;
 }
 .bg {
     background: url('/images/photos/bg.png');

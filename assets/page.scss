@@ -1,12 +1,12 @@
 .page {
-  gap: 25px;
+  gap: 20px;
   max-width: 1500px;
   margin: 0 auto 0 auto;
   &-info {
     display: flex;
     background: #fff;
     border-radius: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     &-items {
       flex-grow: 1;
       & > div:first-child {
@@ -105,8 +105,8 @@
     &-list {
       display: flex;
       flex-direction: column;
-      gap: 25px;
-      margin: 25px 0 0 0;
+      gap: 20px;
+      margin: 20px 0 0 0;
     }
     &-header {
       background: #fff;
