@@ -1,10 +1,17 @@
 .item {
-  min-height: 150px;
   background: #f8fbff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   position: relative;
+  &-hide {
+    & > .item-header {
+      border-radius: 10px;
+    }
+    & > .item-body {
+      display: none;
+    }
+  }
   &-alerts {
     display: flex;
     font-size: 10px;
@@ -13,10 +20,10 @@
   &-alert {
     border-radius: 20px;
     background: #f9d3d7;
-    padding: 3px 7px 3px 7px;
-    font-weight: 500;
+    padding: 2px 8px 2px 8px;
     text-transform: uppercase;
     color: #dc3545;
+    font-size: 10px;
   }
   &-header {
     display: flex;
@@ -25,6 +32,25 @@
     padding: 20px;
     background: #fff;
     border-radius: 10px 10px 0 0;
+    gap: 15px;
+    &-icon {
+      width: 40px;
+      max-width: 40px;
+      min-width: 40px;
+      height: 40px;
+      max-height: 40px;
+      min-height: 40px;
+      border-radius: 10px;
+      background: #f8fbff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & > div {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0b76a6;
+      }
+    }
     &-title {
       display: flex;
       flex-direction: column;
@@ -40,13 +66,22 @@
       }
       &-desc {
         font-size: 12px;
+        font-weight: 600;
+      }
+      &-url {
+        color: #d18700 !important;
+        text-transform: none;
+      }
+      &-auditor {
+        color: #28a745 !important;
+        text-transform: none;
       }
     }
     &-detail {
       margin-left: auto;
       display: flex;
-      gap: 10px;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-end;
     }
     &-buttons {
       display: flex;
@@ -63,9 +98,9 @@
       display: flex;
       gap: 5px;
       font-size: 10px;
-      padding: 5px;
       font-weight: 600;
       text-transform: uppercase;
+      align-items: center;
       &-item {
         padding: 7px 14px 7px 14px;
         color: #6c757d;
@@ -87,6 +122,34 @@
           &:nth-child(4) {
             color: #d18700;
             background: #ffe7bc;
+          }
+        }
+        &-hide {
+          width: 30px;
+          height: 30px;
+          position: relative;
+          cursor: pointer;
+          margin-left: auto;
+          transform: rotate(270deg);
+          transition: all .05s linear;
+          &-show {
+            transform: rotate(90deg);
+          }
+          &:before, &:after {
+            content: '';
+            position: absolute;
+            background: #d0d5dd;
+            width: 3px;
+            height: 9px;
+            border-radius: 3px;
+          }
+          &:before {
+            transform: rotate(45deg);
+            margin: 8px 0 0 12px;
+          }
+          &:after {
+            transform: rotate(-45deg);
+            margin: 13px 0 0 12px;
           }
         }
       }

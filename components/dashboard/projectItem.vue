@@ -1,6 +1,9 @@
 <template>
-  <div class="item" v-if="portalProject">
+  <div class="item" v-if="portalProject" :class="{'item-hide':!show}">
     <div class="item-header">
+        <div class="item-header-icon">
+            <div>{{portalProject.status}}</div>
+        </div>
       <div class="item-header-title">
         <NuxtLink :to="'/dashboard/'+portalProject.id">
           <div class="item-header-title-text" v-if="portalProject.portalProjectType">
@@ -12,16 +15,15 @@
               <span>#{{portalProject.id}}</span>
           </div>
         </NuxtLink>
-        <div class="item-header-title-desc text-muted">
-            <div class="item-alerts" v-if="portalProject.alerts">
-                <div class="item-alert" v-for="(alert,key) in portalProject.alerts" :key="key">{{ alert }}</div>
-            </div>
+        <div class="item-header-title-desc">
+            <a v-if="portalProject.url" :href="portalProject.url" class="item-header-title-url" target="_blank">{{portalProject.url}}</a>
+            <span class="item-header-title-auditor">{{portalProject.scanby}}</span>
         </div>
       </div>
       <div class="item-header-detail">
-        <div class="item-header-buttons">
-          <button class="item-header-button bg bg-danger text-white">Report</button>
-        </div>
+          <div class="item-alerts" v-if="portalProject.alerts">
+              <div class="item-alert" v-for="(alert,key) in portalProject.alerts" :key="key">{{ alert }}</div>
+          </div>
         <div class="item-header-switcher" v-if="portalProject.portalJitReport">
             <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 3)}" @click="table = 3">
                 Details
@@ -34,6 +36,9 @@
             </div>
             <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 2)}" @click="table = 2">
               Drafts <div class="item-header-switcher-item-count" v-if="portalProject.portalJitReport.drafts > 0">{{ portalProject.portalJitReport.drafts }}</div>
+            </div>
+            <div class="item-header-switcher-item" style="background: transparent;" @click="show = !show">
+                <div class="item-header-switcher-item-hide" :class="{'item-header-switcher-item-hide-show':show}"></div>
             </div>
         </div>
       </div>
@@ -194,7 +199,8 @@ export default {
   data() {
     return {
       detail: 1,
-      table: 3
+      table: 3,
+        show: false,
     }
   },
   methods: {

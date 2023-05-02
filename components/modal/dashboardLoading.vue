@@ -19,11 +19,6 @@
                           <div class="block-loading-item-field"></div>
                       </div>
                   </div>
-                  <div>
-                      <div class="block-loading-item-field"></div>
-                      <div class="block-loading-item-field"></div>
-                      <div class="block-loading-item-field"></div>
-                  </div>
               </div>
               <div class="block-dashboard-loading-left-item">
                   <div class="block-dashboard-loading-left-item-header">
@@ -34,11 +29,6 @@
                           <div class="block-loading-item-field"></div>
                       </div>
                   </div>
-                  <div>
-                      <div class="block-loading-item-field"></div>
-                      <div class="block-loading-item-field"></div>
-                      <div class="block-loading-item-field"></div>
-                  </div>
               </div>
               <div class="block-dashboard-loading-left-item">
                   <div class="block-dashboard-loading-left-item-header">
@@ -48,11 +38,6 @@
                       <div class="block-dashboard-loading-left-item-header-right">
                           <div class="block-loading-item-field"></div>
                       </div>
-                  </div>
-                  <div>
-                      <div class="block-loading-item-field"></div>
-                      <div class="block-loading-item-field"></div>
-                      <div class="block-loading-item-field"></div>
                   </div>
               </div>
           </div>

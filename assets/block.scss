@@ -48,12 +48,11 @@ a {
           width: 100%;
           background: #f8fbff;
           border-radius: 10px;
-          height: 235px;
           &-header {
             align-items: center;
             background: #fff;
             border-bottom: 1px solid #f1f4f8;
-            border-radius: 10px 10px 0 0;
+            border-radius: 10px;
             display: flex;
             padding: 0 20px 0 20px;
             height: 85px;
@@ -63,15 +62,6 @@ a {
             &-right {
               width: 350px;
               margin-left: auto;
-            }
-          }
-          & > div:last-child {
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            gap: 10px;
-            & > div {
-              height: 30px;
             }
           }
           &-body {
