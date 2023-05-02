@@ -57,7 +57,17 @@ export default {
             list: null,
             orderBy: 'id',
             orderByType: 'asc',
-            status: 'draft'
+            status: 'draft',
+            page: 1
+        }
+    },
+    computed: {
+        take() {
+            let take = 100;
+            if (this.portalProject && this.portalJitReport.drafts) {
+                take    =   this.portalJitReport.drafts;
+            }
+            return take;
         }
     },
     created() {
@@ -79,7 +89,9 @@ export default {
                     project_id: this.portalProject.id,
                     status: this.status,
                     orderBy: this.orderBy,
-                    orderByType: this.orderByType
+                    orderByType: this.orderByType,
+                    page: this.page,
+                    take: this.take
                 });
                 if (list.data) {
                     this.list = list.data;
