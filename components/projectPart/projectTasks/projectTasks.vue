@@ -193,7 +193,7 @@ export default {
             if (this.portalProject && this.user) {
 
                 let list = await this.$store.dispatch('localStorage/auditorTask_getWhere', {
-                    project_id: 3896348,//this.portalProject.id,
+                    project_id: this.portalProject.id,
                     auditor_id: this.user.auditor_id,
                     user: this.user.auditor.user,
                     orderBy: 'task_dt',
