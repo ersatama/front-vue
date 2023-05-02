@@ -8,7 +8,7 @@
         <NuxtLink :to="'/dashboard/'+portalProject.id">
           <div class="item-header-title-text" v-if="portalProject.portalProjectType">
               <span>#{{portalProject.id}}</span>
-              <a v-if="portalProject.url" :href="portalProject.url" class="item-header-title-url" target="_blank">{{portalProject.url}}</a>
+              <span v-if="portalProject.url" class="item-header-title-url">{{portalProject.url}}</span>
               <span class="item-header-title-auditor">{{portalProject.scanby}}</span>
           </div>
         </NuxtLink>
