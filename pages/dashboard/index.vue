@@ -28,6 +28,7 @@
       </div>
       <dashboard-filter :filter="filter" @changeFilter="changeFilter"></dashboard-filter>
     </div>
+    <dashboard-loading v-else></dashboard-loading>
   </div>
 </template>
 
@@ -35,9 +36,10 @@
 import ProjectStatus from "../../components/dashboard/projectStatus.vue";
 import ProjectItem from "../../components/dashboard/projectItem.vue";
 import DashboardFilter from "../../components/dashboard/dashboardFilter.vue";
+import DashboardLoading from "../../components/modal/dashboardLoading.vue";
 
 export default {
-  components: {DashboardFilter, ProjectItem, ProjectStatus},
+  components: {DashboardLoading, DashboardFilter, ProjectItem, ProjectStatus},
   layout: 'admin',
   name: "index",
   data() {
@@ -55,9 +57,8 @@ export default {
         testProject: 'All',
         host: '',
         targetUrl: '',
-        projectApproved: 'All',
+        projectApproved: 'Yes',
         report_date: '',
-        scheduled_date: '',
         scheduled_before_date: '',
         scheduled_after_date: '',
         continuous_paid_before_date: '',
@@ -155,14 +156,14 @@ export default {
         });
         data.type = codes;
       }
+        if (this.filter.projectStatus.trim() !== '' && this.filter.projectStatus.trim() !== 'All') {
+            data.status = this.filter.projectStatus.trim();
+        }
       if (this.filter.projectId.trim() !== '') {
         data.id = this.filter.projectId.trim();
       }
       if (this.filter.report_date && this.filter.report_date !== '') {
         data.dtreport = this.convertDate(this.filter.report_date);
-      }
-      if (this.filter.scheduled_date && this.filter.scheduled_date !== '') {
-        data.dtshedule = this.convertDate(this.filter.scheduled_date);
       }
       if (this.filter.scheduled_after_date && this.filter.scheduled_after_date !== '') {
         data.dtshedule_after = this.convertDate(this.filter.scheduled_after_date);
@@ -187,9 +188,6 @@ export default {
       }
       if (this.filter.company.trim() !== '') {
         data.company = this.filter.company.trim();
-      }
-      if (this.filter.projectStatus.trim() !== '') {
-        data.status = this.filter.projectStatus.trim();
       }
       if (this.filter.host.trim() !== '') {
         data.host = this.filter.host.trim();

@@ -16,70 +16,74 @@
         <div class="filter-item">
           <div class="filter-item-title text-muted">Project status:</div>
           <div class="filter-item-input">
-            <input type="text" v-model="projectStatus">
+              <select v-model="projectStatus">
+                  <option v-for="(item, key) in statuses" :key="key" :value="item">{{item}}</option>
+              </select>
           </div>
+        </div>
+          <div class="filter-item">
+              <div class="filter-item-title text-muted">Test project:</div>
+              <div class="filter-item-input">
+                  <select v-model="testProject">
+                      <option>All</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+        <div class="filter-item">
+            <div class="filter-item-title text-muted">Host:</div>
+            <div class="filter-item-input">
+                <input type="text" list="hosts" v-model="host">
+                <datalist id="hosts">
+                    <option v-for="(host,key) in hosts" :key="key">{{ host }}</option>
+                </datalist>
+            </div>
         </div>
         <div class="filter-item">
-          <div class="filter-item-title text-muted">Project ID:</div>
-          <div class="filter-item-input">
-            <input type="text" v-model="projectId">
-          </div>
+            <div class="filter-item-title text-muted">Target URL:</div>
+            <div class="filter-item-input">
+                <input type="text" list="urls" v-model="targetUrl">
+                <datalist id="urls">
+                    <option v-for="(url,key) in urls" :key="key">{{ url }}</option>
+                </datalist>
+            </div>
         </div>
-      </div>
-      <div class="filter-item">
-        <div class="filter-item-title text-muted">Test project:</div>
-        <div class="filter-item-input">
-          <select v-model="testProject">
-            <option>All</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
+        <div class="filter-item-double">
+            <div class="filter-item">
+                <div class="filter-item-title text-muted">Project approved:</div>
+                <div class="filter-item-input">
+                    <select v-model="projectApproved">
+                        <option>All</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-item">
+                <div class="filter-item-title text-muted">Auditor:</div>
+                <div class="filter-item-input">
+                    <select v-model="scanby">
+                        <option v-for="(auditor,key) in auditors" :key="key">{{auditor}}</option>
+                    </select>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="filter-item-double">
-        <div class="filter-item">
-          <div class="filter-item-title text-muted">Host:</div>
-          <div class="filter-item-input">
-            <input type="text" list="hosts" v-model="host">
-            <datalist id="hosts">
-              <option v-for="(host,key) in hosts" :key="key">{{ host }}</option>
-            </datalist>
-          </div>
+        <div class="filter-item-double">
+            <div class="filter-item">
+                <div class="filter-item-title text-muted">Project ID:</div>
+                <div class="filter-item-input">
+                    <input type="text" v-model="projectId">
+                </div>
+            </div>
+            <div class="filter-item">
+                <div class="filter-item-title text-muted">Report date:</div>
+                <div class="filter-item-input">
+                    <datepicker v-model="report_date" :input-class="'filter-item-input-date'" :clear-button="true"></datepicker>
+                </div>
+            </div>
         </div>
-        <div class="filter-item">
-          <div class="filter-item-title text-muted">Target URL:</div>
-          <div class="filter-item-input">
-            <input type="text" list="urls" v-model="targetUrl">
-            <datalist id="urls">
-              <option v-for="(url,key) in urls" :key="key">{{ url }}</option>
-            </datalist>
-          </div>
-        </div>
-      </div>
-      <div class="filter-item">
-        <div class="filter-item-title text-muted">Project approved:</div>
-        <div class="filter-item-input">
-          <select v-model="projectApproved">
-            <option>All</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-        </div>
-      </div>
-      <div class="filter-item-double">
-        <div class="filter-item">
-          <div class="filter-item-title text-muted">Report date:</div>
-          <div class="filter-item-input">
-            <datepicker v-model="report_date" :input-class="'filter-item-input-date'" :clear-button="true"></datepicker>
-          </div>
-        </div>
-        <div class="filter-item">
-          <div class="filter-item-title text-muted">Schedule date:</div>
-          <div class="filter-item-input">
-            <datepicker v-model="scheduled_date" :input-class="'filter-item-input-date'" :clear-button="true"></datepicker>
-          </div>
-        </div>
-      </div>
       <div class="filter-item-double">
         <div class="filter-item">
           <div class="filter-item-title text-muted">Scheduled:</div>
@@ -122,14 +126,6 @@
           </div>
         </div>
       </div>
-      <div class="filter-item">
-        <div class="filter-item-title text-muted">Auditor:</div>
-        <div class="filter-item-input">
-          <select v-model="scanby">
-            <option v-for="(auditor,key) in auditors" :key="key">{{auditor}}</option>
-          </select>
-        </div>
-      </div>
       <div class="filter-item-double">
         <div class="filter-item">
           <div class="filter-item-title text-muted">Client Name:</div>
@@ -163,16 +159,16 @@ export default {
   props: ['filter'],
   data() {
     return {
+        statuses: ['All',0,10,20,30,40],
       scanby: 'All',
       type: 'All',
       projectId: '',
-      projectStatus: '',
+      projectStatus: 'All',
       testProject: 'All',
       host: '',
       targetUrl: '',
-      projectApproved: 'All',
+      projectApproved: 'Yes',
       report_date: '',
-      scheduled_date: '',
       scheduled_before_date: '',
       scheduled_after_date: '',
       continuous_paid_before_date: '',
@@ -255,9 +251,8 @@ export default {
       this.testProject = 'All';
       this.host = '';
       this.targetUrl = '';
-      this.projectApproved = 'All';
+      this.projectApproved = 'Yes';
       this.report_date = '';
-      this.scheduled_date = '';
       this.scheduled_before_date = '';
       this.scheduled_after_date = '';
       this.continuous_paid_before_date = '';
@@ -279,7 +274,6 @@ export default {
         targetUrl: this.targetUrl,
         projectApproved: this.projectApproved,
         report_date: this.report_date,
-        scheduled_date: this.scheduled_date,
         scheduled_before_date: this.scheduled_before_date,
         scheduled_after_date: this.scheduled_after_date,
         continuous_paid_before_date: this.continuous_paid_before_date,
