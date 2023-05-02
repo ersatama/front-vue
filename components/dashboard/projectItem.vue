@@ -7,17 +7,17 @@
       <div class="item-header-title">
         <NuxtLink :to="'/dashboard/'+portalProject.id">
           <div class="item-header-title-text" v-if="portalProject.portalProjectType">
-              <template>
-                  <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template>
-                  <template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template>
-                  <template v-if="portalProject.rescan > 0"> Patch Verification</template>
-              </template>
               <span>#{{portalProject.id}}</span>
+              <a v-if="portalProject.url" :href="portalProject.url" class="item-header-title-url" target="_blank">{{portalProject.url}}</a>
+              <span class="item-header-title-auditor">{{portalProject.scanby}}</span>
           </div>
         </NuxtLink>
         <div class="item-header-title-desc">
-            <a v-if="portalProject.url" :href="portalProject.url" class="item-header-title-url" target="_blank">{{portalProject.url}}</a>
-            <span class="item-header-title-auditor">{{portalProject.scanby}}</span>
+            <template v-if="portalProject.portalProjectType">
+                <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template>
+                <template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template>
+                <template v-if="portalProject.rescan > 0"> Patch Verification</template>
+            </template>
         </div>
       </div>
       <div class="item-header-detail">
