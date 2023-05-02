@@ -150,7 +150,6 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker';
-import projectStatus from "./projectStatus.vue";
 export default {
   name: "dashboardFilter",
   components: {
@@ -247,7 +246,7 @@ export default {
       this.scanby = 'All';
       this.type = 'All';
       this.projectId = '';
-      this.projectStatus = '';
+      this.projectStatus = 'All';
       this.testProject = 'All';
       this.host = '';
       this.targetUrl = '';

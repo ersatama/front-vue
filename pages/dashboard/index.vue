@@ -101,7 +101,7 @@ export default {
         scanby: 'All',
         type: 'All',
         projectId: '',
-        projectStatus: '',
+        projectStatus: 'All',
         testProject: 'All',
         host: '',
         targetUrl: '',
@@ -205,8 +205,8 @@ export default {
         });
         data.type = codes;
       }
-        if (this.filter.projectStatus.trim() !== '' && this.filter.projectStatus.trim() !== 'All') {
-            data.status = this.filter.projectStatus.trim();
+        if (this.filter.projectStatus !== '' && this.filter.projectStatus !== 'All') {
+            data.status = this.filter.projectStatus;
         }
       if (this.filter.projectId.trim() !== '') {
         data.id = this.filter.projectId.trim();
