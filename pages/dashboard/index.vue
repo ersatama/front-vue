@@ -22,9 +22,56 @@
             </div>
           </div>
         </div>
-        <div class="page-left-list">
-          <project-item v-for="(portalProject, key) in portalProjects.data" :key="key" :portalProject="portalProject"></project-item>
-        </div>
+          <div class="page-left-list" v-if="loadingStatus">
+            <project-item v-for="(portalProject, key) in portalProjects.data" :key="key" :portalProject="portalProject"></project-item>
+          </div>
+          <div class="block-dashboard-loading-left-items" style="margin-top: 20px;" v-else>
+              <div class="block-dashboard-loading-left-item">
+                  <div class="block-dashboard-loading-left-item-header">
+                      <div class="block-dashboard-loading-left-item-header-left">
+                          <div class="block-loading-item-field"></div>
+                      </div>
+                      <div class="block-dashboard-loading-left-item-header-right">
+                          <div class="block-loading-item-field"></div>
+                      </div>
+                  </div>
+                  <div>
+                      <div class="block-loading-item-field"></div>
+                      <div class="block-loading-item-field"></div>
+                      <div class="block-loading-item-field"></div>
+                  </div>
+              </div>
+              <div class="block-dashboard-loading-left-item">
+                  <div class="block-dashboard-loading-left-item-header">
+                      <div class="block-dashboard-loading-left-item-header-left">
+                          <div class="block-loading-item-field"></div>
+                      </div>
+                      <div class="block-dashboard-loading-left-item-header-right">
+                          <div class="block-loading-item-field"></div>
+                      </div>
+                  </div>
+                  <div>
+                      <div class="block-loading-item-field"></div>
+                      <div class="block-loading-item-field"></div>
+                      <div class="block-loading-item-field"></div>
+                  </div>
+              </div>
+              <div class="block-dashboard-loading-left-item">
+                  <div class="block-dashboard-loading-left-item-header">
+                      <div class="block-dashboard-loading-left-item-header-left">
+                          <div class="block-loading-item-field"></div>
+                      </div>
+                      <div class="block-dashboard-loading-left-item-header-right">
+                          <div class="block-loading-item-field"></div>
+                      </div>
+                  </div>
+                  <div>
+                      <div class="block-loading-item-field"></div>
+                      <div class="block-loading-item-field"></div>
+                      <div class="block-loading-item-field"></div>
+                  </div>
+              </div>
+          </div>
       </div>
       <dashboard-filter :filter="filter" @changeFilter="changeFilter"></dashboard-filter>
     </div>
@@ -44,6 +91,7 @@ export default {
   name: "index",
   data() {
     return {
+        loadingStatus: false,
       portalProjects: null,
       page: 1,
       pageBreak: 1,
@@ -134,6 +182,7 @@ export default {
 
   methods: {
     async getPortalProjects() {
+        this.loadingStatus = false;
       let data  = {
         page: this.page,
         take: this.take
@@ -196,6 +245,7 @@ export default {
         data.url = this.filter.targetUrl.trim();
       }
       this.portalProjects = await this.$store.dispatch('localStorage/portalProject_get', data);
+        this.loadingStatus = true;
     },
     convertDate(date) {
       if (date) {
