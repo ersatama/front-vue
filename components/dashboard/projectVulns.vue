@@ -64,8 +64,8 @@ export default {
     computed: {
         take() {
             let take = 100;
-            if (this.portalProject && this.portalJitReport.vulns) {
-                take    =   this.portalJitReport.vulns;
+            if (this.portalProject && this.portalProject.portalJitReport.vulns) {
+                take    =   this.portalProject.portalJitReport.vulns;
             }
             return take;
         }

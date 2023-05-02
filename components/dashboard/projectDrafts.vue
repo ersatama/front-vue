@@ -64,8 +64,8 @@ export default {
     computed: {
         take() {
             let take = 100;
-            if (this.portalProject && this.portalJitReport.drafts) {
-                take    =   this.portalJitReport.drafts;
+            if (this.portalProject && this.portalProject.portalJitReport.drafts) {
+                take    =   this.portalProject.portalJitReport.drafts;
             }
             return take;
         }
