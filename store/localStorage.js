@@ -145,4 +145,12 @@ export const actions = {
         }
         return false;
     },
+    async portalProject_search({commit}, payload) {
+        const res = await this.$repository.portalProject.search(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    }
 }

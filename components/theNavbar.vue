@@ -3,22 +3,28 @@
     <div class="nav bg-white d-flex align-items-center">
       <div class="nav-close rounded-lg" :class="{'nav-close-rotate':!sidebar}" @click="$store.commit('localStorage/sidebar')"></div>
       <div class="nav-title">{{ navTitle }}</div>
-      <div class="nav-options d-flex align-items-center">
-        <div class="nav-options-detail">
-            <div class="nav-options-detail-title">{{ user.name }} {{ user.surname }}</div>
-            <div class="nav-options-detail-desc">{{ user.role }}</div>
+        <div class="nav-right">
+            <navbar-search></navbar-search>
+            <div class="nav-options">
+                <div class="nav-options-detail">
+                    <div class="nav-options-detail-title">{{ user.name }} {{ user.surname }}</div>
+                    <div class="nav-options-detail-desc">{{ user.role }}</div>
+                </div>
+                <div class="nav-profile bg-primary text-white d-flex align-items-center justify-content-center" v-if="user">
+                    <div>{{ getNameLetter(user) }}</div>
+                </div>
+            </div>
         </div>
-        <div class="nav-profile bg-primary text-white d-flex align-items-center justify-content-center" v-if="user">
-          <div>{{ getNameLetter(user) }}</div>
-        </div>
-      </div>
     </div>
   </nav>
 </template>
 
 <script>
+import NavbarSearch from "./navbarSearch.vue";
+
 export default {
   name: "theNavbar",
+    components: {NavbarSearch},
   computed: {
     user() {
       return this.$store.state.localStorage.user;
@@ -52,73 +58,5 @@ export default {
 </script>
 
 <style lang="scss">
-  .nav {
-    width: 100%;
-    gap: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    &-main {
-      padding: 20px;
-    }
-    &-title {
-      color: #212529;
-      font-weight: 600;
-    }
-    &-profile {
-      width: 36px;
-      height: 36px;
-      font-size: 14px;
-      font-weight: bold;
-      border-radius: 30px;
-    }
-    &-options {
-      margin-left: auto;
-      display: flex;
-      gap: 15px;
-      &-detail {
-        display: flex;
-        flex-direction: column;
-        text-align: right;
-        text-transform: capitalize;
-        &-title {
-          color: #0b76a6;
-          font-size: 12px;
-          font-weight: 600;
-        }
-        &-desc {
-          font-size: 10px;
-          color: #7d7f81;
-        }
-      }
-    }
-    &-close {
-      width: 30px;
-      height: 30px;
-      background: #F1F4F8;
-      position: relative;
-      cursor: pointer;
-      &-rotate {
-        transform: rotate(180deg);
-      }
-      &:hover {
-        background: #e7eaee;
-      }
-      &:before, &:after {
-        content: '';
-        position: absolute;
-        background: #6c757d;
-        width: 4px;
-        height: 13px;
-        border-radius: 3px;
-      }
-      &:before {
-        transform: rotate(45deg);
-        margin: 5px 0 0 12px;
-      }
-      &:after {
-        transform: rotate(-45deg);
-        margin: 12px 0 0 12px;
-      }
-    }
-  }
+
 </style>

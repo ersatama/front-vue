@@ -41,6 +41,7 @@ export default {
 @import "assets/scrollBar.scss";
 @import "assets/filter.scss";
 @import "assets/item.scss";
+@import "assets/navbar.scss";
 .admin {
   margin: 0 20px 20px 20px;
 }
