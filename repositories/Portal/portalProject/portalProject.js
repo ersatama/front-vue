@@ -6,6 +6,13 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getAlertsByAuditorUser(user) {
+        return $axios.get('/api/v1/portal/portalProject/getAlertsByAuditorUser/'+user).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     search(payload) {
         return $axios.post('/api/v1/portal/portalProject/search', payload).then(response => {
             return response;

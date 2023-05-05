@@ -152,5 +152,13 @@ export const actions = {
             return data;
         }
         return null;
+    },
+    async portalProject_getAlertsByAuditorUser({commit}, user){
+        const res = await this.$repository.portalProject.getAlertsByAuditorUser(user);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
     }
 }
