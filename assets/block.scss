@@ -196,6 +196,21 @@ a {
           &-vuln {
             background-image: url('/images/icons/vuln.png');
           }
+          &-message {
+            background-image: url('/images/icons/email-16.png');
+          }
+          &-play {
+            background-image: url('/images/icons/play.png');
+          }
+          &-tick {
+            background-image: url('/images/icons/tick.png');
+          }
+          &-check {
+            background-image: url('/images/icons/check.png');
+          }
+          &-exclamation {
+            background-image: url('/images/icons/exclamation.png');
+          }
         }
       }
       &-vuln, &-add {

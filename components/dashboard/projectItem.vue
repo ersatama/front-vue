@@ -19,10 +19,44 @@
                 <template v-if="portalProject.rescan > 0"> Patch Verification</template>
             </template>
         </div>
-      </div>
-      <div class="item-header-detail">
           <div class="item-alerts" v-if="portalProject.alerts">
               <div class="item-alert" v-for="(alert,key) in portalProject.alerts" :key="key">{{ alert }}</div>
+          </div>
+      </div>
+      <div class="item-header-detail">
+          <div class="item-header-detail-buttons">
+              <template v-if="portalProject.type < 3000">
+                  <div class="item-header-detail-button" :style="projectStatusStyle">
+                      <template v-if="portalProject.jit === 0">
+                          <template v-if="portalProject.hasOwnProperty('reportStatus')">
+                              <template v-if="portalProject.reportStatus === 'blue'">
+                                  <i class="block-body-content-filter-icon block-body-content-filter-icon-play"></i>
+                              </template>
+                              <template v-else-if="portalProject.reportStatus === 'orange'">
+                                  <template v-if="(portalProject.projectReportStatuses && portalProject.projectReportStatuses.length > 0) && (portalProject.notFinishedUsers && portalProject.notFinishedUsers.length === 0) && (portalProject.allApproved && !portalProject.allApproved)">
+                                      <i class="block-body-content-filter-icon block-body-content-filter-icon-tick" title="Finished by all"></i>
+                                  </template>
+                                  <template v-if="portalProject.projectReportStatus === 1">
+                                      <i class="block-body-content-filter-icon block-body-content-filter-icon-check" title="Approved by all"></i>
+                                  </template>
+                                  <template v-if="portalProject.projectReportStatus === 0 && portalProject.SEND_TO_READ_BY_AUDITORS">
+                                      <template v-if="portalProject.allApproved">
+                                          <i class="block-body-content-filter-icon block-body-content-filter-icon-check" title="Approved by all"></i>
+                                      </template>
+                                      <template v-else>
+                                          <i class="block-body-content-filter-icon block-body-content-filter-icon-exclamation" title="Not approved by all auditors"></i>
+                                      </template>
+                                  </template>
+                              </template>
+                          </template>
+                      </template>
+                      Report
+                      <i class="block-body-content-filter-icon block-body-content-filter-icon-message" v-if="portalProject.portalProp" :title="portalProject.portalProp"></i>
+                  </div>
+              </template>
+              <template v-else-if="portalProject.mobile === 1">
+                  <div class="item-header-detail-button">Mobile Portal</div>
+              </template>
           </div>
         <div class="item-header-switcher" v-if="portalProject.portalJitReport">
             <div class="item-header-switcher-item" :class="{'item-header-switcher-item-sel':(table === 3)}" @click="table = 3">
@@ -191,6 +225,7 @@
 <script>
 import ProjectVulns from "./projectVulns.vue";
 import ProjectDrafts from "./projectDrafts.vue";
+import projectStatus from "./projectStatus.vue";
 
 export default {
   name: "projectItem",
@@ -203,6 +238,37 @@ export default {
         show: false,
     }
   },
+    computed: {
+        projectStatus() {
+            return projectStatus
+        },
+      user() {
+          return this.$store.state.localStorage.user;
+      },
+        reportcheck() {
+            let status = false;
+            if (this.user && this.user.auditor && this.user.auditor.access) {
+                let accesses    =   this.user.auditor.access.split(',');
+                if (accesses.includes('reportcheck')) {
+                    status = true;
+                }
+            }
+            return status;
+        },
+        projectStatusStyle() {
+            let projectStatusStyle  =   {};
+            if (this.portalProject) {
+                if (this.portalProject.jit === 0) {
+                    if (this.portalProject.reportStatus) {
+                        projectStatusStyle.backgroundColor  =   this.portalProject.reportStatus;
+                    }
+                } else if (this.portalProject.jit === 1) {
+                    projectStatusStyle.backgroundColor  =   'green';
+                }
+            }
+            return projectStatusStyle;
+        }
+    },
   methods: {
     convertDate(date) {
       let dateArr = date.split('-');
