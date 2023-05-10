@@ -32,40 +32,48 @@ export default {
     }
   },
     computed: {
+      route() {
+          let name = '';
+          let route = this.$route.path.split('/');
+          if (route[1]) {
+              name = route[1];
+          }
+          return name;
+      },
       className() {
           let className =   '';
-          if (this.$route.name === 'profile') {
+          if (this.route === 'profile') {
               className = '';
-          } else if (this.$route.name === 'dashboard') {
+          } else if (this.route === 'dashboard') {
               className = 'sidebar-menu-item-projects';
-          } else if (this.$route.name === 'tickets') {
+          } else if (this.route === 'tickets') {
               className = 'sidebar-menu-item-tickets';
-          } else if (this.$route.name === 'content') {
+          } else if (this.route === 'content') {
               className = 'sidebar-menu-item-editor';
-          } else if (this.$route.name === 'system') {
+          } else if (this.route === 'system') {
               className = 'sidebar-menu-item-system';
-          } else if (this.$route.name === 'neuron') {
+          } else if (this.routee === 'neuron') {
               className = 'sidebar-menu-item-neuron';
-          } else if (this.$route.name === 'discovery') {
+          } else if (this.route === 'discovery') {
               className = 'sidebar-menu-item-discovery';
           }
           return className;
       },
         title() {
             let title =   '';
-            if (this.$route.name === 'profile') {
+            if (this.route === 'profile') {
                 title = 'Profile';
-            } else if (this.$route.name === 'dashboard') {
+            } else if (this.route === 'dashboard') {
                 title = 'Dashboard';
-            } else if (this.$route.name === 'tickets') {
+            } else if (this.route === 'tickets') {
                 title = 'Support tickets';
-            } else if (this.$route.name === 'content') {
+            } else if (this.route === 'content') {
                 title = 'Content editor';
-            } else if (this.$route.name === 'system') {
+            } else if (this.route === 'system') {
                 title = 'System configuration';
-            } else if (this.$route.name === 'neuron') {
+            } else if (this.route === 'neuron') {
                 title = 'Neuron';
-            } else if (this.$route.name === 'discovery') {
+            } else if (this.route === 'discovery') {
                 title = 'Discovery';
             }
             return title;
