@@ -52,7 +52,7 @@ export default {
               className = 'sidebar-menu-item-editor';
           } else if (this.route === 'system') {
               className = 'sidebar-menu-item-system';
-          } else if (this.routee === 'neuron') {
+          } else if (this.route === 'neuron') {
               className = 'sidebar-menu-item-neuron';
           } else if (this.route === 'discovery') {
               className = 'sidebar-menu-item-discovery';
