@@ -1,29 +1,33 @@
 <template>
   <div>
       <div class="bg"></div>
-      <div class="d-flex justify-content-center" id="wrapper">
-          <!-- Sidebar-->
-          <sidebar></sidebar>
-          <!-- Page content wrapper-->
-          <div id="page-content-wrapper">
-              <!-- Top navigation-->
-              <the-navbar :className="className" :title="title"></the-navbar>
-              <!-- Page content-->
-              <div class="admin">
-                  <Nuxt />
+      <vue-custom-scrollbar class="scroll-main">
+          <div class="d-flex justify-content-center" id="wrapper">
+              <!-- Sidebar-->
+              <sidebar></sidebar>
+              <!-- Page content wrapper-->
+              <div id="page-content-wrapper">
+                  <!-- Top navigation-->
+                  <the-navbar :className="className" :title="title"></the-navbar>
+                  <!-- Page content-->
+                  <div class="admin">
+                      <Nuxt />
+                  </div>
               </div>
           </div>
-      </div>
+      </vue-custom-scrollbar>
+
   </div>
 </template>
 
 <script>
 import TheNavbar from "../components/theNavbar.vue";
 import Sidebar from "../components/sidebar.vue";
-
+import vueCustomScrollbar from 'vue-custom-scrollbar'
+import "vue-custom-scrollbar/dist/vueScrollbar.css"
 export default {
   name: "admin",
-  components: {Sidebar, TheNavbar},
+  components: {vueCustomScrollbar, Sidebar, TheNavbar},
   head() {
     return {
       bodyAttrs: {
@@ -31,6 +35,15 @@ export default {
       }
     }
   },
+    data() {
+      return {
+          settings: {
+              suppressScrollY: true,
+              suppressScrollX: false,
+              wheelPropagation: false
+          }
+      }
+    },
     computed: {
       route() {
           let name = '';
@@ -91,6 +104,10 @@ export default {
 @import "assets/item.scss";
 @import "assets/navbar.scss";
 @import "assets/sidebar.scss";
+.scroll-main {
+    position: relative;
+    height: 100vh
+}
 .admin {
   margin: 0 20px 20px 20px;
 }
