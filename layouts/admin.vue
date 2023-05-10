@@ -7,7 +7,7 @@
           <!-- Page content wrapper-->
           <div id="page-content-wrapper">
               <!-- Top navigation-->
-              <the-navbar></the-navbar>
+              <the-navbar :className="className" :title="title"></the-navbar>
               <!-- Page content-->
               <div class="admin">
                   <Nuxt />
@@ -31,6 +31,46 @@ export default {
       }
     }
   },
+    computed: {
+      className() {
+          let className =   '';
+          if (this.$route.name === 'profile') {
+              className = '';
+          } else if (this.$route.name === 'dashboard') {
+              className = 'sidebar-menu-item-projects';
+          } else if (this.$route.name === 'tickets') {
+              className = 'sidebar-menu-item-tickets';
+          } else if (this.$route.name === 'content') {
+              className = 'sidebar-menu-item-editor';
+          } else if (this.$route.name === 'system') {
+              className = 'sidebar-menu-item-system';
+          } else if (this.$route.name === 'neuron') {
+              className = 'sidebar-menu-item-neuron';
+          } else if (this.$route.name === 'discovery') {
+              className = 'sidebar-menu-item-discovery';
+          }
+          return className;
+      },
+        title() {
+            let title =   '';
+            if (this.$route.name === 'profile') {
+                title = 'Profile';
+            } else if (this.$route.name === 'dashboard') {
+                title = 'Dashboard';
+            } else if (this.$route.name === 'tickets') {
+                title = 'Support tickets';
+            } else if (this.$route.name === 'content') {
+                title = 'Content editor';
+            } else if (this.$route.name === 'system') {
+                title = 'System configuration';
+            } else if (this.$route.name === 'neuron') {
+                title = 'Neuron';
+            } else if (this.$route.name === 'discovery') {
+                title = 'Discovery';
+            }
+            return title;
+        }
+    }
 }
 </script>
 
@@ -42,6 +82,7 @@ export default {
 @import "assets/filter.scss";
 @import "assets/item.scss";
 @import "assets/navbar.scss";
+@import "assets/sidebar.scss";
 .admin {
   margin: 0 20px 20px 20px;
 }

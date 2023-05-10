@@ -38,7 +38,8 @@ export default {
   plugins: [
     { src: '~/plugins/vue-datepicker', ssr: false },
     { src: '~/plugins/repository.js', mode: 'client', ssr: false },
-    { src: '~/plugins/auth.js', mode: 'client', ssr: false }
+    { src: '~/plugins/auth.js', mode: 'client', ssr: false },
+    { src: '~/plugins/vue-notification.js', mode: 'client', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

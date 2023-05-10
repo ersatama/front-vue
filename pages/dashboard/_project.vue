@@ -97,6 +97,9 @@ export default {
     }
   },
   computed: {
+      links() {
+          return this.$store.state.localStorage.links;
+      },
     linksRawReport() {
       let rawReport = null;
       if (this.links && this.links.neuron_raw_reports) {

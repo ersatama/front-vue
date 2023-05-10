@@ -298,7 +298,7 @@
       border-bottom: 1px solid #F1F4F8;
       &-title {
         font-size: 18px;
-        font-weight: bold;
+        font-weight: 600;
       }
       &-desc {
         font-size: 12px;
@@ -345,6 +345,9 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        &-list {
+          gap: 0;
+        }
         &-item {
           display: flex;
           flex-direction: column;
@@ -377,6 +380,87 @@
               background: #0b76a6;
               color: #fff;
               outline: none;
+            }
+          }
+        }
+        &-detail {
+          display: flex;
+          gap: 20px;
+          &-main {
+            margin-bottom: 20px;
+          }
+          &-item {
+            padding: 15px 25px 15px 25px;
+            width: 500px;
+            left: -25px;
+            position: relative;
+            z-index: 2;
+            font-size: 14px;
+            color: #6c757d;
+            cursor: pointer;
+            gap: 15px;
+            &:hover {
+              background: #f8fbff;
+            }
+          }
+          &-logo {
+            width: 70px;
+            min-width: 70px;
+            max-width: 70px;
+            height: 70px;
+            background: #0b76a6;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 20px;
+          }
+          &-icon {
+            width: 24px;
+            height: 24px;
+            &-profile {
+              background-image: url('/images/icons/profile.png');
+            }
+            &-settings {
+              background-image: url('/images/icons/settings.png');
+            }
+            &-notification {
+              background-image: url('/images/icons/bell.png');
+            }
+            &-security {
+              background-image: url('/images/icons/locked-24.png');
+            }
+            &-faq {
+              background-image: url('/images/icons/faq.png');
+            }
+            &-question {
+              background-image: url('/images/icons/question.png');
+            }
+            &-logout {
+              background-image: url('/images/icons/power.png');
+            }
+          }
+          &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            &-title {
+              font-size: 16px;
+              font-weight: 600;
+            }
+            &-desc {
+              font-size: 12px;
+              text-transform: lowercase;
+              color: #6c757d;
+              &:before {
+                content: '@';
+              }
+            }
+            &-add {
+              font-size: 12px;
+              color: #0b76a6;
             }
           }
         }

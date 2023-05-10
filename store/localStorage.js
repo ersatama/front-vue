@@ -3,6 +3,7 @@ export const state = () => ({
     portalProjectTypes: [],
     portalProjectFilter: null,
     sidebar: true,
+    statuses: null
 })
 
 export const mutations = {
@@ -17,6 +18,9 @@ export const mutations = {
     },
     setPortalProjectFilter(state, value) {
         state.portalProjectFilter   =   value
+    },
+    setStatuses(state, value) {
+        state.statuses  =   value;
     }
 }
 
@@ -136,8 +140,17 @@ export const actions = {
             data: []
         };
     },
-    async user_auth({commit}, info) {
-        const res = await this.$repository.user.auth(info);
+    async user_updateById({commit}, payload){
+        const res = await this.$repository.user.updateById(payload);
+        const { status, data } = res
+        if (status === 200) {
+            commit('setUser', data.data);
+            return true;
+        }
+        return false;
+    },
+    async user_auth({commit}, payload) {
+        const res = await this.$repository.user.auth(payload);
         const { status, data } = res
         if (status === 200) {
             commit('setUser', data.data);
@@ -157,8 +170,7 @@ export const actions = {
         const res = await this.$repository.portalProject.getAlertsByAuditorUser(user);
         const { status, data } = res
         if (status === 200) {
-            return data;
+            commit('setStatuses', data);
         }
-        return null;
     }
 }

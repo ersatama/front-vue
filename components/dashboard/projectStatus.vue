@@ -103,26 +103,12 @@
 <script>
 export default {
   name: "projectStatus",
-    data() {
-      return {
-          data: null
-      }
-    },
     computed: {
-      user() {
-          return this.$store.state.localStorage.user;
-      }
-    },
-    created() {
-      this.getStatuses();
-    },
-    methods: {
-        async getStatuses() {
-            if (this.user) {
-                this.data = await this.$store.dispatch('localStorage/portalProject_getAlertsByAuditorUser', this.user.auditor.user);
-            }
+        data() {
+            return this.$store.state.localStorage.statuses;
         }
-    }
+    },
+
 }
 </script>
 

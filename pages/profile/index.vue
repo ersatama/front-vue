@@ -1,5 +1,6 @@
 <template>
   <div class="block">
+      <notifications position="bottom right" classes="my-custom-class"/>
     <div class="block-title">My profile</div>
     <div class="block-body">
       <div class="block-body-left">
@@ -35,9 +36,24 @@
               <div class="block-body-content-form-item">
                 <div class="block-body-content-form-item-title">Alias</div>
                 <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="alias">
+                  <input type="text" v-model="alias" readonly>
+                    <div class="block-body-content-form-item-content-locked"></div>
                 </div>
               </div>
+                <div class="block-body-content-form-item">
+                    <div class="block-body-content-form-item-title">Email</div>
+                    <div class="block-body-content-form-item-content">
+                        <input type="text" readonly v-model="email">
+                        <div class="block-body-content-form-item-content-locked"></div>
+                    </div>
+                </div>
+                <div class="block-body-content-form-item">
+                    <div class="block-body-content-form-item-title">Phone</div>
+                    <div class="block-body-content-form-item-content">
+                        <input type="text" readonly v-model="phone">
+                        <div class="block-body-content-form-item-content-locked"></div>
+                    </div>
+                </div>
               <div class="block-body-content-form-item">
                 <div class="block-body-content-form-item-title">Name</div>
                 <div class="block-body-content-form-item-content">
@@ -57,13 +73,10 @@
                 </div>
               </div>
               <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Email</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" readonly v-model="email">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <button class="block-body-content-form-item-button">Save</button>
+                <button class="block-body-content-form-item-button ajax-loading" :class="{'ajax-loading-hide':profileAjax}" @click="saveProfile">
+                    <span>Save</span>
+                    <div class="lds-dual-ring"></div>
+                </button>
               </div>
             </div>
             <extra-profile-content></extra-profile-content>
@@ -81,7 +94,6 @@
                 <div class="block-body-content-form-item-content">
                   <select>
                     <option>English</option>
-                    <option>Russian</option>
                   </select>
                 </div>
               </div>
@@ -100,39 +112,7 @@
           </div>
           <div class="block-body-content">
             <div class="block-body-content-form">
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Alias</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="alias">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Name</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="name">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Surname</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="surname">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Last name</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" v-model="last_name">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <div class="block-body-content-form-item-title">Email</div>
-                <div class="block-body-content-form-item-content">
-                  <input type="text" readonly v-model="email">
-                </div>
-              </div>
-              <div class="block-body-content-form-item">
-                <button class="block-body-content-form-item-button">Save</button>
-              </div>
+
             </div>
             <extra-profile-content></extra-profile-content>
           </div>
@@ -183,18 +163,38 @@ export default {
   name: "index",
   data() {
     return {
-      alias: '',
       name: '',
       surname: '',
       last_name: '',
-      email: '',
       mode: false,
+        profileAjax: false,
     }
   },
   computed: {
     user() {
       return this.$store.state.localStorage.user;
     },
+      alias() {
+          let alias = '';
+          if (this.user && this.user.auditor.user) {
+            alias = this.user.auditor.user;
+          }
+          return alias;
+      },
+      email() {
+          let email = '';
+          if (this.user && this.user.auditor.email) {
+              email = this.user.auditor.email;
+          }
+          return email;
+      },
+      phone() {
+          let phone = '';
+          if (this.user && this.user.auditor.phone) {
+              phone = this.user.auditor.phone;
+          }
+          return phone;
+      },
     tab() {
       let tab = 0;
       if (this.$route.query.tab) {
@@ -212,18 +212,32 @@ export default {
   },
   mounted() {
     this.setValues();
-
   },
   methods: {
     setValues() {
       if (this.user) {
-        this.alias  = this.user.alias;
         this.name = this.user.name;
         this.surname = this.user.surname;
         this.last_name = this.user.last_name;
-        this.email = this.user.email;
       }
-    }
+    },
+      async saveProfile() {
+          if (this.user) {
+              this.profileAjax = true;
+              let status = await this.$store.dispatch('localStorage/user_updateById', {
+                  id: this.user.id,
+                  name: this.name,
+                  surname: this.surname,
+                  last_name: this.last_name
+              });
+              if (status) {
+                  this.setValues();
+
+              }
+              this.$notify({ type: 'success', text: 'The operation completed' })
+              this.profileAjax = false;
+          }
+      },
   }
 }
 </script>

@@ -12,5 +12,12 @@ export default ($axios) => ({
         }).catch(error => {
             return error.response;
         });
+    },
+    updateById(data) {
+        return $axios.post('/api/v1/portal/user/updateById/'+data.id, data).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
     }
 });

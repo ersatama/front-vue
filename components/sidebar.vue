@@ -1,38 +1,19 @@
 <template>
   <div>
-      <div class="border-end bg-white" id="sidebar-wrapper" style="z-index: 2" v-if="sidebar">
-          <div class="sidebar-heading d-flex justify-content-center">
-              <img src="/images/logo/logo-immuniweb.svg" width="150">
+      <div class="sidebar-menu">
+          <div class="sidebar-menu-list">
+              <NuxtLink to="/dashboard" class="sidebar-menu-item sidebar-menu-item-projects">
+                  <div class="sidebar-menu-item-count" v-if="countDashboard > 0">{{ countDashboard }}</div>
+              </NuxtLink>
+              <NuxtLink to="/tickets" class="sidebar-menu-item sidebar-menu-item-tickets"></NuxtLink>
+              <NuxtLink to="/content" class="sidebar-menu-item sidebar-menu-item-editor"></NuxtLink>
+              <NuxtLink to="/system" class="sidebar-menu-item sidebar-menu-item-system"></NuxtLink>
+              <NuxtLink to="/neuron" class="sidebar-menu-item sidebar-menu-item-neuron"></NuxtLink>
+              <NuxtLink to="/discovery" class="sidebar-menu-item sidebar-menu-item-discovery"></NuxtLink>
           </div>
-          <div class="list-group list-group-flush d-flex">
-              <NuxtLink to="/dashboard" class="list-group-item" :class="{'list-group-item-active':(name === 'dashboard')}">
-                  <img src="/images/icons/dashboard.png" width="24" height="24"> Projects <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-              <NuxtLink to="/tickets" class="list-group-item" :class="{'list-group-item-active':(name === 'tickets')}">
-                  <img src="/images/icons/receipt.png" width="24" height="24"> Tickets <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-              <NuxtLink to="/content" class="list-group-item" :class="{'list-group-item-active':(name === 'content')}">
-                  <img src="/images/icons/copy-writing.png" width="24" height="24"> Content editor <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-              <NuxtLink to="/system" class="list-group-item" :class="{'list-group-item-active':(name === 'system')}">
-                  <img src="/images/icons/management.png" width="24" height="24"> System <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-              <NuxtLink to="/neuron" class="list-group-item" :class="{'list-group-item-active':(name === 'neuron')}">
-                  <img src="/images/icons/neuron.png" width="24" height="24"> Neuron <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-              <NuxtLink to="/discovery" class="list-group-item" :class="{'list-group-item-active':(name === 'discovery')}">
-                  <img src="/images/icons/discover.png" width="24" height="24"> Discovery <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-          </div>
-      </div>
-      <div class="border-end bg-white" id="sidebar-wrapper" style="z-index: 2" v-if="sidebar">
-          <div class="list-group list-group-flush d-flex">
-              <NuxtLink to="/profile" class="list-group-item" :class="{'list-group-item-active':(name === 'profile')}">
-                  <img src="/images/icons/profile.png" width="24" height="24"> Profile <div class="block-body-left-item-icon-arr"></div>
-              </NuxtLink>
-              <a class="list-group-item" @click="logout">
-                  <img src="/images/icons/log-out.png" width="24" height="24"> Log out <div class="block-body-left-item-icon-arr"></div>
-              </a>
+          <div class="sidebar-menu-split"></div>
+          <div class="sidebar-menu-list">
+              <div class="sidebar-menu-item sidebar-menu-item-home"></div>
           </div>
       </div>
   </div>
@@ -41,91 +22,37 @@
 <script>
 export default {
   name: "sidebar",
-  computed:{
-      sidebar() {
-        return this.$store.state.localStorage.sidebar;
-      },
-      name() {
-          let route = '';
-          let path  = this.$route.path;
-          let split = path.split('/');
-          if (split.length > 1) {
-            route = split[1]
-          }
-          return route;
-      }
-  },
-  methods: {
-    logout() {
-      this.$store.commit('localStorage/setUser', null);
-      window.location.href = '/login';
+    computed: {
+        user() {
+            return this.$store.state.localStorage.user;
+        },
+        statuses() {
+            return this.$store.state.localStorage.statuses;
+        },
+        countDashboard() {
+            let count = 0;
+            if (this.statuses) {
+                count += this.statuses.alerts;
+                count += this.statuses.neuron.report;
+                count += this.statuses.notApproved;
+                count += this.statuses.tickets;
+            }
+            return count;
+        }
+    },
+    created() {
+        this.getStatuses();
+    },
+    methods: {
+        async getStatuses() {
+            if (this.user && this.user.auditor) {
+                await this.$store.dispatch('localStorage/portalProject_getAlertsByAuditorUser', this.user.auditor.user);
+            }
+        }
     }
-  },
 }
 </script>
 
 <style lang="scss">
-#wrapper {
-  overflow: hidden;
-}
 
-#sidebar-wrapper {
-  margin: 20px 0 20px 20px !important;
-  border-radius: 10px;
-  transition: margin 0.25s ease-out;
-  height: max-content;
-  min-width: 280px;
-  font-weight: 600;
-}
-
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
-  border-bottom: 1px solid #F1F4F8;
-}
-
-#sidebar-wrapper .list-group {
-
-}
-.list-group-item {
-  width: 100%;
-  font-size: 12px;
-  padding: 10px 15px 10px 20px;
-  border-bottom: 1px solid #F1F4F8;
-  display: flex;
-  gap: 10px;
-  background: transparent !important;
-  color: #6c757d !important;
-  align-items: center;
-    & > img {
-        transform: scale(.9);
-    }
-  &:last-child {
-    border-bottom: none;
-  }
-  &:hover, &-active {
-    color: #0b76a6 !important;
-    & > .block-body-left-item-icon-arr {
-
-      &:before, &:after {
-        background: #0b76a6;
-      }
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-
-  body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
-    margin-left: -15rem;
-  }
-}
 </style>
