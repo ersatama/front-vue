@@ -34,6 +34,7 @@
       border-radius: 15px;
       cursor: pointer;
       position: relative;
+      transition: all .05s linear;
       &-count {
         background: #FF6347;
         position: absolute;
