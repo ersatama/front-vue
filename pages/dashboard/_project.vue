@@ -16,8 +16,12 @@
     </div>
     <div class="block-body" v-if="portalProject">
       <project-sidebar :portalProject="portalProject" :tab="tab" :links="links"></project-sidebar>
-
-      <project-details :portalProject="portalProject" v-if="tab === 0"></project-details>
+      <template v-if="tab === 0">
+          <div class="block-body-right-split" >
+              <project-details :portalProject="portalProject"></project-details>
+              <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
+          </div>
+      </template>
       <project-raw-report :portalProject="portalProject" :links="linksRawReport" v-else-if="tab === 1"></project-raw-report>
       <project-alerts :portalProject="portalProject" v-else-if="tab === 2"></project-alerts>
       <project-scan-jobs :portalProject="portalProject" v-else-if="tab === 3"></project-scan-jobs>
@@ -49,7 +53,7 @@ import ProjectScanJobs from "../../components/projectPart/projectScanJobs/projec
 import ProjectUnpatched from "../../components/projectPart/projectUnpatched/projectUnpatched.vue";
 import ProjectTasks from "../../components/projectPart/projectTasks/projectTasks.vue";
 import ProjectRawbase from "../../components/projectPart/projectRawbase/projectRawbase.vue";
-import ProjectDetails from "../../components/projectPart/projectDetails.vue";
+import ProjectDetails from "../../components/projectPart/projectDetails/projectDetails.vue";
 import ProjectAlerts from "../../components/projectPart/projectAlerts/projectAlerts.vue";
 import ProjectSidebar from "../../components/projectPart/projectSidebar.vue";
 import ProjectLoading from "../../components/modal/projectLoading.vue";
@@ -62,9 +66,12 @@ import ProjectGenerated from "../../components/projectPart/projectGenerated/proj
 import ProjectUnverified from "../../components/projectPart/projectUnverified/projectUnverified.vue";
 import ProjectTickets from "../../components/projectPart/projectTickets/projectTickets.vue";
 import ProjectSoftVulnMonitor from "../../components/projectPart/projectSoftVuln/projectSoftVulnMonitor.vue";
+import ProjectServerAvailabilityMonitor
+    from "../../components/projectPart/projectDetails/projectServerAvailabilityMonitor.vue";
 
 export default {
   components: {
+      ProjectServerAvailabilityMonitor,
       ProjectSoftVulnMonitor,
       ProjectTickets,
       ProjectUnverified,
@@ -97,9 +104,6 @@ export default {
     }
   },
   computed: {
-      links() {
-          return this.$store.state.localStorage.links;
-      },
     linksRawReport() {
       let rawReport = null;
       if (this.links && this.links.neuron_raw_reports) {

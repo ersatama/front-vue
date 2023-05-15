@@ -58,7 +58,7 @@ export default {
      'nuxt-vuex-localstorage',
     'bootstrap-vue/nuxt',
     '@nuxtjs/i18n',
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
   module: {
     rules: [
@@ -90,5 +90,6 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+
   }
 }

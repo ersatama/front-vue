@@ -25,6 +25,22 @@ export const mutations = {
 }
 
 export const actions = {
+    async serverTesterLog_getServerTesterLog({commit}, payload){
+        const res = await this.$repository.serverTesterLog.getServerTesterLog(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProp_getProjectStatusesByProjectId({commit}, projectId){
+        const res = await this.$repository.portalProp.getProjectStatusesByProjectId(projectId);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async rawbase_getWhere({commit}, payload){
         const res = await this.$repository.rawbase.getWhere(payload);
         const { status, data } = res
