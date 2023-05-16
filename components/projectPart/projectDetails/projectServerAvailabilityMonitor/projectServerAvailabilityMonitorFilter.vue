@@ -67,16 +67,6 @@ export default defineComponent({
                 </div>
             </div>
             <div class="modalbox-detail-content-header-btns">
-                <div class="modalbox-detail-content-header-btn">
-                    <div class="modalbox-detail-content-header-btn-dots"></div>
-                    <div class="modalbox-detail-content-header-btn-select">
-                        <div class="modalbox-detail-content-header-btn-select-angle"></div>
-                        <div class="block-body-content-table-item-option-select-list">
-                            <div class="block-body-content-table-item-option-select-item">Edit</div>
-                            <div class="block-body-content-table-item-option-select-item">Log</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="modalbox-detail-content-header-btn modalbox-detail-content-header-btn-close" @click="$emit('closeModal');"></div>
             </div>
         </div>

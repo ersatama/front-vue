@@ -20,6 +20,7 @@
           <div class="block-body-right-split" >
               <project-details :portalProject="portalProject"></project-details>
               <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
+              <project-statistics-monitor :portalProject="portalProject"></project-statistics-monitor>
           </div>
       </template>
       <project-raw-report :portalProject="portalProject" :links="linksRawReport" v-else-if="tab === 1"></project-raw-report>
@@ -67,7 +68,7 @@ import ProjectUnverified from "../../components/projectPart/projectUnverified/pr
 import ProjectTickets from "../../components/projectPart/projectTickets/projectTickets.vue";
 import ProjectSoftVulnMonitor from "../../components/projectPart/projectSoftVuln/projectSoftVulnMonitor.vue";
 import ProjectServerAvailabilityMonitor
-    from "../../components/projectPart/projectDetails/projectServerAvailabilityMonitor.vue";
+    from "../../components/projectPart/projectDetails/projectServerAvailabilityMonitor/projectServerAvailabilityMonitor.vue";
 
 export default {
   components: {

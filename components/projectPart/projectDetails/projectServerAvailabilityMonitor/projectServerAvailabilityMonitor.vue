@@ -46,9 +46,9 @@
 </template>
 <script>
 import {defineComponent} from 'vue'
-import ModalDetail from "../../modal/modalDetail.vue";
+import ModalDetail from "../../../modal/modalDetail.vue";
 import ProjectServerAvailabilityMonitorFilter from "./projectServerAvailabilityMonitorFilter.vue";
-import ProjectUnverifiedDetail from "../projectUnverified/projectUnverifiedDetail.vue";
+import ProjectUnverifiedDetail from "../../projectUnverified/projectUnverifiedDetail.vue";
 import { Line as LineChartGenerator } from 'vue-chartjs'
 import { Chart,
     Title,

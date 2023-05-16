@@ -25,6 +25,14 @@ export const mutations = {
 }
 
 export const actions = {
+    async scanStat_getScanStat({commit}, payload){
+        const res = await this.$repository.scanStat.getScanStat(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async serverTesterLog_getServerTesterLog({commit}, payload){
         const res = await this.$repository.serverTesterLog.getServerTesterLog(payload);
         const { status, data } = res
