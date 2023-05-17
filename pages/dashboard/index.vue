@@ -5,7 +5,7 @@
       <div class="page-left">
         <div class="page-left-header">
           <div class="page-left-header-title text-muted">
-            Найдено проекта: <span class="page-left-header-title-success"><template v-if="portalProjects.count">{{portalProjects.count}}</template><template v-else>0</template></span>
+            Projects found: <span class="page-left-header-title-success"><template v-if="portalProjects.count">{{portalProjects.count}}</template><template v-else>0</template></span>
           </div>
           <div class="page-left-header-detail">
             <div class="page-left-header-pagination">
