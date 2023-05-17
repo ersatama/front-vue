@@ -1,16 +1,39 @@
 .nav {
-  width: 100%;
+  width: 1460px;
   gap: 20px;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   height: 76px;
   padding-left: 20px;
+  position: fixed;
+  z-index: 10;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.149);
+  &-div {
+    height: 76px;
+    position: relative;
+    width: 100%;
+  }
+  &-dropdown {
+    &-item {
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      &-title {
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        &-sel, &:hover {
+          color: #0b76a6;
+        }
+      }
+    }
+  }
   &-icon {
     width: 40px;
     height: 40px;
     border-radius: 10px;
   }
   &-main {
-    padding: 20px;
+    padding: 0 20px 20px 20px;
   }
   &-title {
     color: #212529;

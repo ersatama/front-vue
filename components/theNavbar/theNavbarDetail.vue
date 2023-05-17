@@ -3,10 +3,26 @@ import {defineComponent} from 'vue'
 
 export default defineComponent({
     name: "theNavbarDetail",
+    data() {
+        return {
+            sel: 1
+        }
+    },
+    watch: {
+        sel(value) {
+            this.$store.commit('localStorage/setMenu', parseInt(value));
+        }
+    },
     computed: {
+        menu() {
+            return this.$store.state.localStorage.menu;
+        },
         user() {
             return this.$store.state.localStorage.user;
         },
+    },
+    created() {
+        this.sel    =   this.menu;
     },
     methods: {
         getNameLetter(user) {
@@ -39,7 +55,7 @@ export default defineComponent({
                     <div class="modalbox-slot-body-form-detail-logo">
                         <div class="modalbox-slot-body-form-detail-name">{{ getNameLetter(user) }}</div>
                     </div>
-                    <div class="modalbox-slot-body-form-detail-info">
+                    <div class="modalbox-slot-body-form-detail-info" style="flex-direction: column; align-items: start;">
                         <div class="modalbox-slot-body-form-detail-info-title">{{ user.name }} {{ user.surname }}</div>
                         <div class="modalbox-slot-body-form-detail-info-desc" v-if="user.auditor && user.auditor.user">{{ user.auditor.user }}</div>
                         <div class="modalbox-slot-body-form-detail-info-add">{{ user.role }}</div>
@@ -69,6 +85,16 @@ export default defineComponent({
                     <div class="modalbox-slot-body-form-detail-icon modalbox-slot-body-form-detail-icon-question"></div>
                     <div class="modalbox-slot-body-form-detail-info">Ask Question</div>
                 </NuxtLink>
+                <div class="modalbox-slot-body-form-detail modalbox-slot-body-form-detail-item">
+                    <div class="modalbox-slot-body-form-detail-icon modalbox-slot-body-form-detail-icon-menu"></div>
+                    <div class="modalbox-slot-body-form-detail-info">
+                        Menu design
+                        <select v-model="sel">
+                            <option value="1">Default design</option>
+                            <option value="2">IOS design</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="modalbox-slot-body-form-detail modalbox-slot-body-form-detail-item" @click="logout">
                     <div class="modalbox-slot-body-form-detail-icon modalbox-slot-body-form-detail-icon-logout"></div>
                     <div class="modalbox-slot-body-form-detail-info">Log out</div>

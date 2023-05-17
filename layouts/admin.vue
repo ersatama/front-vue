@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="bg"></div>
-      <vue-custom-scrollbar class="scroll-main">
+      <vue-custom-scrollbar class="scroll-main" @ps-scroll-y="scrollHandle">
           <div class="d-flex justify-content-center" id="wrapper">
               <!-- Sidebar-->
               <sidebar></sidebar>
@@ -90,6 +90,11 @@ export default {
                 title = 'Discovery';
             }
             return title;
+        }
+    },
+    methods: {
+        scrollHandle(evt) {
+            console.log(evt)
         }
     }
 }

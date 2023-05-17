@@ -433,6 +433,7 @@
             color: #6c757d;
             cursor: pointer;
             gap: 15px;
+            align-items: center;
             &:hover {
               background: #f8fbff;
             }
@@ -475,11 +476,25 @@
             &-logout {
               background-image: url('/images/icons/power.png');
             }
+            &-menu {
+              background-image: url('/images/icons/menu.png');
+            }
           }
           &-info {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex: 1;
+            align-items: center;
+            & > select {
+              margin-left: auto;
+              height: 36px;
+              border: none;
+              padding: 0 10px 0 10px;
+              border-radius: 5px;
+              outline: none;
+              background: #f8fbff;
+              font-size: 12px;
+              color: #0b76a6;
+            }
             &-title {
               font-size: 16px;
               font-weight: 600;

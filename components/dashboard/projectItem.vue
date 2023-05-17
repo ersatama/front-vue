@@ -9,6 +9,7 @@
           <div class="item-header-title-text" v-if="portalProject.portalProjectType">
               <span>#{{portalProject.id}}</span>
               <span v-if="portalProject.url" class="item-header-title-url">{{portalProject.url}}</span>
+              <span v-if="portalProject.projname" class="item-header-title-projname">{{portalProject.projname}}</span>
               <span class="item-header-title-auditor">{{portalProject.scanby}}</span>
           </div>
         </NuxtLink>

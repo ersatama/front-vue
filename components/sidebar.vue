@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="menu === 2">
       <div class="sidebar-menu">
           <div class="sidebar-menu-list">
               <NuxtLink to="/dashboard" class="sidebar-menu-item sidebar-menu-item-projects">
@@ -23,6 +23,9 @@
 export default {
   name: "sidebar",
     computed: {
+        menu() {
+            return this.$store.state.localStorage.menu;
+        },
         user() {
             return this.$store.state.localStorage.user;
         },

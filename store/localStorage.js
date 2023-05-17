@@ -1,4 +1,5 @@
 export const state = () => ({
+    menu: 1,
     user: null,
     portalProjectTypes: [],
     portalProjectFilter: null,
@@ -7,6 +8,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+    setMenu(state, value) {
+        state.menu  =   value;
+    },
     sidebar(state) {
         state.sidebar = !state.sidebar;
     },
