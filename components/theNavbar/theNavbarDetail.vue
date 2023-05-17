@@ -85,7 +85,7 @@ export default defineComponent({
                     <div class="modalbox-slot-body-form-detail-icon modalbox-slot-body-form-detail-icon-question"></div>
                     <div class="modalbox-slot-body-form-detail-info">Ask Question</div>
                 </NuxtLink>
-                <div class="modalbox-slot-body-form-detail modalbox-slot-body-form-detail-item">
+                <div class="modalbox-slot-body-form-detail modalbox-slot-body-form-detail-item" style="border-top: 1px solid #f1f4f8;">
                     <div class="modalbox-slot-body-form-detail-icon modalbox-slot-body-form-detail-icon-menu"></div>
                     <div class="modalbox-slot-body-form-detail-info">
                         Menu design
