@@ -157,6 +157,22 @@ export const actions = {
         }
         return null;
     },
+    async portalProject_getByFilter({commit}, payload){
+        const res = await this.$repository.portalProject.getByFilter(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return [];
+    },
+    async auditor_get({commit}){
+        const res = await this.$repository.auditor.get();
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProject_get({commit}, payload) {
         const res = await this.$repository.portalProject.getWhere(payload);
         const { status, data } = res

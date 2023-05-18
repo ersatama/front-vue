@@ -10,6 +10,7 @@ import scanNeuronJob from "./Master/scanNeuronJob/scanNeuronJob";
 import scanReportRawMaster from "./Master/scanReportRawMaster/scanReportRawMaster";
 import projsoft from "./Master/projsoft/projsoft";
 import auditorTask from "./Master/auditorTask/auditorTask";
+import auditor from "@/repositories/Master/auditor/auditor";
 import scanJob from "./Master/scanJob/scanJob";
 import serverTesterLog from "~/repositories/Master/serverTesterLog/serverTesterLog";
 import scanStat from "@/repositories/Master/scanStat/scanStat";
@@ -27,6 +28,7 @@ export const repository = ($axios) => ({
     scanReportRawMaster: scanReportRawMaster($axios),
     projsoft: projsoft($axios),
     auditorTask: auditorTask($axios),
+    auditor: auditor($axios),
     scanJob: scanJob($axios),
     serverTesterLog: serverTesterLog($axios),
     scanStat: scanStat($axios),

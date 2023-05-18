@@ -1,4 +1,11 @@
 export default ($axios) => ({
+    getByFilter(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getByFilter', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     getWhere(payload) {
         return $axios.post('/api/v1/portal/portalProject/getWhere?page='+payload.page+'&take='+payload.take, payload).then(response => {
             return response;
