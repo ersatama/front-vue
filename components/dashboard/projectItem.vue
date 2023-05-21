@@ -226,7 +226,6 @@
 <script>
 import ProjectVulns from "./projectVulns.vue";
 import ProjectDrafts from "./projectDrafts.vue";
-import projectStatus from "./projectStatus.vue";
 
 export default {
   name: "projectItem",
@@ -240,9 +239,6 @@ export default {
     }
   },
     computed: {
-        projectStatus() {
-            return projectStatus
-        },
       user() {
           return this.$store.state.localStorage.user;
       },

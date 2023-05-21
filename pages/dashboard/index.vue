@@ -1,6 +1,5 @@
 <template>
   <div>
-    <project-status></project-status>
     <div class="d-flex page" v-if="portalProjects">
       <div class="page-left">
         <div class="page-left-header">
@@ -65,13 +64,12 @@
 </template>
 
 <script>
-import ProjectStatus from "../../components/dashboard/projectStatus.vue";
 import ProjectItem from "../../components/dashboard/projectItem.vue";
 import DashboardFilter from "../../components/dashboard/dashboardFilter.vue";
 import DashboardLoading from "../../components/modal/dashboardLoading.vue";
 
 export default {
-  components: {DashboardLoading, DashboardFilter, ProjectItem, ProjectStatus},
+  components: {DashboardLoading, DashboardFilter, ProjectItem},
   layout: 'admin',
   name: "index",
   data() {

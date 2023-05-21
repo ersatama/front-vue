@@ -13,7 +13,7 @@
           </div>
           <div class="sidebar-menu-split"></div>
           <div class="sidebar-menu-list">
-              <div class="sidebar-menu-item sidebar-menu-item-home"></div>
+              <NuxtLink to="/my_tasks" class="sidebar-menu-item sidebar-menu-item-home"></NuxtLink>
           </div>
       </div>
   </div>

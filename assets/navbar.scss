@@ -1,14 +1,82 @@
 .nav {
-  width: 1460px;
   gap: 20px;
-  border-radius: 0 0 10px 10px;
-  height: 76px;
   padding-left: 20px;
-  position: fixed;
-  z-index: 10;
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.149);
+  &-head {
+    width: 1460px;
+    position: fixed;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+    z-index: 10;
+    background: #fff;
+  }
+  &-alerts {
+    display: flex;
+    font-size: 10px;
+    border-bottom: 1px solid #F1F4F8;
+    color: #6c757d;
+    font-weight: 600;
+    &-item {
+      flex-grow: 1;
+      display: flex;
+      border-right: 1px solid #F1F4F8;
+      padding: 5px 5px 5px 20px;
+      align-items: center;
+      &:last-child {
+        border-right: none;
+        padding-right: 20px;
+      }
+      &-loading {
+        height: 19px;
+        width: 50px;
+      }
+      &-count {
+        display: flex;
+        margin-left: auto;
+        gap: 5px;
+        & > div {
+          padding: 2px 7px 2px 7px;
+          border-radius: 30px;
+        }
+        &-failure {
+          color: #dc3545;
+          background: #f9d3d7;
+        }
+        &-success {
+          color: #28a745;
+          background: #c8f1d2;
+        }
+      }
+      &:nth-child(1) > .nav-alerts-item-title {
+        color: #0b76a6;
+      }
+      &:nth-child(2) > .nav-alerts-item-title {
+        color: #d18700;
+      }
+      &:nth-child(3) > .nav-alerts-item-title {
+        color: #dc3545;
+      }
+      &:nth-child(4) > .nav-alerts-item-title {
+        color: #28a745;
+      }
+      &:nth-child(5) > .nav-alerts-item-title {
+        color: #DA70D6;
+      }
+      &:nth-child(6) > .nav-alerts-item-title {
+        color: #FF6347;
+      }
+      &:nth-child(7) > .nav-alerts-item-title {
+        color: #4169E1;
+      }
+      &:nth-child(8) > .nav-alerts-item-title {
+        color: #008080;
+      }
+      &:nth-child(9) > .nav-alerts-item-title {
+        color: #FF69B4;
+      }
+    }
+  }
   &-div {
-    height: 76px;
+    height: 106px;
     position: relative;
     width: 100%;
   }
@@ -20,17 +88,21 @@
       &-title {
         font-weight: 600;
         color: #6c757d;
-        text-transform: uppercase;
+        border-bottom: 1px solid transparent;
+        padding: 6px 12px 6px 12px;
+        border-radius: 30px;
         &-sel, &:hover {
-          color: #0b76a6;
+          color: #28a745;
+          background: #c8f1d2;
         }
       }
     }
   }
   &-icon {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
+    transform: scale(.8);
   }
   &-main {
     padding: 0 20px 20px 20px;

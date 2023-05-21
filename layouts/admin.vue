@@ -69,6 +69,8 @@ export default {
               className = 'sidebar-menu-item-neuron';
           } else if (this.route === 'discovery') {
               className = 'sidebar-menu-item-discovery';
+          } else if (this.route === 'my_tasks') {
+              className = 'sidebar-menu-item-home';
           }
           return className;
       },
@@ -88,6 +90,8 @@ export default {
                 title = 'Neuron';
             } else if (this.route === 'discovery') {
                 title = 'Discovery';
+            } else if (this.route === 'my_tasks') {
+                title = 'My tasks';
             }
             return title;
         }
