@@ -21,6 +21,7 @@
               <project-details :portalProject="portalProject"></project-details>
               <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
               <project-statistics-monitor :portalProject="portalProject"></project-statistics-monitor>
+              <project-additional-application-urls :portalProject="portalProject"></project-additional-application-urls>
           </div>
       </template>
       <project-raw-report :portalProject="portalProject" :links="linksRawReport" v-else-if="tab === 1"></project-raw-report>

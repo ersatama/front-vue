@@ -4,10 +4,22 @@ export const state = () => ({
     portalProjectTypes: [],
     portalProjectFilter: null,
     sidebar: true,
-    statuses: null
+    statuses: null,
+    details: true,
+    serverAvailability: true,
+    projectStatistics: true
 })
 
 export const mutations = {
+    toggleProjectStatistics(state) {
+        state.projectStatistics    =   !state.projectStatistics;
+    },
+    toggleServerAvailability(state) {
+        state.serverAvailability    =   !state.serverAvailability;
+    },
+    toggleDetails(state) {
+        state.details   =   !state.details;
+    },
     setMenu(state, value) {
         state.menu  =   value;
     },

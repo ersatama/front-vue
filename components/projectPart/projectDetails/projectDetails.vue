@@ -5,8 +5,11 @@
             <div class="block-body-right-desc" v-if="portalProject.portalProjectType">
                 <template v-if="portalProject.portalProjectType.title">{{portalProject.portalProjectType.title}}</template><template v-if="portalProject.portalProjectType.name"> {{portalProject.portalProjectType.name}}</template><template v-if="portalProject.rescan > 0"> Patch Verification</template>
             </div>
+            <div class="block-body-right-header-buttons">
+                <div class="block-body-right-header-buttons-dropdown" :class="{'block-body-right-header-buttons-dropdown-close':(!show)}" onselectstart="return false" @click="$store.commit('localStorage/toggleDetails');"></div>
+            </div>
         </div>
-        <div class="block-body-content">
+        <div class="block-body-content" :class="{'block-body-content-close':!show}">
             <div class="block-body-content-data" v-if="portalProject">
                 <div class="block-body-content-data-list">
                     <div class="block-body-content-item">
@@ -23,7 +26,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-profile"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Responsible person</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.scanby">
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.scanby" :title="portalProject.scanby">
                                 {{ portalProject.scanby }}
                             </div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
@@ -33,7 +36,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-web"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Target host</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.host">{{ portalProject.host }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.host" :title="portalProject.host">{{ portalProject.host }}</div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -41,7 +44,13 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-link"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Target url</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.url">{{ portalProject.url }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.url">
+                                {{ portalProject.url }}
+                                <div class="block-body-content-item-detail-info">
+                                    <div class="block-body-content-item-detail-info-angle"></div>
+                                    <div class="block-body-content-item-detail-info-main">{{ portalProject.url }}</div>
+                                </div>
+                            </div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -51,7 +60,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-calendar"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Scan scheduled on</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.dtshedule">{{ portalProject.dtshedule }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.dtshedule" :title="portalProject.dtshedule">{{ portalProject.dtshedule }}</div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -59,7 +68,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-calendar"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Scan jobs starts on</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.starttime">{{ portalProject.starttime }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.starttime" :title="portalProject.starttime">{{ portalProject.starttime }}</div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -67,7 +76,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-calendar"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Scan end on</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.portalProp">{{ portalProject.portalProp }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.portalProp" :title="portalProject.portalProp">{{ portalProject.portalProp }}</div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -75,7 +84,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-calendar"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Report delivery on</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.portalProp">{{ portalProject.portalProp }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.portalProp" :title="portalProject.portalProp">{{ portalProject.portalProp }}</div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -103,7 +112,7 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-email"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Tech email</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.portalUser && portalProject.portalUser.email">{{portalProject.portalUser.email}}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.portalUser && portalProject.portalUser.email" :title="portalProject.portalUser.email">{{portalProject.portalUser.email}}</div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -111,7 +120,13 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-writing"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Special Requirements</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.specreq">{{ portalProject.specreq }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.specreq">
+                                {{ portalProject.specreq }}
+                                <div class="block-body-content-item-detail-info">
+                                    <div class="block-body-content-item-detail-info-angle"></div>
+                                    <div class="block-body-content-item-detail-info-main">{{ portalProject.specreq }}</div>
+                                </div>
+                            </div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -206,7 +221,13 @@
                         <div class="block-body-content-item-icon block-body-content-item-icon-comment"></div>
                         <div class="block-body-content-item-detail">
                             <div class="block-body-content-item-detail-title">Authentication Comment</div>
-                            <div class="block-body-content-item-detail-desc" v-if="portalProject.authcomment">{{ portalProject.authcomment }}</div>
+                            <div class="block-body-content-item-detail-desc" v-if="portalProject.authcomment">
+                                {{ portalProject.authcomment }}
+                                <div class="block-body-content-item-detail-info">
+                                    <div class="block-body-content-item-detail-info-angle"></div>
+                                    <div class="block-body-content-item-detail-info-main">{{ portalProject.authcomment }}</div>
+                                </div>
+                            </div>
                             <div class="block-body-content-item-detail-desc" v-else>-</div>
                         </div>
                     </div>
@@ -220,7 +241,12 @@
 <script>
 export default {
     name: "projectDetails",
-    props: ['portalProject']
+    props: ['portalProject'],
+    computed: {
+        show() {
+            return this.$store.state.localStorage.details;
+        }
+    }
 }
 </script>
 
