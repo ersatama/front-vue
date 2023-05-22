@@ -10,7 +10,7 @@ export default defineComponent({
 <template>
     <div class="block-body-right" >
         <div class="block-body-right-header">
-            <div class="block-body-right-title">Project details</div>
+            <div class="block-body-right-title">Additional Application URLs</div>
             <div class="block-body-right-desc">Visible to Client</div>
         </div>
     </div>

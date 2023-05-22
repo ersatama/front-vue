@@ -7,10 +7,14 @@ export const state = () => ({
     statuses: null,
     details: true,
     serverAvailability: true,
-    projectStatistics: true
+    projectStatistics: true,
+    jobStatuses: true,
 })
 
 export const mutations = {
+    toggleJobStatuses(state) {
+        state.jobStatuses    =   !state.jobStatuses;
+    },
     toggleProjectStatistics(state) {
         state.projectStatistics    =   !state.projectStatistics;
     },
@@ -115,6 +119,14 @@ export const actions = {
     },
     async auditorTask_getWhere({commit}, payload) {
         const res = await this.$repository.auditorTask.getWhere(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async scanJob_getJobStatuses({commit}, payload){
+        const res = await this.$repository.scanJob.getJobStatuses(payload);
         const { status, data } = res
         if (status === 200) {
             return data;
