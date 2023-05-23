@@ -19,6 +19,7 @@
       <template v-if="tab === 0">
           <div class="block-body-right-split" >
               <project-details :portalProject="portalProject"></project-details>
+              <project-settings :portalProject="portalProject"></project-settings>
               <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
               <project-statistics-monitor :portalProject="portalProject"></project-statistics-monitor>
               <project-additional-application-urls :portalProject="portalProject"></project-additional-application-urls>
@@ -27,7 +28,6 @@
           </div>
       </template>
       <project-raw-report :portalProject="portalProject" :links="linksRawReport" v-else-if="tab === 1"></project-raw-report>
-      <project-alerts :portalProject="portalProject" v-else-if="tab === 2"></project-alerts>
       <project-scan-jobs :portalProject="portalProject" v-else-if="tab === 3"></project-scan-jobs>
       <project-sitemap :links="links" v-else-if="tab === 4"></project-sitemap>
       <project-unpatched :portalProject="portalProject" v-else-if="tab === 5"></project-unpatched>
@@ -58,7 +58,6 @@ import ProjectUnpatched from "../../components/projectPart/projectUnpatched/proj
 import ProjectTasks from "../../components/projectPart/projectTasks/projectTasks.vue";
 import ProjectRawbase from "../../components/projectPart/projectRawbase/projectRawbase.vue";
 import ProjectDetails from "../../components/projectPart/projectDetails/projectDetails.vue";
-import ProjectAlerts from "../../components/projectPart/projectAlerts/projectAlerts.vue";
 import ProjectSidebar from "../../components/projectPart/projectSidebar.vue";
 import ProjectLoading from "../../components/modal/projectLoading.vue";
 import ProjectBlacklist from "../../components/projectPart/projectBlacklist/projectBlacklist.vue";
@@ -87,7 +86,6 @@ export default {
       ProjectBlacklist,
       ProjectLoading,
       ProjectSidebar,
-      ProjectAlerts,
       ProjectDetails,
       ProjectRawbase,
       ProjectTasks,

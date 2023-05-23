@@ -10,10 +10,14 @@ export const state = () => ({
     projectStatistics: true,
     jobStatuses: true,
     additionalApplicationUrls: true,
-    additionalInformation: true
+    additionalInformation: true,
+    projectSettings: true
 })
 
 export const mutations = {
+    toggleProjectSettings(state) {
+        state.projectSettings   =   !state.projectSettings;
+    },
     toggleAdditionalInformation(state) {
         state.additionalInformation =   !state.additionalInformation;
     },

@@ -16,11 +16,6 @@
                 <div class="block-body-left-item-icon-arr"></div>
             </div>
         </NuxtLink>
-        <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=alerts'">
-            <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 2)}">
-                <div class="block-body-left-item-icon block-body-left-item-icon-warning"></div> Alerts <div class="block-body-left-item-icon-arr"></div>
-            </div>
-        </NuxtLink>
         <NuxtLink :to="'/dashboard/' + portalProject.id + '?tab=scan_jobs'">
             <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 3)}">
                 <div class="block-body-left-item-icon block-body-left-item-icon-bag"></div>
