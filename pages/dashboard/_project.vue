@@ -22,6 +22,7 @@
               <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
               <project-statistics-monitor :portalProject="portalProject"></project-statistics-monitor>
               <project-additional-application-urls :portalProject="portalProject"></project-additional-application-urls>
+              <project-additional-information :portalProject="portalProject"></project-additional-information>
               <project-job-statuses :portalProject="portalProject"></project-job-statuses>
           </div>
       </template>
