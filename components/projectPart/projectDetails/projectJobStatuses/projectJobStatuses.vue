@@ -69,7 +69,7 @@ export default defineComponent({
                                     <div class="block-body-content-table-item block-body-content-table-item-data">
                                         <template v-if="serviceData.process && !['SOFTKILLED','KILLED','STOPPED','ERROR'].includes(serviceData.processStatus)">{{serviceData.processStatus}}</template>
                                         <template v-else-if="serviceData.process && ['SOFTKILLED','KILLED','STOPPED','ERROR'].includes(serviceData.processStatus)">{{serviceData.processStatus}}</template>
-                                        <template v-else>No process {{serviceData.processStatus}}</template>
+                                        <template v-else>No process</template>
                                     </div>
                                 </div>
                             </template>

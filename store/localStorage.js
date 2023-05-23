@@ -9,9 +9,13 @@ export const state = () => ({
     serverAvailability: true,
     projectStatistics: true,
     jobStatuses: true,
+    additionalApplicationUrls: true
 })
 
 export const mutations = {
+    toggleAdditionalApplicationUrls(state) {
+        state.additionalApplicationUrls =   !state.additionalApplicationUrls;
+    },
     toggleJobStatuses(state) {
         state.jobStatuses    =   !state.jobStatuses;
     },
