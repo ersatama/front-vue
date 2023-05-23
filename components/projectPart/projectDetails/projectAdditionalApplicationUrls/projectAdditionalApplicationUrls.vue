@@ -33,7 +33,7 @@ export default defineComponent({
         </div>
         <div class="block-body-content" :class="{'block-body-content-close':!show}">
             <div class="block-body-content-table">
-                <div class="block-body-content-table-header" v-if="urls.length > 0">
+                <div class="block-body-content-table-header" v-if="urls && urls.length > 0">
                     <div class="block-body-content-table-tr" v-for="(url, key) in urls" :key="key">
                         <div class="block-body-content-table-item" style="color: rgb(40, 167, 69);">{{ url }}</div>
                     </div>
