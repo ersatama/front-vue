@@ -21,7 +21,7 @@
             </template>
         </div>
           <div class="item-alerts" v-if="portalProject.alerts">
-              <div class="item-alert" v-for="(alert,key) in portalProject.alerts" :key="key">{{ alert }}</div>
+              <div class="item-alert" v-for="(alert,key) in portalProject.alerts" :key="key" :class="{'item-alert-danger': (alert === 'Has stopped jobs')}">{{ alert }}</div>
           </div>
       </div>
       <div class="item-header-detail">
