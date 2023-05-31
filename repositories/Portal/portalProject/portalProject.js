@@ -55,4 +55,11 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getSettings(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getSettings/', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    }
 });

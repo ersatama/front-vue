@@ -170,6 +170,14 @@ export const actions = {
         }
         return false;
     },
+    async portalProject_getSettings({commit}, payload){
+        const res = await this.$repository.portalProject.getSettings(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProject_filter({commit}) {
         const res = await this.$repository.portalProject.filter();
         const { status, data } = res
