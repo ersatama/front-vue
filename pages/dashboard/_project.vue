@@ -17,14 +17,21 @@
     <div class="block-body" v-if="portalProject">
       <project-sidebar :portalProject="portalProject" :tab="tab" :links="links"></project-sidebar>
       <template v-if="tab === 0">
-          <div class="block-body-right-split" >
+          <div class="block-body-right-split block-body-right-split-column" >
+            <draggable>
               <project-details :portalProject="portalProject"></project-details>
+              <project-alert-settings :portalProject="portalProject"></project-alert-settings>
+              <project-internal-comment :portalProject="portalProject"></project-internal-comment>
+              <project-report-params :portalProject="portalProject"></project-report-params>
+              <project-application-evaluation :portalProject="portalProject"></project-application-evaluation>
               <project-settings :portalProject="portalProject"></project-settings>
+              <project-s-c-a :portalProject="portalProject"></project-s-c-a>
               <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
               <project-statistics-monitor :portalProject="portalProject"></project-statistics-monitor>
               <project-additional-application-urls :portalProject="portalProject"></project-additional-application-urls>
               <project-additional-information :portalProject="portalProject"></project-additional-information>
               <project-job-statuses :portalProject="portalProject"></project-job-statuses>
+            </draggable>
           </div>
       </template>
       <project-raw-report :portalProject="portalProject" :links="linksRawReport" v-else-if="tab === 1"></project-raw-report>
@@ -71,6 +78,7 @@ import ProjectTickets from "../../components/projectPart/projectTickets/projectT
 import ProjectSoftVulnMonitor from "../../components/projectPart/projectSoftVuln/projectSoftVulnMonitor.vue";
 import ProjectServerAvailabilityMonitor
     from "../../components/projectPart/projectDetails/projectServerAvailabilityMonitor/projectServerAvailabilityMonitor.vue";
+import draggable from "vuedraggable";
 
 export default {
   components: {
@@ -90,7 +98,7 @@ export default {
       ProjectRawbase,
       ProjectTasks,
     ProjectUnpatched,
-    ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent},
+    ProjectScanJobs, ProjectSitemap, RawReportFilter, ModalBox, ProjectRawReport, ExtraProfileContent, draggable},
   layout: 'admin',
   name: "project",
   data() {

@@ -1016,13 +1016,14 @@ a {
           display: flex;
           width: 100%;
           border-bottom: 1px solid #F1F4F8;
+          flex-wrap: wrap;
           &:last-child {
             border-bottom: none;
           }
           & > div {
             flex-grow: 1;
-            min-width: 25%;
-            max-width: 25%;
+            min-width: 50%;
+            max-width: 50%;
           }
         }
       }
@@ -1295,19 +1296,52 @@ a {
       flex-direction: column;
       gap: 20px;
       height: max-content;
+      &-column {
+        & > div {
+          display: flex;
+          flex-direction: initial;
+          width: 1260px;
+          gap: 20px;
+          flex-wrap: wrap;
+          & > div {
+            width: 620px;
+            max-width: 620px;
+            min-width: 620px;
+          }
+        }
+      }
     }
     &-right {
       flex-grow: 1;
       border-radius: 10px;
       background: #fff;
       height: max-content;
-      max-width: 1160px;
-      min-width: 1160px;
+      max-width: 1260px;
+      min-width: 1260px;
       &-header {
         display: flex;
         flex-direction: column;
         padding: 20px;
         position: relative;
+        &-button {
+          &-checkbox {
+            height: 36px;
+            padding: 0 15px 0 15px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            background: #f8fbff;
+            color: #7d7f81;
+            cursor: pointer;
+            border-radius: 5px;
+            &:hover, &-active {
+              background: #0b76a6;
+              color: #fff;
+            }
+          }
+        }
         &-buttons {
           position: absolute;
           right: 20px;

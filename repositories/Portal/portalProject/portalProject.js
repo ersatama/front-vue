@@ -55,6 +55,20 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getActualSoftware(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getActualSoftware/', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
+    getSoftReport(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getSoftReport/', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     getSettings(payload) {
         return $axios.post('/api/v1/portal/portalProject/getSettings/', payload).then(response => {
             return response;

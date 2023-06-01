@@ -11,10 +11,34 @@ export const state = () => ({
     jobStatuses: true,
     additionalApplicationUrls: true,
     additionalInformation: true,
-    projectSettings: true
+    projectSettings: true,
+    projectSCA: true,
+    projectApplicationEvaluation: true,
+    projectOwaspGroup: true,
+    projectAlertSettings: true,
+    projectInternalComment: true,
+    projectReportParams: true,
 })
 
 export const mutations = {
+    toggleProjectReportParams(state) {
+        state.projectReportParams   =   !state.projectReportParams;
+    },
+    toggleProjectInternalComment(state) {
+        state.projectInternalComment  =   !state.projectInternalComment;
+    },
+    toggleProjectAlertSettings(state) {
+        state.projectAlertSettings  =   !state.projectAlertSettings;
+    },
+    toggleProjectOwaspGroup(state) {
+        state.projectOwaspGroup  =   !state.projectOwaspGroup;
+    },
+    toggleProjectApplicationEvaluation(state) {
+        state.projectApplicationEvaluation  =   !state.projectApplicationEvaluation;
+    },
+    toggleProjectSCA(state) {
+        state.projectSCA   =   !state.projectSCA;
+    },
     toggleProjectSettings(state) {
         state.projectSettings   =   !state.projectSettings;
     },
@@ -169,6 +193,22 @@ export const actions = {
             return true;
         }
         return false;
+    },
+    async portalProject_getActualSoftware({commit}, payload){
+        const res = await this.$repository.portalProject.getActualSoftware(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProject_getSoftReport({commit}, payload){
+        const res = await this.$repository.portalProject.getSoftReport(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
     },
     async portalProject_getSettings({commit}, payload){
         const res = await this.$repository.portalProject.getSettings(payload);

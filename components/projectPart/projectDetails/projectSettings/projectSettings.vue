@@ -90,9 +90,9 @@ export default defineComponent({
                   <div class="block-body-content-table-tr">
                       <div class="block-body-content-table-item" style="width: 50%;">Responsible person</div>
                       <div class="block-body-content-table-item" style="width: 50%; color: rgb(40, 167, 69); display: flex; gap: 5px;">
-                          <template v-if="data.portalProject.scanby">
+                          <template v-if="portalProject.scanby">
                               <span v-if="data.portalProject.jit === 1 && data.portalProject.actualAuditor">{{ data.portalProject.actualAuditor.actualAuditor}}</span>
-                              <span v-else>{{data.portalProject.scanby}}</span>
+                              <span v-else>{{portalProject.scanby}}</span>
                           </template>
                           <template v-else>
                               <span>No responsible person</span>

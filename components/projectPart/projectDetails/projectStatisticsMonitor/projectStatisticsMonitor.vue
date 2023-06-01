@@ -239,11 +239,11 @@ export default defineComponent({
             </div>
             <div class="block-body-graph">
                 <client-only>
-                    <Bar :chart-data="allData" :chart-options="chartOptions" :height="500" v-if="tab === 0"></Bar>
-                    <Bar :chart-data="requestCntData" :chart-options="chartOptions" :height="500" v-if="tab === 1"></Bar>
-                    <LineChartGenerator :chart-data="downloadsData" :chart-options="chartOptions" :height="500" v-if="tab === 2"/>
-                    <LineChartGenerator :chart-data="loginsData" :chart-options="chartOptions" :height="500" v-if="tab === 3"/>
-                    <LineChartGenerator :chart-data="loginFailsData" :chart-options="chartOptions" :height="500" v-if="tab === 4"/>
+                    <Bar :chart-data="allData" :chart-options="chartOptions" :height="350" v-if="tab === 0"></Bar>
+                    <Bar :chart-data="requestCntData" :chart-options="chartOptions" :height="350" v-if="tab === 1"></Bar>
+                    <LineChartGenerator :chart-data="downloadsData" :chart-options="chartOptions" :height="350" v-if="tab === 2"/>
+                    <LineChartGenerator :chart-data="loginsData" :chart-options="chartOptions" :height="350" v-if="tab === 3"/>
+                    <LineChartGenerator :chart-data="loginFailsData" :chart-options="chartOptions" :height="350" v-if="tab === 4"/>
                 </client-only>
             </div>
         </div>

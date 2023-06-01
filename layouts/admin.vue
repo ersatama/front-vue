@@ -130,8 +130,8 @@ export default {
 }
 
 #page-content-wrapper {
-  min-width: 100vw;
-    max-width: 1500px;
+    min-width: 100vw;
+    max-width: 1600px;
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {

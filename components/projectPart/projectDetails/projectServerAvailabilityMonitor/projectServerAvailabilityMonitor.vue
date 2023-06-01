@@ -19,9 +19,9 @@
             </div>
             <div class="block-body-right-header-buttons">
                 <div class="block-body-right-header-options">
-                    <div class="block-body-right-header-option" :class="{'block-body-right-header-option-sel':(period === 1)}" @click="period = 1">Default</div>
-                    <div class="block-body-right-header-option" :class="{'block-body-right-header-option-sel':(period === 12)}" @click="period = 12">Last 12 hours</div>
-                    <div class="block-body-right-header-option" :class="{'block-body-right-header-option-sel':(period === 120)}" @click="period = 120">Last 5 days</div>
+                    <div class="block-body-right-header-option block-body-right-header-option-sel" v-if="period === 1" @click="period = 12">Default</div>
+                    <div class="block-body-right-header-option block-body-right-header-option-sel" v-if="period === 12" @click="period = 120">Last 12 hours</div>
+                    <div class="block-body-right-header-option block-body-right-header-option-sel" v-if="period === 120" @click="period = 1">Last 5 days</div>
                 </div>
                 <button class="block-body-content-filter" @click="filterModal = true"><i class="block-body-content-filter-icon"></i> Filter</button>
                 <div class="block-body-right-header-buttons-dropdown" :class="{'block-body-right-header-buttons-dropdown-close':(!show)}" onselectstart="return false" @click="$store.commit('localStorage/toggleServerAvailability');"></div>
@@ -47,16 +47,17 @@
             </div>
             <div class="block-body-graph">
                 <client-only>
-                    <LineChartGenerator :chart-data="all" :chart-options="chartOptions" :height="500" v-if="tab === 0"/>
-                    <LineChartGenerator :chart-data="startTransferTimeData" :chart-options="chartOptions" :height="500" v-if="tab === 1"/>
-                    <LineChartGenerator :chart-data="connectionTimeData" :chart-options="chartOptions" :height="500" v-if="tab === 2"/>
-                    <LineChartGenerator :chart-data="fullResponseTimeData" :chart-options="chartOptions" :height="500" v-if="tab === 3"/>
+                    <LineChartGenerator :chart-data="all" :chart-options="chartOptions" :height="350" v-if="tab === 0"/>
+                    <LineChartGenerator :chart-data="startTransferTimeData" :chart-options="chartOptions" :height="350" v-if="tab === 1"/>
+                    <LineChartGenerator :chart-data="connectionTimeData" :chart-options="chartOptions" :height="350" v-if="tab === 2"/>
+                    <LineChartGenerator :chart-data="fullResponseTimeData" :chart-options="chartOptions" :height="350" v-if="tab === 3"/>
                 </client-only>
             </div>
         </div>
     </div>
 </template>
 <script>
+
 import {defineComponent} from 'vue'
 import ModalDetail from "../../../modal/modalDetail.vue";
 import ProjectServerAvailabilityMonitorFilter from "./projectServerAvailabilityMonitorFilter.vue";
