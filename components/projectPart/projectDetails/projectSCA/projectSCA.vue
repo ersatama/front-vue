@@ -81,10 +81,10 @@ export default defineComponent({
         </div>
         <div class="block-body-content-table-body">
           <template v-for="(soft, key, mkey) in actualSoftware.software">
-            <div class="block-body-content-table-tr" :key="mkey">
+            <div class="block-body-content-table-tr" :key="key">
               <div class="block-body-content-table-item" style="color: #0b76a6; font-weight: 600;">{{ key }}</div>
             </div>
-            <div class="block-body-content-table-tr" v-for="(item, itemKey) in soft" :key="itemKey">
+            <div class="block-body-content-table-tr" v-for="(item, itemKey) in soft" >
               <div class="block-body-content-table-item block-body-content-table-item-status">{{ itemKey }}</div>
               <div class="block-body-content-table-item block-body-content-table-item-status">
                 <template v-for="(v,k, ind) in Object.entries(item)">
@@ -95,10 +95,10 @@ export default defineComponent({
                 <template v-for="(v,k, ind) in Object.entries(item)">
                   <template v-for="(v1,k1) in v[1]">
                     <template v-if="!active">
-                      <div v-for="(v2,k2) in v1" :key="k2" v-if="v2.active === 1">{{ v2.last }}</div>
+                      <div v-for="(v2,k2) in v1" v-if="v2.active === 1">{{ v2.last }}</div>
                     </template>
                     <template v-else>
-                      <div v-for="(v2,k2) in v1" :key="k2">{{ v2.last }}</div>
+                      <div v-for="(v2,k2) in v1">{{ v2.last }}</div>
                     </template>
                   </template>
                 </template>
@@ -107,10 +107,10 @@ export default defineComponent({
                 <template v-for="(v,k, ind) in Object.entries(item)">
                   <template v-for="(v1,k1) in v[1]">
                     <template v-if="!active">
-                      <div v-for="(v2,k2) in v1" :key="k2" v-if="v2.active === 1">{{ v2.type }}</div>
+                      <div v-for="(v2,k2) in v1" v-if="v2.active === 1">{{ v2.type }}</div>
                     </template>
                     <template v-else>
-                      <div v-for="(v2,k2) in v1" :key="k2">{{ v2.type }}</div>
+                      <div v-for="(v2,k2) in v1">{{ v2.type }}</div>
                     </template>
                   </template>
                 </template>

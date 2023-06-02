@@ -75,5 +75,12 @@ export default ($axios) => ({
         }).catch(error => {
             return error.response;
         });
+    },
+    getComments(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getComments/', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
     }
 });

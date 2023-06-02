@@ -210,6 +210,14 @@ export const actions = {
         }
         return null;
     },
+    async portalProject_getComments({commit}, payload){
+        const res = await this.$repository.portalProject.getComments(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProject_getSettings({commit}, payload){
         const res = await this.$repository.portalProject.getSettings(payload);
         const { status, data } = res
