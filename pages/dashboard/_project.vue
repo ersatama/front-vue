@@ -26,6 +26,13 @@
               <project-application-evaluation :portalProject="portalProject"></project-application-evaluation>
               <project-settings :portalProject="portalProject"></project-settings>
               <project-s-c-a :portalProject="portalProject"></project-s-c-a>
+              <project-q-a :portalProject="portalProject"></project-q-a>
+              <project-alert :portalProject="portalProject"></project-alert>
+              <project-statistics :portalProject="portalProject"></project-statistics>
+              <project-d-d-o-s-sustainability :portalProject="portalProject"></project-d-d-o-s-sustainability>
+              <project-v-p-n-configuration :portalProject="portalProject"></project-v-p-n-configuration>
+              <project-private-data :portalProject="portalProject"></project-private-data>
+              <project-auditors-time-tracking :portalProject="portalProject"></project-auditors-time-tracking>
               <project-server-availability-monitor :portalProject="portalProject"></project-server-availability-monitor>
               <project-statistics-monitor :portalProject="portalProject"></project-statistics-monitor>
               <project-additional-application-urls :portalProject="portalProject"></project-additional-application-urls>

@@ -18,9 +18,37 @@ export const state = () => ({
     projectAlertSettings: true,
     projectInternalComment: true,
     projectReportParams: true,
+    projectQA: true,
+    projectAlert: true,
+    projectStats: true,
+    projectPrivateData: true,
+    projectAuditorsTimeTracking: true,
+    projectDDOSSustainability: true,
+    projectVPNConfiguration: true,
 })
 
 export const mutations = {
+    toggleProjectVPNConfiguration(state) {
+        state.projectVPNConfiguration    =   !state.projectVPNConfiguration;
+    },
+    toggleProjectDDOSSustainability(state) {
+        state.projectDDOSSustainability    =   !state.projectDDOSSustainability;
+    },
+    toggleProjectAuditorsTimeTracking(state) {
+        state.projectAuditorsTimeTracking    =   !state.projectAuditorsTimeTracking;
+    },
+    toggleProjectPrivateData(state) {
+        state.projectPrivateData    =   !state.projectPrivateData;
+    },
+    toggleProjectStats(state) {
+        state.projectStats  =   !state.projectStats;
+    },
+    toggleProjectAlert(state) {
+        state.projectAlert  =   !state.projectAlert;
+    },
+    toggleProjectQA(state) {
+        state.projectQA =   !state.projectQA;
+    },
     toggleProjectReportParams(state) {
         state.projectReportParams   =   !state.projectReportParams;
     },
@@ -91,6 +119,22 @@ export const actions = {
     },
     async serverTesterLog_getServerTesterLog({commit}, payload){
         const res = await this.$repository.serverTesterLog.getServerTesterLog(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProp_getReportParams({commit}, payload){
+        const res = await this.$repository.portalProp.getReportParams(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProp_getApplicationEvaluation({commit}, payload){
+        const res = await this.$repository.portalProp.getApplicationEvaluation(payload);
         const { status, data } = res
         if (status === 200) {
             return data;
@@ -193,6 +237,14 @@ export const actions = {
             return true;
         }
         return false;
+    },
+    async portalProject_getQA({commit}, payload){
+        const res = await this.$repository.portalProject.getQA(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
     },
     async portalProject_getActualSoftware({commit}, payload){
         const res = await this.$repository.portalProject.getActualSoftware(payload);

@@ -55,6 +55,13 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getQA(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getQA', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     getActualSoftware(payload) {
         return $axios.post('/api/v1/portal/portalProject/getActualSoftware/', payload).then(response => {
             return response;
