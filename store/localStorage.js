@@ -125,6 +125,22 @@ export const actions = {
         }
         return null;
     },
+    async evenalerterEvent_getAlert({commit}, payload) {
+        const res = await this.$repository.evenalerterEvent.getAlert(payload);
+        const {status, data} = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProp_getDDOSSustainability({commit}, payload) {
+        const res = await this.$repository.portalProp.getDDOSSustainability(payload);
+        const {status, data} = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProp_getReportParams({commit}, payload){
         const res = await this.$repository.portalProp.getReportParams(payload);
         const { status, data } = res

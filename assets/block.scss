@@ -670,6 +670,7 @@ a {
             max-width: 30px;
             &-input {
               width: 14px;
+              min-width: 14px;
               height: 14px;
               background: #fff;
               border: 1px solid #dbe2eb;
@@ -1009,6 +1010,8 @@ a {
                 overflow: hidden;
                 z-index: 3;
                 position: relative;
+                display: flex;
+                flex-direction: column;
               }
               &-item {
                 min-width: 100%;

@@ -14,6 +14,7 @@ import auditor from "@/repositories/Master/auditor/auditor";
 import scanJob from "./Master/scanJob/scanJob";
 import serverTesterLog from "~/repositories/Master/serverTesterLog/serverTesterLog";
 import scanStat from "@/repositories/Master/scanStat/scanStat";
+import evenalerterEvent from "@/repositories/Master/evenalerterEvent/evenalerterEvent";
 
 export const repository = ($axios) => ({
     user: user($axios),
@@ -32,4 +33,5 @@ export const repository = ($axios) => ({
     scanJob: scanJob($axios),
     serverTesterLog: serverTesterLog($axios),
     scanStat: scanStat($axios),
+    evenalerterEvent: evenalerterEvent($axios),
 });
