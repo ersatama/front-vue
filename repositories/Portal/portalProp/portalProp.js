@@ -1,4 +1,11 @@
 export default ($axios) => ({
+    getAuditorTimetracking(payload) {
+        return $axios.post('/api/v1/portal/portalProp/getAuditorTimetracking', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     getDDOSSustainability(payload) {
         return $axios.post('/api/v1/portal/portalProp/getDDOSSustainability', payload).then(response => {
             return response;

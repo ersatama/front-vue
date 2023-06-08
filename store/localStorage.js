@@ -109,6 +109,22 @@ export const mutations = {
 }
 
 export const actions = {
+    async vpn_getConfig({commit}, payload){
+        const res = await this.$repository.vpn.getConfig(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async scanStat_getProjectStat({commit}, payload){
+        const res = await this.$repository.scanStat.getProjectStat(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async scanStat_getScanStat({commit}, payload){
         const res = await this.$repository.scanStat.getScanStat(payload);
         const { status, data } = res
@@ -127,6 +143,14 @@ export const actions = {
     },
     async evenalerterEvent_getAlert({commit}, payload) {
         const res = await this.$repository.evenalerterEvent.getAlert(payload);
+        const {status, data} = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProp_getAuditorTimetracking({commit}, payload){
+        const res = await this.$repository.portalProp.getAuditorTimetracking(payload);
         const {status, data} = res
         if (status === 200) {
             return data;

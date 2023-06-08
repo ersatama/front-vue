@@ -15,6 +15,7 @@ import scanJob from "./Master/scanJob/scanJob";
 import serverTesterLog from "~/repositories/Master/serverTesterLog/serverTesterLog";
 import scanStat from "@/repositories/Master/scanStat/scanStat";
 import evenalerterEvent from "@/repositories/Master/evenalerterEvent/evenalerterEvent";
+import vpn from "@/repositories/Master/vpn/vpn"
 
 export const repository = ($axios) => ({
     user: user($axios),
@@ -34,4 +35,5 @@ export const repository = ($axios) => ({
     serverTesterLog: serverTesterLog($axios),
     scanStat: scanStat($axios),
     evenalerterEvent: evenalerterEvent($axios),
+    vpn: vpn($axios),
 });
