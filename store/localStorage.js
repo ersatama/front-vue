@@ -25,9 +25,13 @@ export const state = () => ({
     projectAuditorsTimeTracking: true,
     projectDDOSSustainability: true,
     projectVPNConfiguration: true,
+    projectOsint: true,
 })
 
 export const mutations = {
+    toggleProjectOsint(state) {
+        state.projectOsint  =   !state.projectOsint;
+    },
     toggleProjectVPNConfiguration(state) {
         state.projectVPNConfiguration    =   !state.projectVPNConfiguration;
     },
@@ -264,6 +268,14 @@ export const actions = {
     async scanNeuronJob_getJobsByProjectId({commit}, projectId) {
         const res = await this.$repository.scanJob.getJobsByProjectId(projectId);
         const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
+    async portalProject_getOsintById({commit}, id) {
+        const res = await this.$repository.portalProject.getOsintById(id);
+        const {status, data} = res
         if (status === 200) {
             return data;
         }

@@ -29,6 +29,7 @@
               <project-q-a :portalProject="portalProject"></project-q-a>
               <project-alert :portalProject="portalProject"></project-alert>
               <project-statistics :portalProject="portalProject"></project-statistics>
+              <project-osint :portalProject="portalProject"></project-osint>
               <project-d-d-o-s-sustainability :portalProject="portalProject"></project-d-d-o-s-sustainability>
               <project-v-p-n-configuration :portalProject="portalProject"></project-v-p-n-configuration>
               <project-private-data :portalProject="portalProject"></project-private-data>

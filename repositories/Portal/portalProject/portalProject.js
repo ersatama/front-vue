@@ -55,6 +55,13 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getOsintById(id) {
+        return $axios.get('/api/v1/portal/portalProject/getOsintById/'+id).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     getQA(payload) {
         return $axios.post('/api/v1/portal/portalProject/getQA', payload).then(response => {
             return response;

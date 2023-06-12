@@ -4,6 +4,11 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "projectAuditorsTimeTracking",
   props: ['portalProject'],
+  data() {
+    return {
+      data: null
+    }
+  },
   computed: {
     show() {
       return this.$store.state.localStorage.projectAuditorsTimeTracking;
@@ -42,8 +47,10 @@ export default defineComponent({
             <div class="block-body-content-table-item block-body-content-table-item-status">7 days</div>
             <div class="block-body-content-table-item block-body-content-table-item-status">2 week</div>
             <div class="block-body-content-table-item block-body-content-table-item-status">1 month</div>
-            <div class="block-body-content-table-item block-body-content-table-item-status">Scanner Notifications</div>
           </div>
+        </div>
+        <div class="block-body-content-table-body" v-if="data">
+          {{ data }}
         </div>
       </div>
     </div>
