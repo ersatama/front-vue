@@ -1,13 +1,16 @@
 <script>
 import {defineComponent} from 'vue'
 import ProjectPartLoading from "@/components/modal/projectPartLoading.vue";
+import ModalBox from "@/components/modal/modalBox.vue";
+import QATree from "@/components/modal/qATree.vue";
 
 export default defineComponent({
   name: "projectQA",
-  components: {ProjectPartLoading},
+  components: {QATree, ProjectPartLoading, ModalBox},
   props: ['portalProject'],
   data() {
     return {
+      modal: false,
       domain: '',
       data: null,
     }
@@ -40,6 +43,9 @@ export default defineComponent({
 
 <template>
   <div class="block-body-right">
+    <modal-box v-if="portalProject" :modal="modal" @closeModal="modal = false">
+      <q-a-tree :project="portalProject" @closeModal="modal = false"></q-a-tree>
+    </modal-box>
     <div class="block-body-right-header">
       <div class="block-body-right-title">QA</div>
       <div class="block-body-right-desc">Project QA</div>
@@ -47,7 +53,7 @@ export default defineComponent({
         <button class="block-body-content-add">
           QA PARAM list
         </button>
-        <button class="block-body-content-add">
+        <button class="block-body-content-add" @click="modal = true;">
           QA PARAM list (tree)
         </button>
         <div class="block-body-right-header-buttons-dropdown" :class="{'block-body-right-header-buttons-dropdown-close':(!show)}" onselectstart="return false" @click="$store.commit('localStorage/toggleProjectQA');"></div>

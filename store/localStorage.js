@@ -345,6 +345,14 @@ export const actions = {
         }
         return null;
     },
+    async portalProject_getQATree({commit}, payload){
+        const res = await this.$repository.portalProject.getQATree(payload);
+        const { status, data } = res
+        if (status === 200) {
+            return data;
+        }
+        return null;
+    },
     async portalProject_firstById({commit}, id) {
         const res = await this.$repository.portalProject.firstById(id);
         const { status, data } = res

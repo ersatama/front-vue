@@ -41,6 +41,13 @@ export default ($axios) => ({
             return error.response;
         });
     },
+    getQATree(payload) {
+        return $axios.post('/api/v1/portal/portalProject/getQATree', payload).then(response => {
+            return response;
+        }).catch(error => {
+            return error.response;
+        });
+    },
     firstById(id) {
         return $axios.get('/api/v1/portal/portalProject/firstById/'+id).then(response => {
             return response;
