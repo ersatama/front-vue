@@ -30,6 +30,9 @@ export default defineComponent({
         }
     },
     computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
         user() {
             return this.$store.state.localStorage.user;
         },
@@ -54,7 +57,7 @@ export default defineComponent({
     <div>
         <div class="d-flex page" v-if="portalProjects">
             <div class="page-left">
-                <div class="page-left-header">
+                <div class="page-left-header" :class="{'page-left-header-dark':mode}">
                     <div class="page-left-header-title text-muted">
                         Projects found: <span class="page-left-header-title-success">{{portalProjects.length}}</span>
                     </div>
@@ -62,24 +65,24 @@ export default defineComponent({
                 <div class="page-left-list" v-if="loadingStatus">
                     <project-item v-for="(portalProject, key) in portalProjects" :key="key" :portalProject="portalProject"></project-item>
                 </div>
-                <div class="block-dashboard-loading-left-items" style="margin-top: 20px;" v-else>
+                <div class="block-dashboard-loading-left-items" :class="{'block-dashboard-loading-left-items-dark':mode}" style="margin-top: 20px;" v-else>
                     <div class="block-dashboard-loading-left-item">
                         <div class="block-dashboard-loading-left-item-header">
                             <div class="block-dashboard-loading-left-item-header-left">
-                                <div class="block-loading-item-field"></div>
+                                <div class="block-loading-item-field" :class="{'block-loading-item-field-dark':mode}"></div>
                             </div>
                             <div class="block-dashboard-loading-left-item-header-right">
-                                <div class="block-loading-item-field"></div>
+                                <div class="block-loading-item-field" :class="{'block-loading-item-field-dark':mode}"></div>
                             </div>
                         </div>
                     </div>
                     <div class="block-dashboard-loading-left-item">
                         <div class="block-dashboard-loading-left-item-header">
                             <div class="block-dashboard-loading-left-item-header-left">
-                                <div class="block-loading-item-field"></div>
+                                <div class="block-loading-item-field" :class="{'block-loading-item-field-dark':mode}"></div>
                             </div>
                             <div class="block-dashboard-loading-left-item-header-right">
-                                <div class="block-loading-item-field"></div>
+                                <div class="block-loading-item-field" :class="{'block-loading-item-field-dark':mode}"></div>
                             </div>
                         </div>
                     </div>

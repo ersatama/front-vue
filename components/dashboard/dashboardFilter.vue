@@ -1,5 +1,5 @@
 <template>
-  <div class="filter bg-white">
+  <div class="filter" :class="{'filter-dark':mode}">
     <div class="filter-title d-flex align-items-center">
       Filter <div class="filter-reset" @click="resetFilter"></div>
     </div>
@@ -183,6 +183,9 @@ export default {
     await this.$store.dispatch('localStorage/portalProject_filter');
   },
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
     portalProjectTypes() {
       return this.$store.state.localStorage.portalProjectTypes;
     },

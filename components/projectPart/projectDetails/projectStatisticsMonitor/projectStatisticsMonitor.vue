@@ -40,6 +40,9 @@ export default defineComponent({
         }
     },
     computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
         show() {
             return this.$store.state.localStorage.projectStatistics;
         },
@@ -212,7 +215,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="block-body-right" >
+    <div class="block-body-right"  :class="{'block-body-right-dark':mode}">
         <modal-detail :show="filterModal" @closeModal="filterModal = false">
             <project-statistics-monitor-filter :filter="filter" @setFilter="setFilter" :portal-project="portalProject" @closeModal="filterModal = false"></project-statistics-monitor-filter>
         </modal-detail>

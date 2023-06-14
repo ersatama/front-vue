@@ -5,6 +5,9 @@ export default defineComponent({
   name: "projectAlertSettings",
   props: ['portalProject'],
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
     show() {
       return this.$store.state.localStorage.projectAlertSettings;
     },
@@ -16,7 +19,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="block-body-right">
+  <div class="block-body-right" :class="{'block-body-right-dark':mode}">
     <div class="block-body-right-header">
       <div class="block-body-right-title">Alert settings</div>
       <div class="block-body-right-desc">Project alerts settings</div>

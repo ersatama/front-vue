@@ -1,5 +1,5 @@
 <template>
-    <div class="block-body-right" >
+    <div class="block-body-right"  :class="{'block-body-right-dark':mode}">
         <div class="block-body-right-header">
             <div class="block-body-right-title">Project details</div>
             <div class="block-body-right-desc" v-if="portalProject.portalProjectType">
@@ -245,7 +245,10 @@ export default {
     computed: {
         show() {
             return this.$store.state.localStorage.details;
-        }
+        },
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
     }
 }
 </script>

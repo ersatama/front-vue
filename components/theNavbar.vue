@@ -4,10 +4,10 @@
         <the-navbar-detail @closeModal="modal = false"></the-navbar-detail>
       </modal-box>
       <div class="nav-div">
-          <div class="nav-head">
-              <div class="nav-head-out">
+          <div class="nav-head" :class="{'nav-head-dark':mode}">
+              <div class="nav-head-out" :class="{'nav-head-out-dark':mode}">
                   <div class="nav-head-in">
-                      <div class="nav-alerts">
+                      <div class="nav-alerts" :class="{'nav-alerts-dark':mode}">
                           <div class="nav-alerts-item">
                               <div class="nav-alerts-item-title">Critical Alerts</div>
                               <div class="nav-alerts-item-count" v-if="data">
@@ -106,8 +106,8 @@
                       </template>
                       <div class="nav-right">
                           <navbar-search></navbar-search>
-                          <div class="nav-options" @click="modal = true">
-                              <div class="nav-options-notification">
+                          <div class="nav-options" @click="modal = true" :class="{'nav-options-dark':mode}">
+                              <div class="nav-options-notification" :class="{'nav-options-notification-dark':mode}">
                                   <div class="nav-options-notification-icon"></div>
                               </div>
                               <div class="nav-options-detail">
@@ -144,6 +144,9 @@ export default {
       }
     },
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
       data() {
           return this.$store.state.localStorage.statuses;
       },

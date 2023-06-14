@@ -19,6 +19,20 @@ a {
       margin: 0 auto;
       max-width: 1500px;
       display: flex;
+      &-dark {
+
+        & > .block-dashboard-loading-left {
+          & > .block-dashboard-loading-left-items {
+            & > .block-dashboard-loading-left-item {
+              background: #1e1e1e;
+              & > .block-dashboard-loading-left-item-header {
+                background: #1e1e1e;
+                border: none;
+              }
+            }
+          }
+        }
+      }
       &-left {
         flex-grow: 3;
         display: flex;
@@ -43,6 +57,15 @@ a {
           display: flex;
           flex-direction: column;
           gap: 20px;
+          &-dark {
+            & > .block-dashboard-loading-left-item {
+              background: #1e1e1e;
+              & > .block-dashboard-loading-left-item-header {
+                background: #1e1e1e;
+                border-bottom: none;
+              }
+            }
+          }
         }
         &-item {
           width: 100%;
@@ -85,6 +108,17 @@ a {
         gap: 15px;
         display: flex;
         flex-direction: column;
+        &-dark {
+          background: #1e1e1e !important;
+          & > .page-left-header-detail {
+            & > .page-left-header-take {
+              & > select {
+                background: #373737;
+                color: #fff;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -111,6 +145,9 @@ a {
         background: linear-gradient(to right, #fafafa 8%, #F1F4F8 38%, #fafafa 54%);
         background-size: 1000px 640px;
         position: relative;
+        &-dark {
+          background: linear-gradient(to right, #373737 8%, #323232 38%, #373737 54%);
+        }
       }
     }
     & > div {
@@ -131,7 +168,10 @@ a {
     border-radius: 10px;
     background: #fff;
     position: relative;
-
+    &-dark {
+      background: #1e1e1e;
+      color: #fff;
+    }
     &-data {
       display: flex;
       flex-direction: column;
@@ -149,7 +189,6 @@ a {
     }
   }
   &-body {
-    border-top: 1px solid #F1F4F8;
     display: flex;
     min-height: 250px;
     gap: 20px;
@@ -1241,6 +1280,10 @@ a {
           font-weight: 600;
           cursor: pointer;
           border-top: 1px solid #F1F4F8;
+          &-dark {
+            color: #8774e1;
+            border-color: #323232;
+          }
           &-status {
             margin-left: auto;
             width: 30px;
@@ -1259,10 +1302,10 @@ a {
               box-shadow: 0 0 1px 1px #4a4949;
             }
             &-active {
-              background: #93c2d7;
+              background: #fff;
               & > .block-body-content-form-switcher-status-in {
-                background: #0b76a6;
-                box-shadow: 0 0 1px 1px #17475c;
+                background: #8774e1;
+                box-shadow: 0 0 1px 1px #8774e1;
                 left: auto;
                 right: -3px;
               }
@@ -1329,6 +1372,32 @@ a {
       background: #fff;
       height: max-content;
       overflow: hidden;
+      & > a:last-child > div {
+        border-bottom: none !important;
+      }
+      &-dark {
+        background: #1e1e1e;
+        & > a {
+          color: #fff !important;
+        }
+        & > a > .block-body-left-item {
+          border-color: #323232;
+          &:hover, &-active {
+            color: #8774e1;
+            & > .block-body-left-item-icon-arr {
+              &:before, &:after {
+                background: #8774e1;
+              }
+            }
+          }
+          &:hover {
+            background: #000 radial-gradient(circle, transparent 1%, #000 1%) center/15000%;
+          }
+        }
+      }
+      & > a {
+        color: #6c757d;
+      }
       &-item {
         text-decoration: none !important;
         padding: 10px 15px 10px 20px;
@@ -1339,7 +1408,6 @@ a {
         align-items: center;
         cursor: pointer;
         font-weight: 600;
-        color: #6c757d;
         position: relative;
         background-color: transparent;
         background-position: center;
@@ -1516,6 +1584,28 @@ a {
       height: max-content;
       max-width: 1260px;
       min-width: 1260px;
+      &-dark {
+        background: #1e1e1e;
+        color: #fff;
+        & > .block-body-content {
+          border-color: #323232;
+          & > .block-body-content-form {
+            border-color: #323232;
+            & > .block-body-content-form-item {
+              & > button {
+                background: #8774e1;
+              }
+              & > .block-body-content-form-item-content {
+
+                & > select, & > input {
+                  background: #373737;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
       &-header {
         display: flex;
         flex-direction: column;

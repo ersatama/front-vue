@@ -1,9 +1,9 @@
 <template>
   <div class="block">
       <notifications position="bottom right" classes="my-custom-class"/>
-    <div class="block-title">My profile</div>
+    <div class="block-title" :class="{'block-title-dark':mode}">My profile</div>
     <div class="block-body">
-      <div class="block-body-left">
+      <div class="block-body-left" :class="{'block-body-left-dark':mode}">
         <NuxtLink to="/profile">
           <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 0)}">
             <div class="block-body-left-item-icon block-body-left-item-icon-profile"></div> <span>Profile</span> <div class="block-body-left-item-icon-arr"></div>
@@ -25,13 +25,13 @@
           </div>
         </NuxtLink>
       </div>
-      <div class="block-body-right">
+      <div class="block-body-right" :class="{'block-body-right-dark':mode}">
         <template v-if="tab === 0">
           <div class="block-body-right-header">
             <div class="block-body-right-title">Profile</div>
             <div class="block-body-right-desc">Edit your profile</div>
           </div>
-          <div class="block-body-content">
+          <div class="block-body-content" style="flex-direction: initial">
             <div class="block-body-content-form">
               <div class="block-body-content-form-item">
                 <div class="block-body-content-form-item-title">Alias</div>
@@ -87,7 +87,7 @@
             <div class="block-body-right-title">Settings</div>
             <div class="block-body-right-desc">Customize your interface</div>
           </div>
-          <div class="block-body-content">
+          <div class="block-body-content" style="flex-direction: initial">
             <div class="block-body-content-form">
               <div class="block-body-content-form-item">
                 <div class="block-body-content-form-item-title">Language</div>
@@ -97,9 +97,9 @@
                   </select>
                 </div>
               </div>
-              <div class="block-body-content-form-switcher">
+              <div class="block-body-content-form-switcher" :class="{'block-body-content-form-switcher-dark':mode}">
                 <div class="block-body-content-form-switcher-title">Night mode</div>
-                <div class="block-body-content-form-switcher-status" :class="{'block-body-content-form-switcher-status-active':mode}" @click="mode = !mode"><div class="block-body-content-form-switcher-status-in"></div></div>
+                <div class="block-body-content-form-switcher-status" :class="{'block-body-content-form-switcher-status-active':mode}" @click="$store.commit('localStorage/toggleMode');"><div class="block-body-content-form-switcher-status-in"></div></div>
               </div>
             </div>
             <extra-profile-content></extra-profile-content>
@@ -110,7 +110,7 @@
             <div class="block-body-right-title">Notifications</div>
             <div class="block-body-right-desc">History of alerts, notifications, logs</div>
           </div>
-          <div class="block-body-content">
+          <div class="block-body-content" style="flex-direction: initial">
             <div class="block-body-content-form">
 
             </div>
@@ -122,7 +122,7 @@
             <div class="block-body-right-title">Security</div>
             <div class="block-body-right-desc">Manage access to your account</div>
           </div>
-          <div class="block-body-content">
+          <div class="block-body-content" style="flex-direction: initial">
             <div class="block-body-content-form">
               <div class="block-body-content-form-item">
                 <div class="block-body-content-form-item-title">Current password</div>
@@ -166,11 +166,13 @@ export default {
       name: '',
       surname: '',
       last_name: '',
-      mode: false,
         profileAjax: false,
     }
   },
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
     user() {
       return this.$store.state.localStorage.user;
     },

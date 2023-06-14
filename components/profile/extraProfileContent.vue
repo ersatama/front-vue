@@ -2,7 +2,7 @@
   <div class="extra-content">
     <div class="extra-content-title">FAQ</div>
     <div class="extra-content-desc">If you have any questions or concerns contact support@immuniweb.com</div>
-    <div class="extra-content-bordered">
+    <div class="extra-content-bordered" :class="{'extra-content-bordered-dark':mode}">
       <div class="extra-content-item">
         <div class="extra-content-item-icon extra-content-item-icon-profile"></div>
         <div class="extra-content-item-detail">
@@ -23,7 +23,12 @@
 
 <script>
 export default {
-  name: "extraProfileContent"
+  name: "extraProfileContent",
+  computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
+  }
 }
 </script>
 
@@ -46,6 +51,18 @@ export default {
       border: 1px solid #eaedf1;
       border-radius: 5px;
       background: #f9f9f9;
+      &-dark {
+        border-color: transparent;
+        background: #373737;
+        & > .extra-content-item {
+          border-color: #323232;
+          & > .extra-content-item-detail {
+            & > .extra-content-item-detail-title {
+              color: #8774e1;
+            }
+          }
+        }
+      }
     }
     &-item {
       padding: 15px;

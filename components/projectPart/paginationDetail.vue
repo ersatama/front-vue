@@ -31,6 +31,9 @@ export default {
         }
     },
     computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
         pages() {
             let pages = 0;
             if (this.size > this.take) {

@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <div class="block-title">
+    <div class="block-title" :class="{'block-title-dark':mode}">
         <div class="block-title-data">
             <div class="block-title-data-name">
                 <span>Project</span> #{{ projectId }}
@@ -116,12 +116,14 @@ export default {
       surname: '',
       last_name: '',
       email: '',
-      mode: false,
       portalProject: null,
       links: null,
     }
   },
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
     linksRawReport() {
       let rawReport = null;
       if (this.links && this.links.neuron_raw_reports) {

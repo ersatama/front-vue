@@ -3,19 +3,24 @@ import {defineComponent} from 'vue'
 import ProjectPartLoading from "@/components/modal/projectPartLoading.vue";
 import ModalBox from "@/components/modal/modalBox.vue";
 import QATree from "@/components/modal/qATree.vue";
+import QAList from "@/components/modal/qAList.vue";
 
 export default defineComponent({
   name: "projectQA",
-  components: {QATree, ProjectPartLoading, ModalBox},
+  components: {QAList, QATree, ProjectPartLoading, ModalBox},
   props: ['portalProject'],
   data() {
     return {
       modal: false,
+      modalQA: false,
       domain: '',
       data: null,
     }
   },
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
     show() {
       return this.$store.state.localStorage.projectQA;
     },
@@ -42,7 +47,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="block-body-right">
+  <div class="block-body-right" :class="{'block-body-right-dark':mode}">
+    <modal-box v-if="portalProject" :modal="modalQA" @closeModal="modalQA = false">
+      <q-a-list :project="portalProject" @closeModal="modalQA = false"></q-a-list>
+    </modal-box>
     <modal-box v-if="portalProject" :modal="modal" @closeModal="modal = false">
       <q-a-tree :project="portalProject" @closeModal="modal = false"></q-a-tree>
     </modal-box>
@@ -50,7 +58,7 @@ export default defineComponent({
       <div class="block-body-right-title">QA</div>
       <div class="block-body-right-desc">Project QA</div>
       <div class="block-body-right-header-buttons">
-        <button class="block-body-content-add">
+        <button class="block-body-content-add" @click="modalQA = true;">
           QA PARAM list
         </button>
         <button class="block-body-content-add" @click="modal = true;">

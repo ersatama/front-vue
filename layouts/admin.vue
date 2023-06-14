@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <div class="bg"></div>
+  <div :style="{'background-color':bg}">
+      <div class="bg" :style="{'background-image':'url('+(!mode?'/images/photos/bg.png':'/images/photos/bg-1.png')+')'}"></div>
       <vue-custom-scrollbar class="scroll-main" @ps-scroll-y="scrollHandle">
           <div class="d-flex justify-content-center" id="wrapper">
               <!-- Sidebar-->
@@ -16,7 +16,6 @@
               </div>
           </div>
       </vue-custom-scrollbar>
-
   </div>
 </template>
 
@@ -31,7 +30,7 @@ export default {
   head() {
     return {
       bodyAttrs: {
-        class: 'bg-light'
+        class: ''
       }
     }
   },
@@ -45,6 +44,16 @@ export default {
       }
     },
     computed: {
+    bg() {
+      let bg = '#F1F4F8';
+      if (this.$store.state.localStorage.mode) {
+        bg = '#000';
+      }
+      return bg;
+    },
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
       route() {
           let name = '';
           let route = this.$route.path.split('/');
@@ -100,7 +109,9 @@ export default {
         scrollHandle(evt) {
             console.log(evt)
         }
-    }
+    },
+  created() {
+  }
 }
 </script>
 
@@ -115,18 +126,17 @@ export default {
 @import "assets/sidebar.scss";
 .scroll-main {
     position: relative;
-    height: 100vh
+    height: 100vh;
 }
 .admin {
   margin: 0 20px 20px 20px;
 }
 .bg {
-    background: url('/images/photos/bg.png');
     width: 100%;
     height: 100vh;
-    opacity: 0.025;
+    opacity: 0.05;
     position: fixed;
-    z-index: -1;
+    pointer-events: none;
 }
 
 #page-content-wrapper {

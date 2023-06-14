@@ -10,6 +10,9 @@ export default defineComponent({
     }
   },
   computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
     show() {
       return this.$store.state.localStorage.projectPrivateData;
     },
@@ -26,7 +29,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="block-body-right">
+  <div class="block-body-right" :class="{'block-body-right-dark':mode}">
     <div class="block-body-right-header">
       <div class="block-body-right-title">Private Data</div>
       <div class="block-body-right-desc">Project private data</div>

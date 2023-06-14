@@ -1,5 +1,5 @@
 <template>
-    <div class="block-body-left">
+    <div class="block-body-left" :class="{'block-body-left-dark':mode}">
         <NuxtLink :to="'/dashboard/' + portalProject.id">
             <div class="block-body-left-item" :class="{'block-body-left-item-active':(tab === 0)}">
                 <div class="block-body-left-item-icon block-body-left-item-icon-detail"></div> <span>Details</span> <div class="block-body-left-item-icon-arr"></div>
@@ -132,7 +132,12 @@
 <script>
 export default {
     name: "projectSidebar",
-    props: ['portalProject', 'tab', 'links']
+    props: ['portalProject', 'tab', 'links'],
+    computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
+    }
 }
 </script>
 

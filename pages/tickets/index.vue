@@ -1,6 +1,6 @@
 <template>
     <div class="block">
-        <div class="block-title">Support tickets</div>
+        <div class="block-title" :class="{'block-title-dark':mode}">Support tickets</div>
     </div>
 </template>
 
@@ -8,6 +8,11 @@
 export default {
     name: "index",
     layout: 'admin',
+  computed: {
+    mode() {
+      return this.$store.state.localStorage.mode;
+    },
+  }
 }
 </script>
 

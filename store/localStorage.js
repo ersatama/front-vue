@@ -1,4 +1,5 @@
 export const state = () => ({
+    mode: false,
     menu: 1,
     user: null,
     portalProjectTypes: [],
@@ -29,6 +30,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+    toggleMode(state) {
+        state.mode = !state.mode;
+    },
     toggleProjectOsint(state) {
         state.projectOsint  =   !state.projectOsint;
     },

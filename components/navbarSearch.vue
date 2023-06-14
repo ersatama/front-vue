@@ -1,11 +1,11 @@
 <template>
     <div class="nav-search" @mousedown.stop>
-        <div class="nav-search-input">
+        <div class="nav-search-input" :class="{'nav-search-input-dark':mode}">
             <div class="nav-search-input-icon"></div>
             <input type="text" placeholder="Search project" @focus.stop="show = true;" v-model="search" @keyup="startSearch()">
             <div class="nav-search-input-cancel" v-if="search !== ''" @click="search = ''"></div>
         </div>
-        <div class="nav-search-result" :class="{'nav-search-result-show':show}">
+        <div class="nav-search-result" :class="{'nav-search-result-show':show, 'nav-search-result-dark':mode}">
             <div class="nav-search-result-angle"></div>
             <div class="nav-search-result-list">
                 <div class="nav-search-result-list-item">
@@ -63,6 +63,9 @@ export default {
         window.addEventListener('mousedown', this.hide);
     },
     computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
         user() {
             return this.$store.state.localStorage.user;
         }

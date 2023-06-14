@@ -4,9 +4,18 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  &-dark {
+    background: #1e1e1e;
+    color: #fff;
+    & > .item-header {
+      background: #1e1e1e;
+      border-color: #323232;
+    }
+  }
   &-hide {
     & > .item-header {
       border-radius: 10px;
+      border: none;
     }
     & > .item-body {
       display: none;

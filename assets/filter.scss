@@ -5,6 +5,40 @@
   padding: 20px;
   border-radius: 10px;
   height: fit-content;
+  background: #fff;
+  &-dark {
+    background: #1e1e1e;
+    color: #fff;
+    & > .filter-options {
+      & > .filter-item-double {
+        & > .filter-item {
+          & > .filter-item-input {
+            background: #373737;
+            & > select {
+              color: #fff;
+            }
+          }
+        }
+      }
+      & > .filter-item {
+        & > .filter-item-input {
+          background: #373737;
+          & > select {
+            color: #fff;
+          }
+        }
+      }
+      & > button {
+        background: #8774e1;
+        border: none;
+        outline: none !important;
+        box-shadow: none !important;
+        &:hover, &:active {
+          background: #8774e1 !important;
+        }
+      }
+    }
+  }
   &-reset {
     background: url(/images/icons/undo.png) no-repeat center;
     width: 24px;

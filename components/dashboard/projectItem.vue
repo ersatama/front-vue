@@ -1,5 +1,5 @@
 <template>
-  <div class="item" v-if="portalProject" :class="{'item-hide':!show}">
+  <div class="item" v-if="portalProject" :class="{'item-hide':!show, 'item-dark': mode}">
     <div class="item-header">
         <div class="item-header-icon">
             <div>{{portalProject.status}}</div>
@@ -239,6 +239,9 @@ export default {
     }
   },
     computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
       user() {
           return this.$store.state.localStorage.user;
       },

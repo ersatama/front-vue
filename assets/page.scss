@@ -120,6 +120,9 @@
       padding: 20px;
       display: flex;
       align-items: center;
+      &-dark {
+        background: #1e1e1e;
+      }
       &-next, &-prev {
         background: #f9d3d7 url('/images/icons/next.png') no-repeat center !important;
       }

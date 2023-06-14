@@ -17,6 +17,9 @@ export default defineComponent({
         this.getAuditors();
     },
     computed: {
+      mode() {
+        return this.$store.state.localStorage.mode;
+      },
         user() {
             return this.$store.state.localStorage.user;
         },
@@ -51,7 +54,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="filter bg-white">
+    <div class="filter"  :class="{'filter-dark':mode}">
         <div class="filter-title d-flex align-items-center">
             Filter
         </div>

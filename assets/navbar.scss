@@ -9,6 +9,22 @@
     width: 100%;
     background: #fff;
     box-shadow: 0 0 3px 0 rgba(0,0,0,0.1);
+    &-dark {
+      background: #1e1e1e;
+      box-shadow: none;
+      & > .nav-head-in {
+        & > .nav {
+          & > .nav-dropdown-item {
+            & > .nav-dropdown-item-title {
+              &-sel, &:hover {
+                color: #fff;
+                background: #8774e1;
+              }
+            }
+          }
+        }
+      }
+    }
     &-in {
       width: 1560px;
       margin: 0 auto 0 auto;
@@ -16,6 +32,10 @@
     &-out {
       border-bottom: 1px solid #F1F4F8;
       background: #f8fbff;
+      &-dark {
+        border-color: #323232;
+        background: #373737;
+      }
     }
   }
   &-alerts {
@@ -23,6 +43,11 @@
     font-size: 10px;
     color: #6c757d;
     font-weight: 600;
+    &-dark {
+      & > .nav-alerts-item {
+        border-color: #323232;
+      }
+    }
     &-item {
       flex-grow: 1;
       display: flex;
@@ -255,6 +280,28 @@
           }
         }
       }
+      &-dark {
+        background: #1e1e1e;
+        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.149);
+        & > .nav-search-result-list {
+          background: #1e1e1e;
+          & > .nav-search-result-list-item {
+            & > .nav-search-result-list-item-collection {
+              & > .nav-search-result-list-item-resource {
+                border-color: #323232;
+                &:hover {
+                  background: #000;
+                }
+              }
+            }
+          }
+        }
+        & > .nav-search-result-angle {
+          &:before {
+            background: #1e1e1e;
+          }
+        }
+      }
     }
     &-input {
       display: flex;
@@ -321,6 +368,12 @@
         border-radius: 30px;
         padding: 0 10px 0 36px;
       }
+      &-dark {
+        & > input {
+          background: #373737;
+          color: #fff;
+        }
+      }
     }
   }
   &-options {
@@ -332,6 +385,9 @@
     border-left: 1px solid #F1F4F8;
     cursor: pointer;
     position: relative;
+    &-dark {
+      border-color: #323232;
+    }
     &-menu {
       width: 15px;
       height: 15px;
@@ -372,6 +428,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      &-dark {
+        border-color: #323232;
+        background: #323232;
+      }
       &-icon {
         width: 16px;
         height: 16px;
